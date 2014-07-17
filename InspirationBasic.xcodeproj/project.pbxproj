@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AE0E13D119529B3400E17E7D /* StatementComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E13D019529B3400E17E7D /* StatementComponentViewController.m */; };
+		AE0E13D419529B4B00E17E7D /* IntExpressionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E13D319529B4B00E17E7D /* IntExpressionViewController.m */; };
+		AE0E13D719529B6700E17E7D /* BoolExpressionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E13D619529B6700E17E7D /* BoolExpressionViewController.m */; };
+		AE0E13DA19529CFD00E17E7D /* ProgramListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E13D919529CFD00E17E7D /* ProgramListViewController.m */; };
 		AE1B881C1935B16B002962FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1B881B1935B16B002962FA /* Foundation.framework */; };
 		AE1B881E1935B16B002962FA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1B881D1935B16B002962FA /* CoreGraphics.framework */; };
 		AE1B88201935B16B002962FA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1B881F1935B16B002962FA /* UIKit.framework */; };
@@ -23,6 +27,77 @@
 		AE1B88431935B16B002962FA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1B881F1935B16B002962FA /* UIKit.framework */; };
 		AE1B884B1935B16B002962FA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE1B88491935B16B002962FA /* InfoPlist.strings */; };
 		AE1B884D1935B16B002962FA /* InspirationBasicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B884C1935B16B002962FA /* InspirationBasicTests.m */; };
+		AE1B88591935B2D0002962FA /* EnvironmentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B88581935B2D0002962FA /* EnvironmentModel.m */; };
+		AE20836D193EB3B00035C965 /* IntArrayElement.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20836C193EB3B00035C965 /* IntArrayElement.m */; };
+		AE208370193EB3EC0035C965 /* BoolArrayElement.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20836F193EB3EC0035C965 /* BoolArrayElement.m */; };
+		AE208379193EBFB70035C965 /* StatementFlatteningVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AE208378193EBFB70035C965 /* StatementFlatteningVisitor.m */; };
+		AE20837C193EF0FF0035C965 /* IntArrayElementAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20837B193EF0FF0035C965 /* IntArrayElementAssignment.m */; };
+		AE20837F193EF1120035C965 /* BoolArrayElementAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20837E193EF1120035C965 /* BoolArrayElementAssignment.m */; };
+		AE3701501936E4CF00426393 /* Value.m in Sources */ = {isa = PBXBuildFile; fileRef = AE37014F1936E4CF00426393 /* Value.m */; };
+		AE37015A1936EFC200426393 /* IntValue.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3701591936EFC200426393 /* IntValue.m */; };
+		AE37015D1936EFCD00426393 /* BoolValue.m in Sources */ = {isa = PBXBuildFile; fileRef = AE37015C1936EFCD00426393 /* BoolValue.m */; };
+		AE37016B1936F77000426393 /* BoolAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = AE37016A1936F77000426393 /* BoolAssignment.m */; };
+		AE39C1E11947E1B3004F47BF /* BoolVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = AE39C1E01947E1B3004F47BF /* BoolVariable.m */; };
+		AE604320194E615E0050CAC5 /* StatementAndDisplayString.m in Sources */ = {isa = PBXBuildFile; fileRef = AE60431F194E615E0050CAC5 /* StatementAndDisplayString.m */; };
+		AE604323194E96C10050CAC5 /* OutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE604322194E96C10050CAC5 /* OutputViewController.m */; };
+		AE60432D194EB0CF0050CAC5 /* PrintInt.m in Sources */ = {isa = PBXBuildFile; fileRef = AE60432C194EB0CF0050CAC5 /* PrintInt.m */; };
+		AE604330194EBD400050CAC5 /* PrintBool.m in Sources */ = {isa = PBXBuildFile; fileRef = AE60432F194EBD400050CAC5 /* PrintBool.m */; };
+		AE7B98C6193A0FAC004C8C82 /* IntSum.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98C5193A0FAC004C8C82 /* IntSum.m */; };
+		AE7B98C9193A51F6004C8C82 /* IntVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98C8193A51F6004C8C82 /* IntVariable.m */; };
+		AE7B98CF193A57F0004C8C82 /* IfThenElseEndIf.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98CE193A57F0004C8C82 /* IfThenElseEndIf.m */; };
+		AE7B98D3193A6F8D004C8C82 /* StatementList.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98D2193A6F8D004C8C82 /* StatementList.m */; };
+		AE7B98D6193A8C7D004C8C82 /* WhileEndWhile.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98D5193A8C7D004C8C82 /* WhileEndWhile.m */; };
+		AE7B98DB193A91C1004C8C82 /* ExpressionDisplayStringVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98DA193A91C1004C8C82 /* ExpressionDisplayStringVisitor.m */; };
+		AE7B98DE193BA440004C8C82 /* IntAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98DD193BA440004C8C82 /* IntAssignment.m */; };
+		AE7B98E1193BA6E9004C8C82 /* BoolLessThan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98E0193BA6E9004C8C82 /* BoolLessThan.m */; };
+		AE7B98E4193C284A004C8C82 /* Program.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98E3193C284A004C8C82 /* Program.m */; };
+		AE7B98EA193C2CC1004C8C82 /* ProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98E9193C2CC1004C8C82 /* ProgramViewController.m */; };
+		AE7B98ED193C3813004C8C82 /* StatementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98EC193C3813004C8C82 /* StatementViewController.m */; };
+		AE7B98F0193D5BCD004C8C82 /* IfThenEndIf.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98EF193D5BCD004C8C82 /* IfThenEndIf.m */; };
+		AE7B98F3193D5E27004C8C82 /* BoolLessThanOrEquals.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98F2193D5E27004C8C82 /* BoolLessThanOrEquals.m */; };
+		AE7B98F6193D5E36004C8C82 /* BoolGreaterThan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98F5193D5E36004C8C82 /* BoolGreaterThan.m */; };
+		AE7B98F9193D5E48004C8C82 /* BoolGreaterThanOrEquals.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98F8193D5E48004C8C82 /* BoolGreaterThanOrEquals.m */; };
+		AE7B9902193D5ED1004C8C82 /* BoolIntEquals.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9901193D5ED1004C8C82 /* BoolIntEquals.m */; };
+		AE7B9905193D5EE4004C8C82 /* BoolIntDoesNotEqual.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9904193D5EE4004C8C82 /* BoolIntDoesNotEqual.m */; };
+		AE7B9908193D5EF4004C8C82 /* BoolBoolEquals.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9907193D5EF4004C8C82 /* BoolBoolEquals.m */; };
+		AE7B990B193D5F03004C8C82 /* BoolBoolDoesNotEqual.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B990A193D5F03004C8C82 /* BoolBoolDoesNotEqual.m */; };
+		AE7B990E193D5F3C004C8C82 /* BoolNegation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B990D193D5F3C004C8C82 /* BoolNegation.m */; };
+		AE7B9911193D5F89004C8C82 /* IntDifference.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9910193D5F89004C8C82 /* IntDifference.m */; };
+		AE7B9914193D5F99004C8C82 /* IntProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9913193D5F99004C8C82 /* IntProduct.m */; };
+		AE7B9917193D5FA5004C8C82 /* IntQuotient.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9916193D5FA5004C8C82 /* IntQuotient.m */; };
+		AE7B991A193D5FBD004C8C82 /* IntNegation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9919193D5FBD004C8C82 /* IntNegation.m */; };
+		AE7B991D193D5FD1004C8C82 /* IntRemainder.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B991C193D5FD1004C8C82 /* IntRemainder.m */; };
+		AE7B9920193D7839004C8C82 /* BoolOr.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B991F193D7839004C8C82 /* BoolOr.m */; };
+		AE7B9923193D7853004C8C82 /* BoolNor.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9922193D7853004C8C82 /* BoolNor.m */; };
+		AE7B9926193D7861004C8C82 /* BoolAnd.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9925193D7861004C8C82 /* BoolAnd.m */; };
+		AE7B9929193D788A004C8C82 /* BoolNand.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9928193D788A004C8C82 /* BoolNand.m */; };
+		AE7B9932193D78B4004C8C82 /* BoolImplies.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9931193D78B4004C8C82 /* BoolImplies.m */; };
+		AE7B9935193D78C5004C8C82 /* BoolReverseImplies.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9934193D78C5004C8C82 /* BoolReverseImplies.m */; };
+		AE7B9938193D8699004C8C82 /* BoolNonImplies.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9937193D8699004C8C82 /* BoolNonImplies.m */; };
+		AE7B993B193D86A8004C8C82 /* BoolReverseNonImplies.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B993A193D86A8004C8C82 /* BoolReverseNonImplies.m */; };
+		AEA6FF8119777B71007F6457 /* BlueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7219777B71007F6457 /* BlueButton.png */; };
+		AEA6FF8219777B71007F6457 /* BlueButtonOriginal.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7319777B71007F6457 /* BlueButtonOriginal.png */; };
+		AEA6FF8319777B71007F6457 /* BlueButtonPlus.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7419777B71007F6457 /* BlueButtonPlus.png */; };
+		AEA6FF8419777B71007F6457 /* BlueButtonPlusCropped.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7519777B71007F6457 /* BlueButtonPlusCropped.png */; };
+		AEA6FF8519777B71007F6457 /* GreenButton.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7619777B71007F6457 /* GreenButton.png */; };
+		AEA6FF8619777B71007F6457 /* GreenButtonDown.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7719777B71007F6457 /* GreenButtonDown.png */; };
+		AEA6FF8719777B71007F6457 /* GreenButtonOriginal.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7819777B71007F6457 /* GreenButtonOriginal.png */; };
+		AEA6FF8819777B71007F6457 /* GreenButtonRight.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7919777B71007F6457 /* GreenButtonRight.png */; };
+		AEA6FF8919777B71007F6457 /* GreenButtonUp.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7A19777B71007F6457 /* GreenButtonUp.png */; };
+		AEA6FF8A19777B71007F6457 /* RedButton.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7B19777B71007F6457 /* RedButton.png */; };
+		AEA6FF8B19777B71007F6457 /* RedButtonCropped.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7C19777B71007F6457 /* RedButtonCropped.png */; };
+		AEA6FF8C19777B71007F6457 /* RedButtonMinus.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7D19777B71007F6457 /* RedButtonMinus.png */; };
+		AEA6FF8D19777B71007F6457 /* RedButtonOriginal.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7E19777B71007F6457 /* RedButtonOriginal.png */; };
+		AEA6FF8E19777B71007F6457 /* RedButtonX.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7F19777B71007F6457 /* RedButtonX.png */; };
+		AEA6FF8F19777B71007F6457 /* RedButtonXCropped.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF8019777B71007F6457 /* RedButtonXCropped.png */; };
+		AEA6FF9619777E33007F6457 /* StatementHasStatementListVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA6FF9519777E33007F6457 /* StatementHasStatementListVisitor.m */; };
+		AEAE85AC195F44EF00C8B59E /* ExpressionDebugStringVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE85AB195F44EF00C8B59E /* ExpressionDebugStringVisitor.m */; };
+		AEAE85AF195F4C0D00C8B59E /* StatementDebugStringVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEAE85AE195F4C0D00C8B59E /* StatementDebugStringVisitor.m */; };
+		AEB41FD51976FB9E00227B68 /* StatementBreakdownVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41FD41976FB9E00227B68 /* StatementBreakdownVisitor.m */; };
+		AEB41FD81977395C00227B68 /* StatementDeleteVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41FD71977395C00227B68 /* StatementDeleteVisitor.m */; };
+		AEB41FDB1977397200227B68 /* StatementInsertAfterVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41FDA1977397200227B68 /* StatementInsertAfterVisitor.m */; };
+		AEBD7D3C1956C2CF00F0DCD1 /* StatementMoveVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD7D3B1956C2CF00F0DCD1 /* StatementMoveVisitor.m */; };
+		AEFA0F311945744D006AEA4B /* ProgramException.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA0F301945744D006AEA4B /* ProgramException.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +111,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AE0E13CF19529B3400E17E7D /* StatementComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementComponentViewController.h; sourceTree = "<group>"; };
+		AE0E13D019529B3400E17E7D /* StatementComponentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementComponentViewController.m; sourceTree = "<group>"; };
+		AE0E13D219529B4B00E17E7D /* IntExpressionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntExpressionViewController.h; sourceTree = "<group>"; };
+		AE0E13D319529B4B00E17E7D /* IntExpressionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntExpressionViewController.m; sourceTree = "<group>"; };
+		AE0E13D519529B6700E17E7D /* BoolExpressionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoolExpressionViewController.h; sourceTree = "<group>"; };
+		AE0E13D619529B6700E17E7D /* BoolExpressionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolExpressionViewController.m; sourceTree = "<group>"; };
+		AE0E13D819529CFD00E17E7D /* ProgramListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramListViewController.h; sourceTree = "<group>"; };
+		AE0E13D919529CFD00E17E7D /* ProgramListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramListViewController.m; sourceTree = "<group>"; };
 		AE1B88181935B16B002962FA /* InspirationBasic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InspirationBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE1B881B1935B16B002962FA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AE1B881D1935B16B002962FA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -58,6 +141,139 @@
 		AE1B88481935B16B002962FA /* InspirationBasicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InspirationBasicTests-Info.plist"; sourceTree = "<group>"; };
 		AE1B884A1935B16B002962FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE1B884C1935B16B002962FA /* InspirationBasicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InspirationBasicTests.m; sourceTree = "<group>"; };
+		AE1B88571935B2D0002962FA /* EnvironmentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnvironmentModel.h; sourceTree = "<group>"; };
+		AE1B88581935B2D0002962FA /* EnvironmentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnvironmentModel.m; sourceTree = "<group>"; };
+		AE20836B193EB3B00035C965 /* IntArrayElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntArrayElement.h; sourceTree = "<group>"; };
+		AE20836C193EB3B00035C965 /* IntArrayElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntArrayElement.m; sourceTree = "<group>"; };
+		AE20836E193EB3EC0035C965 /* BoolArrayElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoolArrayElement.h; sourceTree = "<group>"; };
+		AE20836F193EB3EC0035C965 /* BoolArrayElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolArrayElement.m; sourceTree = "<group>"; };
+		AE208377193EBFB70035C965 /* StatementFlatteningVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementFlatteningVisitor.h; sourceTree = "<group>"; };
+		AE208378193EBFB70035C965 /* StatementFlatteningVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementFlatteningVisitor.m; sourceTree = "<group>"; };
+		AE20837A193EF0FF0035C965 /* IntArrayElementAssignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntArrayElementAssignment.h; sourceTree = "<group>"; };
+		AE20837B193EF0FF0035C965 /* IntArrayElementAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntArrayElementAssignment.m; sourceTree = "<group>"; };
+		AE20837D193EF1120035C965 /* BoolArrayElementAssignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoolArrayElementAssignment.h; sourceTree = "<group>"; };
+		AE20837E193EF1120035C965 /* BoolArrayElementAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolArrayElementAssignment.m; sourceTree = "<group>"; };
+		AE37014E1936E4CF00426393 /* Value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Value.h; sourceTree = "<group>"; };
+		AE37014F1936E4CF00426393 /* Value.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Value.m; sourceTree = "<group>"; };
+		AE3701541936ECEF00426393 /* Statement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Statement.h; sourceTree = "<group>"; };
+		AE3701581936EFC200426393 /* IntValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntValue.h; sourceTree = "<group>"; };
+		AE3701591936EFC200426393 /* IntValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntValue.m; sourceTree = "<group>"; };
+		AE37015B1936EFCD00426393 /* BoolValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoolValue.h; sourceTree = "<group>"; };
+		AE37015C1936EFCD00426393 /* BoolValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolValue.m; sourceTree = "<group>"; };
+		AE3701641936F21600426393 /* IntExpression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IntExpression.h; sourceTree = "<group>"; };
+		AE3701651936F22400426393 /* BoolExpression.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BoolExpression.h; sourceTree = "<group>"; };
+		AE3701691936F77000426393 /* BoolAssignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoolAssignment.h; sourceTree = "<group>"; };
+		AE37016A1936F77000426393 /* BoolAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolAssignment.m; sourceTree = "<group>"; };
+		AE39C1DF1947E1B3004F47BF /* BoolVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoolVariable.h; sourceTree = "<group>"; };
+		AE39C1E01947E1B3004F47BF /* BoolVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolVariable.m; sourceTree = "<group>"; };
+		AE60431E194E615E0050CAC5 /* StatementAndDisplayString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementAndDisplayString.h; sourceTree = "<group>"; };
+		AE60431F194E615E0050CAC5 /* StatementAndDisplayString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementAndDisplayString.m; sourceTree = "<group>"; };
+		AE604321194E96C10050CAC5 /* OutputViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OutputViewController.h; sourceTree = "<group>"; };
+		AE604322194E96C10050CAC5 /* OutputViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OutputViewController.m; sourceTree = "<group>"; };
+		AE604327194E9A850050CAC5 /* OutputListener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutputListener.h; sourceTree = "<group>"; };
+		AE60432B194EB0CF0050CAC5 /* PrintInt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintInt.h; sourceTree = "<group>"; };
+		AE60432C194EB0CF0050CAC5 /* PrintInt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintInt.m; sourceTree = "<group>"; };
+		AE60432E194EBD400050CAC5 /* PrintBool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintBool.h; sourceTree = "<group>"; };
+		AE60432F194EBD400050CAC5 /* PrintBool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintBool.m; sourceTree = "<group>"; };
+		AE7B98C4193A0FAC004C8C82 /* IntSum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntSum.h; sourceTree = "<group>"; };
+		AE7B98C5193A0FAC004C8C82 /* IntSum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntSum.m; sourceTree = "<group>"; };
+		AE7B98C7193A51F6004C8C82 /* IntVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntVariable.h; sourceTree = "<group>"; };
+		AE7B98C8193A51F6004C8C82 /* IntVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntVariable.m; sourceTree = "<group>"; };
+		AE7B98CD193A57F0004C8C82 /* IfThenElseEndIf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IfThenElseEndIf.h; sourceTree = "<group>"; };
+		AE7B98CE193A57F0004C8C82 /* IfThenElseEndIf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IfThenElseEndIf.m; sourceTree = "<group>"; };
+		AE7B98D0193A6D4F004C8C82 /* ExpressionVisitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ExpressionVisitor.h; sourceTree = "<group>"; };
+		AE7B98D1193A6F8D004C8C82 /* StatementList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementList.h; sourceTree = "<group>"; };
+		AE7B98D2193A6F8D004C8C82 /* StatementList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementList.m; sourceTree = "<group>"; };
+		AE7B98D4193A8C7D004C8C82 /* WhileEndWhile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WhileEndWhile.h; sourceTree = "<group>"; };
+		AE7B98D5193A8C7D004C8C82 /* WhileEndWhile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WhileEndWhile.m; sourceTree = "<group>"; };
+		AE7B98D7193A8D8A004C8C82 /* StatementVisitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StatementVisitor.h; sourceTree = "<group>"; };
+		AE7B98D9193A91C1004C8C82 /* ExpressionDisplayStringVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionDisplayStringVisitor.h; sourceTree = "<group>"; };
+		AE7B98DA193A91C1004C8C82 /* ExpressionDisplayStringVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionDisplayStringVisitor.m; sourceTree = "<group>"; };
+		AE7B98DC193BA440004C8C82 /* IntAssignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntAssignment.h; sourceTree = "<group>"; };
+		AE7B98DD193BA440004C8C82 /* IntAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntAssignment.m; sourceTree = "<group>"; };
+		AE7B98DF193BA6E9004C8C82 /* BoolLessThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolLessThan.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B98E0193BA6E9004C8C82 /* BoolLessThan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolLessThan.m; sourceTree = "<group>"; };
+		AE7B98E2193C284A004C8C82 /* Program.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Program.h; sourceTree = "<group>"; };
+		AE7B98E3193C284A004C8C82 /* Program.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Program.m; sourceTree = "<group>"; };
+		AE7B98E8193C2CC1004C8C82 /* ProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramViewController.h; sourceTree = "<group>"; };
+		AE7B98E9193C2CC1004C8C82 /* ProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramViewController.m; sourceTree = "<group>"; };
+		AE7B98EB193C3813004C8C82 /* StatementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementViewController.h; sourceTree = "<group>"; };
+		AE7B98EC193C3813004C8C82 /* StatementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementViewController.m; sourceTree = "<group>"; };
+		AE7B98EE193D5BCD004C8C82 /* IfThenEndIf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IfThenEndIf.h; sourceTree = "<group>"; };
+		AE7B98EF193D5BCD004C8C82 /* IfThenEndIf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IfThenEndIf.m; sourceTree = "<group>"; };
+		AE7B98F1193D5E27004C8C82 /* BoolLessThanOrEquals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolLessThanOrEquals.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B98F2193D5E27004C8C82 /* BoolLessThanOrEquals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolLessThanOrEquals.m; sourceTree = "<group>"; };
+		AE7B98F4193D5E36004C8C82 /* BoolGreaterThan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolGreaterThan.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B98F5193D5E36004C8C82 /* BoolGreaterThan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolGreaterThan.m; sourceTree = "<group>"; };
+		AE7B98F7193D5E48004C8C82 /* BoolGreaterThanOrEquals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolGreaterThanOrEquals.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B98F8193D5E48004C8C82 /* BoolGreaterThanOrEquals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolGreaterThanOrEquals.m; sourceTree = "<group>"; };
+		AE7B9900193D5ED1004C8C82 /* BoolIntEquals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolIntEquals.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B9901193D5ED1004C8C82 /* BoolIntEquals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolIntEquals.m; sourceTree = "<group>"; };
+		AE7B9903193D5EE4004C8C82 /* BoolIntDoesNotEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolIntDoesNotEqual.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B9904193D5EE4004C8C82 /* BoolIntDoesNotEqual.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolIntDoesNotEqual.m; sourceTree = "<group>"; };
+		AE7B9906193D5EF4004C8C82 /* BoolBoolEquals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolBoolEquals.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B9907193D5EF4004C8C82 /* BoolBoolEquals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolBoolEquals.m; sourceTree = "<group>"; };
+		AE7B9909193D5F03004C8C82 /* BoolBoolDoesNotEqual.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolBoolDoesNotEqual.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B990A193D5F03004C8C82 /* BoolBoolDoesNotEqual.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolBoolDoesNotEqual.m; sourceTree = "<group>"; };
+		AE7B990C193D5F3C004C8C82 /* BoolNegation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolNegation.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B990D193D5F3C004C8C82 /* BoolNegation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolNegation.m; sourceTree = "<group>"; };
+		AE7B990F193D5F89004C8C82 /* IntDifference.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntDifference.h; sourceTree = "<group>"; };
+		AE7B9910193D5F89004C8C82 /* IntDifference.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntDifference.m; sourceTree = "<group>"; };
+		AE7B9912193D5F99004C8C82 /* IntProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntProduct.h; sourceTree = "<group>"; };
+		AE7B9913193D5F99004C8C82 /* IntProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntProduct.m; sourceTree = "<group>"; };
+		AE7B9915193D5FA5004C8C82 /* IntQuotient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntQuotient.h; sourceTree = "<group>"; };
+		AE7B9916193D5FA5004C8C82 /* IntQuotient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntQuotient.m; sourceTree = "<group>"; };
+		AE7B9918193D5FBD004C8C82 /* IntNegation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntNegation.h; sourceTree = "<group>"; };
+		AE7B9919193D5FBD004C8C82 /* IntNegation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntNegation.m; sourceTree = "<group>"; };
+		AE7B991B193D5FD1004C8C82 /* IntRemainder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntRemainder.h; sourceTree = "<group>"; };
+		AE7B991C193D5FD1004C8C82 /* IntRemainder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntRemainder.m; sourceTree = "<group>"; };
+		AE7B991E193D7839004C8C82 /* BoolOr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolOr.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B991F193D7839004C8C82 /* BoolOr.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolOr.m; sourceTree = "<group>"; };
+		AE7B9921193D7853004C8C82 /* BoolNor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolNor.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B9922193D7853004C8C82 /* BoolNor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolNor.m; sourceTree = "<group>"; };
+		AE7B9924193D7861004C8C82 /* BoolAnd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolAnd.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B9925193D7861004C8C82 /* BoolAnd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolAnd.m; sourceTree = "<group>"; };
+		AE7B9927193D788A004C8C82 /* BoolNand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolNand.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B9928193D788A004C8C82 /* BoolNand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolNand.m; sourceTree = "<group>"; };
+		AE7B9930193D78B4004C8C82 /* BoolImplies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolImplies.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B9931193D78B4004C8C82 /* BoolImplies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolImplies.m; sourceTree = "<group>"; };
+		AE7B9933193D78C5004C8C82 /* BoolReverseImplies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolReverseImplies.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B9934193D78C5004C8C82 /* BoolReverseImplies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolReverseImplies.m; sourceTree = "<group>"; };
+		AE7B9936193D8699004C8C82 /* BoolNonImplies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolNonImplies.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B9937193D8699004C8C82 /* BoolNonImplies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolNonImplies.m; sourceTree = "<group>"; };
+		AE7B9939193D86A8004C8C82 /* BoolReverseNonImplies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolReverseNonImplies.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		AE7B993A193D86A8004C8C82 /* BoolReverseNonImplies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolReverseNonImplies.m; sourceTree = "<group>"; };
+		AEA6FF7219777B71007F6457 /* BlueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButton.png; sourceTree = "<group>"; };
+		AEA6FF7319777B71007F6457 /* BlueButtonOriginal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButtonOriginal.png; sourceTree = "<group>"; };
+		AEA6FF7419777B71007F6457 /* BlueButtonPlus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButtonPlus.png; sourceTree = "<group>"; };
+		AEA6FF7519777B71007F6457 /* BlueButtonPlusCropped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButtonPlusCropped.png; sourceTree = "<group>"; };
+		AEA6FF7619777B71007F6457 /* GreenButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenButton.png; sourceTree = "<group>"; };
+		AEA6FF7719777B71007F6457 /* GreenButtonDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenButtonDown.png; sourceTree = "<group>"; };
+		AEA6FF7819777B71007F6457 /* GreenButtonOriginal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenButtonOriginal.png; sourceTree = "<group>"; };
+		AEA6FF7919777B71007F6457 /* GreenButtonRight.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenButtonRight.png; sourceTree = "<group>"; };
+		AEA6FF7A19777B71007F6457 /* GreenButtonUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GreenButtonUp.png; sourceTree = "<group>"; };
+		AEA6FF7B19777B71007F6457 /* RedButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedButton.png; sourceTree = "<group>"; };
+		AEA6FF7C19777B71007F6457 /* RedButtonCropped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedButtonCropped.png; sourceTree = "<group>"; };
+		AEA6FF7D19777B71007F6457 /* RedButtonMinus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedButtonMinus.png; sourceTree = "<group>"; };
+		AEA6FF7E19777B71007F6457 /* RedButtonOriginal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedButtonOriginal.png; sourceTree = "<group>"; };
+		AEA6FF7F19777B71007F6457 /* RedButtonX.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedButtonX.png; sourceTree = "<group>"; };
+		AEA6FF8019777B71007F6457 /* RedButtonXCropped.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RedButtonXCropped.png; sourceTree = "<group>"; };
+		AEA6FF9419777E33007F6457 /* StatementHasStatementListVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementHasStatementListVisitor.h; sourceTree = "<group>"; };
+		AEA6FF9519777E33007F6457 /* StatementHasStatementListVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementHasStatementListVisitor.m; sourceTree = "<group>"; };
+		AEAE85AA195F44EF00C8B59E /* ExpressionDebugStringVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionDebugStringVisitor.h; sourceTree = "<group>"; };
+		AEAE85AB195F44EF00C8B59E /* ExpressionDebugStringVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionDebugStringVisitor.m; sourceTree = "<group>"; };
+		AEAE85AD195F4C0D00C8B59E /* StatementDebugStringVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementDebugStringVisitor.h; sourceTree = "<group>"; };
+		AEAE85AE195F4C0D00C8B59E /* StatementDebugStringVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementDebugStringVisitor.m; sourceTree = "<group>"; };
+		AEB41FD31976FB9E00227B68 /* StatementBreakdownVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementBreakdownVisitor.h; sourceTree = "<group>"; };
+		AEB41FD41976FB9E00227B68 /* StatementBreakdownVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementBreakdownVisitor.m; sourceTree = "<group>"; };
+		AEB41FD61977395C00227B68 /* StatementDeleteVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementDeleteVisitor.h; sourceTree = "<group>"; };
+		AEB41FD71977395C00227B68 /* StatementDeleteVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementDeleteVisitor.m; sourceTree = "<group>"; };
+		AEB41FD91977397200227B68 /* StatementInsertAfterVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementInsertAfterVisitor.h; sourceTree = "<group>"; };
+		AEB41FDA1977397200227B68 /* StatementInsertAfterVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementInsertAfterVisitor.m; sourceTree = "<group>"; };
+		AEBD7D3A1956C2CF00F0DCD1 /* StatementMoveVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementMoveVisitor.h; sourceTree = "<group>"; };
+		AEBD7D3B1956C2CF00F0DCD1 /* StatementMoveVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementMoveVisitor.m; sourceTree = "<group>"; };
+		AEFA0F2F1945744D006AEA4B /* ProgramException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramException.h; sourceTree = "<group>"; };
+		AEFA0F301945744D006AEA4B /* ProgramException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramException.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +333,9 @@
 		AE1B88211935B16B002962FA /* InspirationBasic */ = {
 			isa = PBXGroup;
 			children = (
+				AE7B98E5193C2BC7004C8C82 /* ViewControllers */,
+				AE7B98D8193A916E004C8C82 /* Visitors */,
+				AE1B88561935B1CD002962FA /* Models */,
 				AE1B882A1935B16B002962FA /* AppDelegate.h */,
 				AE1B882B1935B16B002962FA /* AppDelegate.m */,
 				AE1B882D1935B16B002962FA /* Main_iPhone.storyboard */,
@@ -134,6 +353,7 @@
 		AE1B88221935B16B002962FA /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AEA6FF7119777B71007F6457 /* ButtonImages */,
 				AE1B88231935B16B002962FA /* InspirationBasic-Info.plist */,
 				AE1B88241935B16B002962FA /* InfoPlist.strings */,
 				AE1B88271935B16B002962FA /* main.m */,
@@ -146,6 +366,10 @@
 			isa = PBXGroup;
 			children = (
 				AE1B884C1935B16B002962FA /* InspirationBasicTests.m */,
+				AEAE85AA195F44EF00C8B59E /* ExpressionDebugStringVisitor.h */,
+				AEAE85AB195F44EF00C8B59E /* ExpressionDebugStringVisitor.m */,
+				AEAE85AD195F4C0D00C8B59E /* StatementDebugStringVisitor.h */,
+				AEAE85AE195F4C0D00C8B59E /* StatementDebugStringVisitor.m */,
 				AE1B88471935B16B002962FA /* Supporting Files */,
 			);
 			path = InspirationBasicTests;
@@ -158,6 +382,171 @@
 				AE1B88491935B16B002962FA /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AE1B88561935B1CD002962FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AE7B98D7193A8D8A004C8C82 /* StatementVisitor.h */,
+				AE7B98D0193A6D4F004C8C82 /* ExpressionVisitor.h */,
+				AE7B98E2193C284A004C8C82 /* Program.h */,
+				AE7B98E3193C284A004C8C82 /* Program.m */,
+				AE1B88571935B2D0002962FA /* EnvironmentModel.h */,
+				AE1B88581935B2D0002962FA /* EnvironmentModel.m */,
+				AE604327194E9A850050CAC5 /* OutputListener.h */,
+				AEFA0F2F1945744D006AEA4B /* ProgramException.h */,
+				AEFA0F301945744D006AEA4B /* ProgramException.m */,
+				AE37014E1936E4CF00426393 /* Value.h */,
+				AE37014F1936E4CF00426393 /* Value.m */,
+				AE3701541936ECEF00426393 /* Statement.h */,
+				AE60431E194E615E0050CAC5 /* StatementAndDisplayString.h */,
+				AE60431F194E615E0050CAC5 /* StatementAndDisplayString.m */,
+				AE3701641936F21600426393 /* IntExpression.h */,
+				AE3701651936F22400426393 /* BoolExpression.h */,
+				AE7B98D1193A6F8D004C8C82 /* StatementList.h */,
+				AE7B98D2193A6F8D004C8C82 /* StatementList.m */,
+				AE60432B194EB0CF0050CAC5 /* PrintInt.h */,
+				AE60432C194EB0CF0050CAC5 /* PrintInt.m */,
+				AE60432E194EBD400050CAC5 /* PrintBool.h */,
+				AE60432F194EBD400050CAC5 /* PrintBool.m */,
+				AE7B98DC193BA440004C8C82 /* IntAssignment.h */,
+				AE7B98DD193BA440004C8C82 /* IntAssignment.m */,
+				AE3701691936F77000426393 /* BoolAssignment.h */,
+				AE37016A1936F77000426393 /* BoolAssignment.m */,
+				AE20837A193EF0FF0035C965 /* IntArrayElementAssignment.h */,
+				AE20837B193EF0FF0035C965 /* IntArrayElementAssignment.m */,
+				AE20837D193EF1120035C965 /* BoolArrayElementAssignment.h */,
+				AE20837E193EF1120035C965 /* BoolArrayElementAssignment.m */,
+				AE7B98CD193A57F0004C8C82 /* IfThenElseEndIf.h */,
+				AE7B98CE193A57F0004C8C82 /* IfThenElseEndIf.m */,
+				AE7B98EE193D5BCD004C8C82 /* IfThenEndIf.h */,
+				AE7B98EF193D5BCD004C8C82 /* IfThenEndIf.m */,
+				AE7B98D4193A8C7D004C8C82 /* WhileEndWhile.h */,
+				AE7B98D5193A8C7D004C8C82 /* WhileEndWhile.m */,
+				AE3701581936EFC200426393 /* IntValue.h */,
+				AE3701591936EFC200426393 /* IntValue.m */,
+				AE37015B1936EFCD00426393 /* BoolValue.h */,
+				AE37015C1936EFCD00426393 /* BoolValue.m */,
+				AE7B98C7193A51F6004C8C82 /* IntVariable.h */,
+				AE7B98C8193A51F6004C8C82 /* IntVariable.m */,
+				AE39C1DF1947E1B3004F47BF /* BoolVariable.h */,
+				AE39C1E01947E1B3004F47BF /* BoolVariable.m */,
+				AE20836B193EB3B00035C965 /* IntArrayElement.h */,
+				AE20836C193EB3B00035C965 /* IntArrayElement.m */,
+				AE20836E193EB3EC0035C965 /* BoolArrayElement.h */,
+				AE20836F193EB3EC0035C965 /* BoolArrayElement.m */,
+				AE7B9918193D5FBD004C8C82 /* IntNegation.h */,
+				AE7B9919193D5FBD004C8C82 /* IntNegation.m */,
+				AE7B98C4193A0FAC004C8C82 /* IntSum.h */,
+				AE7B98C5193A0FAC004C8C82 /* IntSum.m */,
+				AE7B990F193D5F89004C8C82 /* IntDifference.h */,
+				AE7B9910193D5F89004C8C82 /* IntDifference.m */,
+				AE7B9912193D5F99004C8C82 /* IntProduct.h */,
+				AE7B9913193D5F99004C8C82 /* IntProduct.m */,
+				AE7B9915193D5FA5004C8C82 /* IntQuotient.h */,
+				AE7B9916193D5FA5004C8C82 /* IntQuotient.m */,
+				AE7B991B193D5FD1004C8C82 /* IntRemainder.h */,
+				AE7B991C193D5FD1004C8C82 /* IntRemainder.m */,
+				AE7B990C193D5F3C004C8C82 /* BoolNegation.h */,
+				AE7B990D193D5F3C004C8C82 /* BoolNegation.m */,
+				AE7B9906193D5EF4004C8C82 /* BoolBoolEquals.h */,
+				AE7B9907193D5EF4004C8C82 /* BoolBoolEquals.m */,
+				AE7B9909193D5F03004C8C82 /* BoolBoolDoesNotEqual.h */,
+				AE7B990A193D5F03004C8C82 /* BoolBoolDoesNotEqual.m */,
+				AE7B991E193D7839004C8C82 /* BoolOr.h */,
+				AE7B991F193D7839004C8C82 /* BoolOr.m */,
+				AE7B9921193D7853004C8C82 /* BoolNor.h */,
+				AE7B9922193D7853004C8C82 /* BoolNor.m */,
+				AE7B9924193D7861004C8C82 /* BoolAnd.h */,
+				AE7B9925193D7861004C8C82 /* BoolAnd.m */,
+				AE7B9927193D788A004C8C82 /* BoolNand.h */,
+				AE7B9928193D788A004C8C82 /* BoolNand.m */,
+				AE7B9930193D78B4004C8C82 /* BoolImplies.h */,
+				AE7B9931193D78B4004C8C82 /* BoolImplies.m */,
+				AE7B9936193D8699004C8C82 /* BoolNonImplies.h */,
+				AE7B9937193D8699004C8C82 /* BoolNonImplies.m */,
+				AE7B9933193D78C5004C8C82 /* BoolReverseImplies.h */,
+				AE7B9934193D78C5004C8C82 /* BoolReverseImplies.m */,
+				AE7B9939193D86A8004C8C82 /* BoolReverseNonImplies.h */,
+				AE7B993A193D86A8004C8C82 /* BoolReverseNonImplies.m */,
+				AE7B9900193D5ED1004C8C82 /* BoolIntEquals.h */,
+				AE7B9901193D5ED1004C8C82 /* BoolIntEquals.m */,
+				AE7B9903193D5EE4004C8C82 /* BoolIntDoesNotEqual.h */,
+				AE7B9904193D5EE4004C8C82 /* BoolIntDoesNotEqual.m */,
+				AE7B98DF193BA6E9004C8C82 /* BoolLessThan.h */,
+				AE7B98E0193BA6E9004C8C82 /* BoolLessThan.m */,
+				AE7B98F1193D5E27004C8C82 /* BoolLessThanOrEquals.h */,
+				AE7B98F2193D5E27004C8C82 /* BoolLessThanOrEquals.m */,
+				AE7B98F4193D5E36004C8C82 /* BoolGreaterThan.h */,
+				AE7B98F5193D5E36004C8C82 /* BoolGreaterThan.m */,
+				AE7B98F7193D5E48004C8C82 /* BoolGreaterThanOrEquals.h */,
+				AE7B98F8193D5E48004C8C82 /* BoolGreaterThanOrEquals.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		AE7B98D8193A916E004C8C82 /* Visitors */ = {
+			isa = PBXGroup;
+			children = (
+				AE7B98D9193A91C1004C8C82 /* ExpressionDisplayStringVisitor.h */,
+				AE7B98DA193A91C1004C8C82 /* ExpressionDisplayStringVisitor.m */,
+				AE208377193EBFB70035C965 /* StatementFlatteningVisitor.h */,
+				AE208378193EBFB70035C965 /* StatementFlatteningVisitor.m */,
+				AEB41FD61977395C00227B68 /* StatementDeleteVisitor.h */,
+				AEB41FD71977395C00227B68 /* StatementDeleteVisitor.m */,
+				AEB41FD91977397200227B68 /* StatementInsertAfterVisitor.h */,
+				AEB41FDA1977397200227B68 /* StatementInsertAfterVisitor.m */,
+				AEBD7D3A1956C2CF00F0DCD1 /* StatementMoveVisitor.h */,
+				AEBD7D3B1956C2CF00F0DCD1 /* StatementMoveVisitor.m */,
+				AEB41FD31976FB9E00227B68 /* StatementBreakdownVisitor.h */,
+				AEB41FD41976FB9E00227B68 /* StatementBreakdownVisitor.m */,
+				AEA6FF9419777E33007F6457 /* StatementHasStatementListVisitor.h */,
+				AEA6FF9519777E33007F6457 /* StatementHasStatementListVisitor.m */,
+			);
+			name = Visitors;
+			sourceTree = "<group>";
+		};
+		AE7B98E5193C2BC7004C8C82 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AE7B98E8193C2CC1004C8C82 /* ProgramViewController.h */,
+				AE7B98E9193C2CC1004C8C82 /* ProgramViewController.m */,
+				AE7B98EB193C3813004C8C82 /* StatementViewController.h */,
+				AE7B98EC193C3813004C8C82 /* StatementViewController.m */,
+				AE604321194E96C10050CAC5 /* OutputViewController.h */,
+				AE604322194E96C10050CAC5 /* OutputViewController.m */,
+				AE0E13CF19529B3400E17E7D /* StatementComponentViewController.h */,
+				AE0E13D019529B3400E17E7D /* StatementComponentViewController.m */,
+				AE0E13D219529B4B00E17E7D /* IntExpressionViewController.h */,
+				AE0E13D319529B4B00E17E7D /* IntExpressionViewController.m */,
+				AE0E13D519529B6700E17E7D /* BoolExpressionViewController.h */,
+				AE0E13D619529B6700E17E7D /* BoolExpressionViewController.m */,
+				AE0E13D819529CFD00E17E7D /* ProgramListViewController.h */,
+				AE0E13D919529CFD00E17E7D /* ProgramListViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		AEA6FF7119777B71007F6457 /* ButtonImages */ = {
+			isa = PBXGroup;
+			children = (
+				AEA6FF7219777B71007F6457 /* BlueButton.png */,
+				AEA6FF7319777B71007F6457 /* BlueButtonOriginal.png */,
+				AEA6FF7419777B71007F6457 /* BlueButtonPlus.png */,
+				AEA6FF7519777B71007F6457 /* BlueButtonPlusCropped.png */,
+				AEA6FF7619777B71007F6457 /* GreenButton.png */,
+				AEA6FF7719777B71007F6457 /* GreenButtonDown.png */,
+				AEA6FF7819777B71007F6457 /* GreenButtonOriginal.png */,
+				AEA6FF7919777B71007F6457 /* GreenButtonRight.png */,
+				AEA6FF7A19777B71007F6457 /* GreenButtonUp.png */,
+				AEA6FF7B19777B71007F6457 /* RedButton.png */,
+				AEA6FF7C19777B71007F6457 /* RedButtonCropped.png */,
+				AEA6FF7D19777B71007F6457 /* RedButtonMinus.png */,
+				AEA6FF7E19777B71007F6457 /* RedButtonOriginal.png */,
+				AEA6FF7F19777B71007F6457 /* RedButtonX.png */,
+				AEA6FF8019777B71007F6457 /* RedButtonXCropped.png */,
+			);
+			path = ButtonImages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,8 +625,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEA6FF8E19777B71007F6457 /* RedButtonX.png in Resources */,
+				AEA6FF8319777B71007F6457 /* BlueButtonPlus.png in Resources */,
+				AEA6FF8719777B71007F6457 /* GreenButtonOriginal.png in Resources */,
+				AEA6FF8419777B71007F6457 /* BlueButtonPlusCropped.png in Resources */,
 				AE1B88321935B16B002962FA /* Main_iPad.storyboard in Resources */,
+				AEA6FF8F19777B71007F6457 /* RedButtonXCropped.png in Resources */,
+				AEA6FF8C19777B71007F6457 /* RedButtonMinus.png in Resources */,
+				AEA6FF8B19777B71007F6457 /* RedButtonCropped.png in Resources */,
+				AEA6FF8D19777B71007F6457 /* RedButtonOriginal.png in Resources */,
+				AEA6FF8919777B71007F6457 /* GreenButtonUp.png in Resources */,
+				AEA6FF8619777B71007F6457 /* GreenButtonDown.png in Resources */,
+				AEA6FF8A19777B71007F6457 /* RedButton.png in Resources */,
+				AEA6FF8819777B71007F6457 /* GreenButtonRight.png in Resources */,
+				AEA6FF8219777B71007F6457 /* BlueButtonOriginal.png in Resources */,
+				AEA6FF8519777B71007F6457 /* GreenButton.png in Resources */,
 				AE1B883A1935B16B002962FA /* Images.xcassets in Resources */,
+				AEA6FF8119777B71007F6457 /* BlueButton.png in Resources */,
 				AE1B882F1935B16B002962FA /* Main_iPhone.storyboard in Resources */,
 				AE1B88261935B16B002962FA /* InfoPlist.strings in Resources */,
 			);
@@ -258,10 +662,68 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE7B9920193D7839004C8C82 /* BoolOr.m in Sources */,
+				AE39C1E11947E1B3004F47BF /* BoolVariable.m in Sources */,
+				AE37016B1936F77000426393 /* BoolAssignment.m in Sources */,
+				AE7B9917193D5FA5004C8C82 /* IntQuotient.m in Sources */,
+				AE0E13D719529B6700E17E7D /* BoolExpressionViewController.m in Sources */,
+				AE1B88591935B2D0002962FA /* EnvironmentModel.m in Sources */,
+				AE7B98E4193C284A004C8C82 /* Program.m in Sources */,
+				AE0E13D119529B3400E17E7D /* StatementComponentViewController.m in Sources */,
+				AE7B98EA193C2CC1004C8C82 /* ProgramViewController.m in Sources */,
+				AE7B9905193D5EE4004C8C82 /* BoolIntDoesNotEqual.m in Sources */,
+				AE0E13DA19529CFD00E17E7D /* ProgramListViewController.m in Sources */,
 				AE1B882C1935B16B002962FA /* AppDelegate.m in Sources */,
+				AE208379193EBFB70035C965 /* StatementFlatteningVisitor.m in Sources */,
+				AE7B98D6193A8C7D004C8C82 /* WhileEndWhile.m in Sources */,
+				AE604323194E96C10050CAC5 /* OutputViewController.m in Sources */,
+				AE7B990B193D5F03004C8C82 /* BoolBoolDoesNotEqual.m in Sources */,
+				AE7B98CF193A57F0004C8C82 /* IfThenElseEndIf.m in Sources */,
+				AE7B98C6193A0FAC004C8C82 /* IntSum.m in Sources */,
+				AE7B98D3193A6F8D004C8C82 /* StatementList.m in Sources */,
+				AE7B9923193D7853004C8C82 /* BoolNor.m in Sources */,
+				AE7B9935193D78C5004C8C82 /* BoolReverseImplies.m in Sources */,
+				AE7B98DE193BA440004C8C82 /* IntAssignment.m in Sources */,
+				AE20836D193EB3B00035C965 /* IntArrayElement.m in Sources */,
+				AE208370193EB3EC0035C965 /* BoolArrayElement.m in Sources */,
 				AE1B88351935B16B002962FA /* MasterViewController.m in Sources */,
+				AE7B98ED193C3813004C8C82 /* StatementViewController.m in Sources */,
+				AE7B98F6193D5E36004C8C82 /* BoolGreaterThan.m in Sources */,
+				AE20837C193EF0FF0035C965 /* IntArrayElementAssignment.m in Sources */,
+				AE3701501936E4CF00426393 /* Value.m in Sources */,
+				AE0E13D419529B4B00E17E7D /* IntExpressionViewController.m in Sources */,
+				AE7B9929193D788A004C8C82 /* BoolNand.m in Sources */,
+				AEFA0F311945744D006AEA4B /* ProgramException.m in Sources */,
 				AE1B88281935B16B002962FA /* main.m in Sources */,
+				AE7B9926193D7861004C8C82 /* BoolAnd.m in Sources */,
+				AE604330194EBD400050CAC5 /* PrintBool.m in Sources */,
+				AEA6FF9619777E33007F6457 /* StatementHasStatementListVisitor.m in Sources */,
+				AE37015A1936EFC200426393 /* IntValue.m in Sources */,
+				AE7B9914193D5F99004C8C82 /* IntProduct.m in Sources */,
+				AE7B993B193D86A8004C8C82 /* BoolReverseNonImplies.m in Sources */,
+				AE7B9908193D5EF4004C8C82 /* BoolBoolEquals.m in Sources */,
+				AE7B9938193D8699004C8C82 /* BoolNonImplies.m in Sources */,
+				AE37015D1936EFCD00426393 /* BoolValue.m in Sources */,
+				AE7B9902193D5ED1004C8C82 /* BoolIntEquals.m in Sources */,
+				AE60432D194EB0CF0050CAC5 /* PrintInt.m in Sources */,
+				AE7B98C9193A51F6004C8C82 /* IntVariable.m in Sources */,
+				AE7B9911193D5F89004C8C82 /* IntDifference.m in Sources */,
+				AE7B98E1193BA6E9004C8C82 /* BoolLessThan.m in Sources */,
+				AEB41FD51976FB9E00227B68 /* StatementBreakdownVisitor.m in Sources */,
+				AEB41FD81977395C00227B68 /* StatementDeleteVisitor.m in Sources */,
+				AE7B9932193D78B4004C8C82 /* BoolImplies.m in Sources */,
+				AE7B990E193D5F3C004C8C82 /* BoolNegation.m in Sources */,
+				AEB41FDB1977397200227B68 /* StatementInsertAfterVisitor.m in Sources */,
+				AE7B991A193D5FBD004C8C82 /* IntNegation.m in Sources */,
+				AEBD7D3C1956C2CF00F0DCD1 /* StatementMoveVisitor.m in Sources */,
 				AE1B88381935B16B002962FA /* DetailViewController.m in Sources */,
+				AE7B991D193D5FD1004C8C82 /* IntRemainder.m in Sources */,
+				AE7B98F9193D5E48004C8C82 /* BoolGreaterThanOrEquals.m in Sources */,
+				AE7B98F0193D5BCD004C8C82 /* IfThenEndIf.m in Sources */,
+				AE604320194E615E0050CAC5 /* StatementAndDisplayString.m in Sources */,
+				AE20837F193EF1120035C965 /* BoolArrayElementAssignment.m in Sources */,
+				AE7B98DB193A91C1004C8C82 /* ExpressionDisplayStringVisitor.m in Sources */,
+				AE7B98F3193D5E27004C8C82 /* BoolLessThanOrEquals.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +732,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				AE1B884D1935B16B002962FA /* InspirationBasicTests.m in Sources */,
+				AEAE85AC195F44EF00C8B59E /* ExpressionDebugStringVisitor.m in Sources */,
+				AEAE85AF195F4C0D00C8B59E /* StatementDebugStringVisitor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,6 +864,7 @@
 				GCC_PREFIX_HEADER = "InspirationBasic/InspirationBasic-Prefix.pch";
 				INFOPLIST_FILE = "InspirationBasic/InspirationBasic-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -413,6 +878,7 @@
 				GCC_PREFIX_HEADER = "InspirationBasic/InspirationBasic-Prefix.pch";
 				INFOPLIST_FILE = "InspirationBasic/InspirationBasic-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -476,6 +942,7 @@
 				AE1B88521935B16B002962FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AE1B88531935B16B002962FA /* Build configuration list for PBXNativeTarget "InspirationBasicTests" */ = {
 			isa = XCConfigurationList;
@@ -484,6 +951,7 @@
 				AE1B88551935B16B002962FA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

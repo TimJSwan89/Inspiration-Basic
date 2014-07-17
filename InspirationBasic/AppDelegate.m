@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ProgramViewController.h"
 
 @implementation AppDelegate
 
@@ -18,6 +19,7 @@
         UINavigationController *navigationController = [splitViewController.viewControllers lastObject];
         splitViewController.delegate = (id)navigationController.topViewController;
     }
+    //ProgramViewController * programViewController = (ProgramViewController *)[[navigationController viewControllers] objectAtIndex:0];
     return YES;
 }
 							
