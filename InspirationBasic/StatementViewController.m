@@ -7,6 +7,11 @@
 //
 
 #import "StatementViewController.h"
+#import "StatementComponentViewController.h"
+#import "IntExpressionViewController.h"
+#import "BoolExpressionViewController.h"
+
+#import "StatementBreakdownVisitor.h"
 
 @interface StatementViewController ()
 
@@ -23,10 +28,28 @@
     return self;
 }
 
+- (void) initCellModels {
+    StatementBreakdownVisitor * visitor = [[StatementBreakdownVisitor alloc] init];
+    [visitor generateBreakdown:self.statement];
+    self.types = visitor.types;
+    self.elements = visitor.elements;
+    self.strings = visitor.strings;
+    
+    self.typesIndex = [[NSMutableArray alloc] init];
+    [self.typesIndex addObject:@"Dummy"];
+    [self.typesIndex addObject:@"StatementComponentCell"];
+    [self.typesIndex addObject:@"IntExpressionCell"];
+    [self.typesIndex addObject:@"BoolExpressionCell"];
+    [self.typesIndex addObject:@"IntVariableCell"];
+    [self.typesIndex addObject:@"BoolVariableCell"];
+    [self.typesIndex addObject:@"IntArrayVariableCell"];
+    [self.typesIndex addObject:@"BoolArrayVariableCell"];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self initCellModels];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -44,28 +67,22 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return self.types.count;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:(NSString *)self.typesIndex[[((NSNumber *)self.types[indexPath.row]) intValue]] forIndexPath:indexPath];
+    [[cell textLabel] setText:self.strings[indexPath.row]];
     return cell;
 }
-*/
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -105,15 +122,23 @@
 }
 */
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
+#pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"StatementToComponent"]) {
+        StatementComponentViewController * statementComponentViewController = [segue destinationViewController];
+        statementComponentViewController.statement = self.statement;
+    } else if ([[segue identifier] isEqualToString:@"StatementToInt"]) {
+        id <IntExpression> intExpression = self.elements[[self.tableView indexPathForSelectedRow].row];
+        IntExpressionViewController * intExpressionViewController = [segue destinationViewController];
+        intExpressionViewController.intExpression = intExpression;
+    } else if ([[segue identifier] isEqualToString:@"StatementToBool"]) {
+        id <BoolExpression> boolExpression = self.elements[[self.tableView indexPathForSelectedRow].row];
+        BoolExpressionViewController * boolExpressionViewController = [segue destinationViewController];
+        boolExpressionViewController.boolExpression = boolExpression;
+    }
 }
-*/
+
 
 @end

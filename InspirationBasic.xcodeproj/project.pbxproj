@@ -75,6 +75,7 @@
 		AE7B9935193D78C5004C8C82 /* BoolReverseImplies.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9934193D78C5004C8C82 /* BoolReverseImplies.m */; };
 		AE7B9938193D8699004C8C82 /* BoolNonImplies.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9937193D8699004C8C82 /* BoolNonImplies.m */; };
 		AE7B993B193D86A8004C8C82 /* BoolReverseNonImplies.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B993A193D86A8004C8C82 /* BoolReverseNonImplies.m */; };
+		AEA5E57D1978879E0090A9F2 /* ExpressionBreakdownVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5E57C1978879E0090A9F2 /* ExpressionBreakdownVisitor.m */; };
 		AEA6FF8119777B71007F6457 /* BlueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7219777B71007F6457 /* BlueButton.png */; };
 		AEA6FF8219777B71007F6457 /* BlueButtonOriginal.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7319777B71007F6457 /* BlueButtonOriginal.png */; };
 		AEA6FF8319777B71007F6457 /* BlueButtonPlus.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7419777B71007F6457 /* BlueButtonPlus.png */; };
@@ -243,6 +244,8 @@
 		AE7B9937193D8699004C8C82 /* BoolNonImplies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolNonImplies.m; sourceTree = "<group>"; };
 		AE7B9939193D86A8004C8C82 /* BoolReverseNonImplies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolReverseNonImplies.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE7B993A193D86A8004C8C82 /* BoolReverseNonImplies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolReverseNonImplies.m; sourceTree = "<group>"; };
+		AEA5E57B1978879E0090A9F2 /* ExpressionBreakdownVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionBreakdownVisitor.h; sourceTree = "<group>"; };
+		AEA5E57C1978879E0090A9F2 /* ExpressionBreakdownVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionBreakdownVisitor.m; sourceTree = "<group>"; };
 		AEA6FF7219777B71007F6457 /* BlueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButton.png; sourceTree = "<group>"; };
 		AEA6FF7319777B71007F6457 /* BlueButtonOriginal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButtonOriginal.png; sourceTree = "<group>"; };
 		AEA6FF7419777B71007F6457 /* BlueButtonPlus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButtonPlus.png; sourceTree = "<group>"; };
@@ -490,6 +493,8 @@
 			children = (
 				AE7B98D9193A91C1004C8C82 /* ExpressionDisplayStringVisitor.h */,
 				AE7B98DA193A91C1004C8C82 /* ExpressionDisplayStringVisitor.m */,
+				AEA5E57B1978879E0090A9F2 /* ExpressionBreakdownVisitor.h */,
+				AEA5E57C1978879E0090A9F2 /* ExpressionBreakdownVisitor.m */,
 				AE208377193EBFB70035C965 /* StatementFlatteningVisitor.h */,
 				AE208378193EBFB70035C965 /* StatementFlatteningVisitor.m */,
 				AEB41FD61977395C00227B68 /* StatementDeleteVisitor.h */,
@@ -675,6 +680,7 @@
 				AE0E13DA19529CFD00E17E7D /* ProgramListViewController.m in Sources */,
 				AE1B882C1935B16B002962FA /* AppDelegate.m in Sources */,
 				AE208379193EBFB70035C965 /* StatementFlatteningVisitor.m in Sources */,
+				AEA5E57D1978879E0090A9F2 /* ExpressionBreakdownVisitor.m in Sources */,
 				AE7B98D6193A8C7D004C8C82 /* WhileEndWhile.m in Sources */,
 				AE604323194E96C10050CAC5 /* OutputViewController.m in Sources */,
 				AE7B990B193D5F03004C8C82 /* BoolBoolDoesNotEqual.m in Sources */,

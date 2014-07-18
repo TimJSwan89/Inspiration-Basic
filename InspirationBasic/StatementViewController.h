@@ -12,5 +12,11 @@
 @interface StatementViewController : UITableViewController
 
 @property (nonatomic) id <Statement> statement;
+@property NSMutableArray * typesIndex;
+@property NSMutableArray * types;
+@property NSMutableArray * elements;
+@property NSMutableArray * strings;
+
+- (void) initCellModels;
 
 @end

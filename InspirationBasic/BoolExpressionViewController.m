@@ -23,6 +23,24 @@
     return self;
 }
 
+- (void) initCellModels {
+    StatementBreakdownVisitor * visitor = [[StatementBreakdownVisitor alloc] init];
+    [visitor generateBreakdown:self.statement];
+    self.types = visitor.types;
+    self.elements = visitor.elements;
+    self.strings = visitor.strings;
+    
+    self.typesIndex = [[NSMutableArray alloc] init];
+    [self.typesIndex addObject:@"Dummy"];
+    [self.typesIndex addObject:@"StatementComponentCell"];
+    [self.typesIndex addObject:@"IntExpressionCell"];
+    [self.typesIndex addObject:@"BoolExpressionCell"];
+    [self.typesIndex addObject:@"IntVariableCell"];
+    [self.typesIndex addObject:@"BoolVariableCell"];
+    [self.typesIndex addObject:@"IntArrayVariableCell"];
+    [self.typesIndex addObject:@"BoolArrayVariableCell"];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -44,22 +62,18 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return self.types.count;
 }
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"" forIndexPath:indexPath];
     
     // Configure the cell...
     

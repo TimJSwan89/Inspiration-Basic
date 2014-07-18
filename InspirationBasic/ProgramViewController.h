@@ -24,9 +24,9 @@
 
 - (void) initStatements;
 
-- (IBAction)DeleteAll:(UIButton *)sender;
+- (IBAction)deleteAll:(UIButton *)sender;
 
-- (IBAction)DeleteProtectChildren:(UIButton *)sender;
+- (IBAction)deleteProtectChildren:(UIButton *)sender;
 
 - (IBAction)moveUp:(UIButton *)sender;
 

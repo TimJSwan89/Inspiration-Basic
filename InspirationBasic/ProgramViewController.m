@@ -88,6 +88,15 @@
     loopStatements.parent = whileEndWhile;
     [self.program addStatement:whileEndWhile];
     
+    StatementList * loopStatements1 = [[StatementList alloc] initWithParent:nil];
+    BoolLessThan * lessThan1 = [[BoolLessThan alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] LessThan:[[IntValue alloc] initWithValue:10]];
+    IntSum * sum1 = [[IntSum alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] plus:[[IntValue alloc] initWithValue:1]];
+    [loopStatements1 addStatement:[[IntAssignment alloc] initWith:@"x" equals:sum1 andParent:loopStatements1]];
+    [loopStatements1 addStatement:[[PrintInt alloc] initWithExpression:[[IntVariable alloc] initWithVariable:@"x"] andParent:loopStatements1]];
+    WhileEndWhile * whileEndWhile1 = [[WhileEndWhile alloc] initWithWhile:lessThan1 Do:loopStatements1 andParent:whileEndWhile.loopStatements];
+    loopStatements1.parent = whileEndWhile1;
+    [whileEndWhile.loopStatements addStatement:whileEndWhile1];
+    
     [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:6] andParent:self.program]];
     NSInteger num = self.program.statementList.count;
     [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:7] andParent:self.program]];
@@ -127,11 +136,11 @@
     [self reflattenProgram];
 }
 
-- (IBAction)DeleteAll:(UIButton *)sender {
+- (IBAction)deleteAll:(UIButton *)sender {
     [self deleteStatement:(UIButton *)sender and:false];
 }
 
-- (IBAction)DeleteProtectChildren:(UIButton *)sender {
+- (IBAction)deleteProtectChildren:(UIButton *)sender {
     [self deleteStatement:(UIButton *)sender and:true];
 }
 
@@ -200,15 +209,22 @@
     NSIndexPath * newIndexPath = [NSIndexPath indexPathForRow:newIndex inSection:0];
     
     NSArray * indexPaths = [[NSArray alloc] initWithObjects:indexPath, newIndexPath, nil];
-    //[table selectRowAtIndexPath:otherIndexPath animated:TRUE scrollPosition:UITableViewScrollPositionMiddle];
     
     
     
     [table reloadData];
-    float verticalContentOffset = table.contentOffset.y + (table.rowHeight) * (newIndex - index);
-    [table setContentOffset:CGPointMake(0, verticalContentOffset)];
-    [table selectRowAtIndexPath:newIndexPath animated:true scrollPosition:UITableViewScrollPositionNone]; //UITableViewScrollPositionMiddle];
+    float oldOffset = table.contentOffset.y;
     //[table selectRowAtIndexPath:newIndexPath animated:false scrollPosition:UITableViewScrollPositionMiddle];
+    //if (oldOffset != table.contentOffset.y) {
+        float verticalContentOffset = oldOffset + (table.rowHeight) * (newIndex - index);
+    float top = self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
+        if (verticalContentOffset < 0 - top)
+            verticalContentOffset = 0 - top;
+        [table setContentOffset:CGPointMake(0, verticalContentOffset)];
+    //}
+    
+    [table selectRowAtIndexPath:newIndexPath animated:false scrollPosition:UITableViewScrollPositionNone];
+    
     [self setButtonsOnCell:[table cellForRowAtIndexPath:newIndexPath] to:true];
     // Commented out since we can move statement groups
     //[table reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
@@ -337,14 +353,10 @@
 
 
 #pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     if ([[segue identifier] isEqualToString:@"ProgramToStatements"]) {
-        id <Statement> statement = self.program.statementList[[self.tableView indexPathForSelectedRow].row];
+        id <Statement> statement = ((StatementAndDisplayString *)(self.flattenedList[[self.tableView indexPathForSelectedRow].row])).statement;
         StatementViewController * statementViewController = [segue destinationViewController];
         statementViewController.statement = statement;
     } else if ([[segue identifier] isEqualToString:@"ProgramToOutput"]) {

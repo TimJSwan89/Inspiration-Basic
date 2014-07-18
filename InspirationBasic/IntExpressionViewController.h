@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IntExpression.h"
 
 @interface IntExpressionViewController : UITableViewController
+
+@property (nonatomic) id <IntExpression> intExpression;
+@property NSMutableArray * typesIndex;
+@property NSMutableArray * types;
+@property NSMutableArray * elements;
+@property NSMutableArray * strings;
 
 @end

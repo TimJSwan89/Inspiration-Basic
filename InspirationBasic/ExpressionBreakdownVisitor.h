@@ -8,16 +8,35 @@
 
 #import <Foundation/Foundation.h>
 #import "./ExpressionVisitor.h"
+
+#import "ExpressionDisplayStringVisitor.h"
+
 #import "IntExpression.h"
 #import "BoolExpression.h"
 
-@interface ExpressionDisplayStringVisitor : NSObject<ExpressionVisitor>
+@interface ExpressionBreakdownVisitor : NSObject<ExpressionVisitor>
 
-@property NSString * displayString;
-
+@property NSMutableArray * types;
+@property NSMutableArray * elements;
+@property NSMutableArray * strings;
+@property ExpressionDisplayStringVisitor * visitor;
 - (id) init;
-- (NSString *) getStringForInt:(id <IntExpression>)intExpression;
-- (NSString *) getStringForBool:(id <BoolExpression>)boolExpression;
+- (void) generateBreakdownInt:(id <IntExpression>)intExpression;
+- (void) generateBreakdownBool:(id <BoolExpression>)boolExpression;
+
+/*
+ 
+ Returning types
+ 
+ 1. Statement
+ 2. Int Expression
+ 3. Bool Expression
+ 4. Int Variable
+ 5. Bool Variable
+ 6. Int Array Variable
+ 7. Bool Array Variable
+ 
+ */
 
 - (void) visitIntValue:(IntValue *)intValue;
 - (void) visitBoolValue:(BoolValue *)boolValue;

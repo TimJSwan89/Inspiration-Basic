@@ -22,8 +22,26 @@
 
 @interface StatementBreakdownVisitor : NSObject <StatementVisitor>
 
+/*
+ 
+ Returning types
+ 
+ 1. Statement
+ 2. Int Expression
+ 3. Bool Expression
+ 4. Int Variable
+ 5. Bool Variable
+ 6. Int Array Variable
+ 7. Bool Array Variable
+ 
+ */
+
+@property NSMutableArray * types;
+@property NSMutableArray * elements;
+@property NSMutableArray * strings;
+
 - (id) init;
-- (NSMutableArray *) generateBreakdown:(id <Statement>)statement;
+- (void) generateBreakdown:(id <Statement>)statement;
 
 - (void) visitPrintInt:(PrintInt *)printInt;
 - (void) visitPrintBool:(PrintInt *)printBool;
