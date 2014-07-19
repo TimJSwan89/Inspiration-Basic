@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AE0E13D119529B3400E17E7D /* StatementComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E13D019529B3400E17E7D /* StatementComponentViewController.m */; };
-		AE0E13D419529B4B00E17E7D /* IntExpressionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E13D319529B4B00E17E7D /* IntExpressionViewController.m */; };
-		AE0E13D719529B6700E17E7D /* BoolExpressionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E13D619529B6700E17E7D /* BoolExpressionViewController.m */; };
+		AE0E13D119529B3400E17E7D /* ComponentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E13D019529B3400E17E7D /* ComponentViewController.m */; };
 		AE0E13DA19529CFD00E17E7D /* ProgramListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE0E13D919529CFD00E17E7D /* ProgramListViewController.m */; };
 		AE1B881C1935B16B002962FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1B881B1935B16B002962FA /* Foundation.framework */; };
 		AE1B881E1935B16B002962FA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1B881D1935B16B002962FA /* CoreGraphics.framework */; };
@@ -52,7 +50,7 @@
 		AE7B98E1193BA6E9004C8C82 /* BoolLessThan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98E0193BA6E9004C8C82 /* BoolLessThan.m */; };
 		AE7B98E4193C284A004C8C82 /* Program.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98E3193C284A004C8C82 /* Program.m */; };
 		AE7B98EA193C2CC1004C8C82 /* ProgramViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98E9193C2CC1004C8C82 /* ProgramViewController.m */; };
-		AE7B98ED193C3813004C8C82 /* StatementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98EC193C3813004C8C82 /* StatementViewController.m */; };
+		AE7B98ED193C3813004C8C82 /* ElementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98EC193C3813004C8C82 /* ElementViewController.m */; };
 		AE7B98F0193D5BCD004C8C82 /* IfThenEndIf.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98EF193D5BCD004C8C82 /* IfThenEndIf.m */; };
 		AE7B98F3193D5E27004C8C82 /* BoolLessThanOrEquals.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98F2193D5E27004C8C82 /* BoolLessThanOrEquals.m */; };
 		AE7B98F6193D5E36004C8C82 /* BoolGreaterThan.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98F5193D5E36004C8C82 /* BoolGreaterThan.m */; };
@@ -112,12 +110,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AE0E13CF19529B3400E17E7D /* StatementComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementComponentViewController.h; sourceTree = "<group>"; };
-		AE0E13D019529B3400E17E7D /* StatementComponentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementComponentViewController.m; sourceTree = "<group>"; };
-		AE0E13D219529B4B00E17E7D /* IntExpressionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntExpressionViewController.h; sourceTree = "<group>"; };
-		AE0E13D319529B4B00E17E7D /* IntExpressionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntExpressionViewController.m; sourceTree = "<group>"; };
-		AE0E13D519529B6700E17E7D /* BoolExpressionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoolExpressionViewController.h; sourceTree = "<group>"; };
-		AE0E13D619529B6700E17E7D /* BoolExpressionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolExpressionViewController.m; sourceTree = "<group>"; };
+		AE0E13CF19529B3400E17E7D /* ComponentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComponentViewController.h; sourceTree = "<group>"; };
+		AE0E13D019529B3400E17E7D /* ComponentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComponentViewController.m; sourceTree = "<group>"; };
 		AE0E13D819529CFD00E17E7D /* ProgramListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramListViewController.h; sourceTree = "<group>"; };
 		AE0E13D919529CFD00E17E7D /* ProgramListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramListViewController.m; sourceTree = "<group>"; };
 		AE1B88181935B16B002962FA /* InspirationBasic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InspirationBasic.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,8 +192,8 @@
 		AE7B98E3193C284A004C8C82 /* Program.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Program.m; sourceTree = "<group>"; };
 		AE7B98E8193C2CC1004C8C82 /* ProgramViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramViewController.h; sourceTree = "<group>"; };
 		AE7B98E9193C2CC1004C8C82 /* ProgramViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramViewController.m; sourceTree = "<group>"; };
-		AE7B98EB193C3813004C8C82 /* StatementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementViewController.h; sourceTree = "<group>"; };
-		AE7B98EC193C3813004C8C82 /* StatementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementViewController.m; sourceTree = "<group>"; };
+		AE7B98EB193C3813004C8C82 /* ElementViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementViewController.h; sourceTree = "<group>"; };
+		AE7B98EC193C3813004C8C82 /* ElementViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementViewController.m; sourceTree = "<group>"; };
 		AE7B98EE193D5BCD004C8C82 /* IfThenEndIf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IfThenEndIf.h; sourceTree = "<group>"; };
 		AE7B98EF193D5BCD004C8C82 /* IfThenEndIf.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IfThenEndIf.m; sourceTree = "<group>"; };
 		AE7B98F1193D5E27004C8C82 /* BoolLessThanOrEquals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolLessThanOrEquals.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -516,16 +510,12 @@
 			children = (
 				AE7B98E8193C2CC1004C8C82 /* ProgramViewController.h */,
 				AE7B98E9193C2CC1004C8C82 /* ProgramViewController.m */,
-				AE7B98EB193C3813004C8C82 /* StatementViewController.h */,
-				AE7B98EC193C3813004C8C82 /* StatementViewController.m */,
+				AE7B98EB193C3813004C8C82 /* ElementViewController.h */,
+				AE7B98EC193C3813004C8C82 /* ElementViewController.m */,
 				AE604321194E96C10050CAC5 /* OutputViewController.h */,
 				AE604322194E96C10050CAC5 /* OutputViewController.m */,
-				AE0E13CF19529B3400E17E7D /* StatementComponentViewController.h */,
-				AE0E13D019529B3400E17E7D /* StatementComponentViewController.m */,
-				AE0E13D219529B4B00E17E7D /* IntExpressionViewController.h */,
-				AE0E13D319529B4B00E17E7D /* IntExpressionViewController.m */,
-				AE0E13D519529B6700E17E7D /* BoolExpressionViewController.h */,
-				AE0E13D619529B6700E17E7D /* BoolExpressionViewController.m */,
+				AE0E13CF19529B3400E17E7D /* ComponentViewController.h */,
+				AE0E13D019529B3400E17E7D /* ComponentViewController.m */,
 				AE0E13D819529CFD00E17E7D /* ProgramListViewController.h */,
 				AE0E13D919529CFD00E17E7D /* ProgramListViewController.m */,
 			);
@@ -671,10 +661,9 @@
 				AE39C1E11947E1B3004F47BF /* BoolVariable.m in Sources */,
 				AE37016B1936F77000426393 /* BoolAssignment.m in Sources */,
 				AE7B9917193D5FA5004C8C82 /* IntQuotient.m in Sources */,
-				AE0E13D719529B6700E17E7D /* BoolExpressionViewController.m in Sources */,
 				AE1B88591935B2D0002962FA /* EnvironmentModel.m in Sources */,
 				AE7B98E4193C284A004C8C82 /* Program.m in Sources */,
-				AE0E13D119529B3400E17E7D /* StatementComponentViewController.m in Sources */,
+				AE0E13D119529B3400E17E7D /* ComponentViewController.m in Sources */,
 				AE7B98EA193C2CC1004C8C82 /* ProgramViewController.m in Sources */,
 				AE7B9905193D5EE4004C8C82 /* BoolIntDoesNotEqual.m in Sources */,
 				AE0E13DA19529CFD00E17E7D /* ProgramListViewController.m in Sources */,
@@ -693,11 +682,10 @@
 				AE20836D193EB3B00035C965 /* IntArrayElement.m in Sources */,
 				AE208370193EB3EC0035C965 /* BoolArrayElement.m in Sources */,
 				AE1B88351935B16B002962FA /* MasterViewController.m in Sources */,
-				AE7B98ED193C3813004C8C82 /* StatementViewController.m in Sources */,
+				AE7B98ED193C3813004C8C82 /* ElementViewController.m in Sources */,
 				AE7B98F6193D5E36004C8C82 /* BoolGreaterThan.m in Sources */,
 				AE20837C193EF0FF0035C965 /* IntArrayElementAssignment.m in Sources */,
 				AE3701501936E4CF00426393 /* Value.m in Sources */,
-				AE0E13D419529B4B00E17E7D /* IntExpressionViewController.m in Sources */,
 				AE7B9929193D788A004C8C82 /* BoolNand.m in Sources */,
 				AEFA0F311945744D006AEA4B /* ProgramException.m in Sources */,
 				AE1B88281935B16B002962FA /* main.m in Sources */,

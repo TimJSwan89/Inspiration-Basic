@@ -1,18 +1,18 @@
 //
-//  IntExpressionViewController.m
+//  StatementComponentViewController.m
 //  InspirationBasic
 //
 //  Created by Timothy Swan on 6/18/14.
 //  Copyright (c) 2014 ___InspirationTeam___. All rights reserved.
 //
 
-#import "IntExpressionViewController.h"
+#import "ComponentViewController.h"
 
-@interface IntExpressionViewController ()
+@interface ComponentViewController ()
 
 @end
 
-@implementation IntExpressionViewController
+@implementation ComponentViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -21,24 +21,6 @@
         // Custom initialization
     }
     return self;
-}
-
-- (void) initCellModels {
-    StatementBreakdownVisitor * visitor = [[StatementBreakdownVisitor alloc] init];
-    [visitor generateBreakdown:self.statement];
-    self.types = visitor.types;
-    self.elements = visitor.elements;
-    self.strings = visitor.strings;
-    
-    self.typesIndex = [[NSMutableArray alloc] init];
-    [self.typesIndex addObject:@"Dummy"];
-    [self.typesIndex addObject:@"StatementComponentCell"];
-    [self.typesIndex addObject:@"IntExpressionCell"];
-    [self.typesIndex addObject:@"BoolExpressionCell"];
-    [self.typesIndex addObject:@"IntVariableCell"];
-    [self.typesIndex addObject:@"BoolVariableCell"];
-    [self.typesIndex addObject:@"IntArrayVariableCell"];
-    [self.typesIndex addObject:@"BoolArrayVariableCell"];
 }
 
 - (void)viewDidLoad
@@ -62,18 +44,22 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+#warning Potentially incomplete method implementation.
+    // Return the number of sections.
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.types.count;
+#warning Incomplete method implementation.
+    // Return the number of rows in the section.
+    return 0;
 }
 
 /*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"reuse" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
     
     // Configure the cell...
     
@@ -119,15 +105,19 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"ComponentToComponent"]) {
+        
+    } else if ([[segue identifier] isEqualToString:@"ComponentToVariable"]) {
+        
+    } else if ([[segue identifier] isEqualToString:@"ComponentToHardcodeInt"]) {
+        
+    }
 }
-*/
+
 
 @end

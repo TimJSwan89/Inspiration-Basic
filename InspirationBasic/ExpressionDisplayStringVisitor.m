@@ -46,6 +46,18 @@
     return self;
 }
 
+- (NSString *) getStringForInt:(id <IntExpression>)intExpression {
+    self.displayString = @"";
+    [intExpression accept:self];
+    return self.displayString;
+}
+
+- (NSString *) getStringForBool:(id <BoolExpression>)boolExpression {
+    self.displayString = @"";
+    [boolExpression accept:self];
+    return self.displayString;
+}
+
 - (void) append:(NSString *)string {
     self.displayString = [self.displayString stringByAppendingString:string];
 }

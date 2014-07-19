@@ -6,18 +6,17 @@
 //  Copyright (c) 2014 ___InspirationTeam___. All rights reserved.
 //
 
-#import "StatementViewController.h"
-#import "StatementComponentViewController.h"
-#import "IntExpressionViewController.h"
-#import "BoolExpressionViewController.h"
+#import "ElementViewController.h"
+#import "ComponentViewController.h"
 
 #import "StatementBreakdownVisitor.h"
+#import "ExpressionBreakdownVisitor.h"
 
-@interface StatementViewController ()
+@interface ElementViewController ()
 
 @end
 
-@implementation StatementViewController
+@implementation ElementViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -29,21 +28,52 @@
 }
 
 - (void) initCellModels {
-    StatementBreakdownVisitor * visitor = [[StatementBreakdownVisitor alloc] init];
-    [visitor generateBreakdown:self.statement];
-    self.types = visitor.types;
-    self.elements = visitor.elements;
-    self.strings = visitor.strings;
-    
+    if (self.type == 1) {
+        StatementBreakdownVisitor * visitor = [[StatementBreakdownVisitor alloc] init];
+        [visitor generateBreakdown:self.element];
+        self.types = visitor.types;
+        self.elements = visitor.elements;
+        self.strings = visitor.strings;
+    } else {
+        ExpressionBreakdownVisitor * visitor = [[ExpressionBreakdownVisitor alloc] init];
+        if (self.type == 2)
+            [visitor generateBreakdownInt:self.element];
+        else
+            [visitor generateBreakdownBool:self.element];
+        self.types = visitor.types;
+        self.elements = visitor.elements;
+        self.strings = visitor.strings;
+    }
     self.typesIndex = [[NSMutableArray alloc] init];
-    [self.typesIndex addObject:@"Dummy"];
-    [self.typesIndex addObject:@"StatementComponentCell"];
-    [self.typesIndex addObject:@"IntExpressionCell"];
-    [self.typesIndex addObject:@"BoolExpressionCell"];
-    [self.typesIndex addObject:@"IntVariableCell"];
-    [self.typesIndex addObject:@"BoolVariableCell"];
-    [self.typesIndex addObject:@"IntArrayVariableCell"];
-    [self.typesIndex addObject:@"BoolArrayVariableCell"];
+    /*
+     
+     Returning types
+     
+     1. Statement
+     2. Int Expression
+     3. Bool Expression
+     4. Int Variable
+     5. Bool Variable
+     6. Int Array Variable
+     7. Bool Array Variable
+     8. Int Expression Component
+     9. Bool Expression Component
+     10. Int Single Component Expression
+     11. Bool Single Component Expression
+     
+     */
+    [self.typesIndex addObject:@"Dummy"];               // 0
+    [self.typesIndex addObject:@"ComponentCell"];       // 1
+    [self.typesIndex addObject:@"ExpressionCell"];      // 2
+    [self.typesIndex addObject:@"ExpressionCell"];      // 3
+    [self.typesIndex addObject:@"VariableCell"];        // 4
+    [self.typesIndex addObject:@"VariableCell"];        // 5
+    [self.typesIndex addObject:@"VariableCell"];        // 6
+    [self.typesIndex addObject:@"VariableCell"];        // 7
+    [self.typesIndex addObject:@"ComponentCell"];       // 8
+    [self.typesIndex addObject:@"ComponentCell"];       // 9
+    [self.typesIndex addObject:@"ComponentCell"];       // 10
+    [self.typesIndex addObject:@"ComponentCell"];       // 11
 }
 
 - (void)viewDidLoad
@@ -126,17 +156,17 @@
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"StatementToComponent"]) {
-        StatementComponentViewController * statementComponentViewController = [segue destinationViewController];
-        statementComponentViewController.statement = self.statement;
-    } else if ([[segue identifier] isEqualToString:@"StatementToInt"]) {
-        id <IntExpression> intExpression = self.elements[[self.tableView indexPathForSelectedRow].row];
-        IntExpressionViewController * intExpressionViewController = [segue destinationViewController];
-        intExpressionViewController.intExpression = intExpression;
-    } else if ([[segue identifier] isEqualToString:@"StatementToBool"]) {
-        id <BoolExpression> boolExpression = self.elements[[self.tableView indexPathForSelectedRow].row];
-        BoolExpressionViewController * boolExpressionViewController = [segue destinationViewController];
-        boolExpressionViewController.boolExpression = boolExpression;
+    if ([[segue identifier] isEqualToString:@"ElementToComponent"]) {
+        ComponentViewController * statementComponentViewController = [segue destinationViewController];
+        statementComponentViewController.statement = self.element;
+    } else if ([[segue identifier] isEqualToString:@"ElementToElement"]) {
+        int index = [self.tableView indexPathForSelectedRow].row;
+        id expression = self.elements[index];
+        ElementViewController * statementViewController = [segue destinationViewController];
+        statementViewController.element = expression;
+        statementViewController.type = [(NSNumber *) self.types[index] intValue];
+    } else if ([[segue identifier] isEqualToString:@"ElementToVariable"]) {
+        
     }
 }
 

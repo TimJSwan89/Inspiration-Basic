@@ -32,6 +32,7 @@
         self.types = [[NSMutableArray alloc] init];
         self.elements = [[NSMutableArray alloc] init];
         self.strings = [[NSMutableArray alloc] init];
+        self.expressionBreakdownVisitor = [[ExpressionBreakdownVisitor alloc] init];
     }
     return self;
 }
@@ -69,9 +70,9 @@
 - (void) visitPrintInt:(PrintInt *)printInt {
     [self.types addObject:[NSNumber numberWithInt:1]];
     [self.elements addObject:printInt];
-    [self.strings addObject:@"Print"];
+    [self.strings addObject:@"print"];
     
-    [self.types addObject:[NSNumber numberWithInt:2]];
+    [self.types addObject:[self.expressionBreakdownVisitor checkIntSingleComponent:printInt.expression]];
     [self.elements addObject:printInt.expression];
     [self.strings addObject:[self intExpressionToString:printInt.expression]];
 }
@@ -79,9 +80,9 @@
 - (void) visitPrintBool:(PrintBool *)printBool {
     [self.types addObject:[NSNumber numberWithInt:1]];
     [self.elements addObject:printBool];
-    [self.strings addObject:@"Print"];
+    [self.strings addObject:@"print"];
     
-    [self.types addObject:[NSNumber numberWithInt:3]];
+    [self.types addObject:[self.expressionBreakdownVisitor checkBoolSingleComponent:printBool.expression]];
     [self.elements addObject:printBool.expression];
     [self.strings addObject:[self boolExpressionToString:printBool.expression]];
 }
@@ -95,7 +96,7 @@
     [self.elements addObject:intAssignment];
     [self.strings addObject:@"="];
     
-    [self.types addObject:[NSNumber numberWithInt:2]];
+    [self.types addObject:[self.expressionBreakdownVisitor checkIntSingleComponent:intAssignment.expression]];
     [self.elements addObject:intAssignment.expression];
     [self.strings addObject:[self intExpressionToString:intAssignment.expression]];
 }
@@ -109,7 +110,7 @@
     [self.elements addObject:boolAssignment];
     [self.strings addObject:@"="];
     
-    [self.types addObject:[NSNumber numberWithInt:3]];
+    [self.types addObject:[self.expressionBreakdownVisitor checkBoolSingleComponent:boolAssignment.expression]];
     [self.elements addObject:boolAssignment.expression];
     [self.strings addObject:[self boolExpressionToString:boolAssignment.expression]];
 }
@@ -119,7 +120,7 @@
     [self.elements addObject:intArrayElementAssignment.variable];
     [self.strings addObject:intArrayElementAssignment.variable];
     
-    [self.types addObject:[NSNumber numberWithInt:2]];
+    [self.types addObject:[self.expressionBreakdownVisitor checkIntSingleComponent:intArrayElementAssignment.indexExpression]];
     [self.elements addObject:intArrayElementAssignment.indexExpression];
     [self.strings addObject:[@"[" stringByAppendingString:([[self intExpressionToString:intArrayElementAssignment.indexExpression] stringByAppendingString:@"]"])]];
     
@@ -127,7 +128,7 @@
     [self.elements addObject:intArrayElementAssignment];
     [self.strings addObject:@"="];
     
-    [self.types addObject:[NSNumber numberWithInt:2]];
+    [self.types addObject:[self.expressionBreakdownVisitor checkIntSingleComponent:intArrayElementAssignment.expression]];
     [self.elements addObject:intArrayElementAssignment.expression];
     [self.strings addObject:[self intExpressionToString:intArrayElementAssignment.expression]];
 }
@@ -137,7 +138,7 @@
     [self.elements addObject:boolArrayElementAssignment.variable];
     [self.strings addObject:boolArrayElementAssignment.variable];
     
-    [self.types addObject:[NSNumber numberWithInt:2]];
+    [self.types addObject:[self.expressionBreakdownVisitor checkIntSingleComponent:boolArrayElementAssignment.indexExpression]];
     [self.elements addObject:boolArrayElementAssignment.indexExpression];
     [self.strings addObject:[@"[" stringByAppendingString:([[self intExpressionToString:boolArrayElementAssignment.indexExpression] stringByAppendingString:@"]"])]];
     
@@ -145,7 +146,7 @@
     [self.elements addObject:boolArrayElementAssignment];
     [self.strings addObject:@"="];
     
-    [self.types addObject:[NSNumber numberWithInt:3]];
+    [self.types addObject:[self.expressionBreakdownVisitor checkBoolSingleComponent:boolArrayElementAssignment.expression]];
     [self.elements addObject:boolArrayElementAssignment.expression];
     [self.strings addObject:[self boolExpressionToString:boolArrayElementAssignment.expression]];
 }
@@ -153,9 +154,9 @@
 - (void) visitIfThenEndIf:(IfThenEndIf *)ifThenEndIf {
     [self.types addObject:[NSNumber numberWithInt:1]];
     [self.elements addObject:ifThenEndIf];
-    [self.strings addObject:@"If"];
+    [self.strings addObject:@"if"];
     
-    [self.types addObject:[NSNumber numberWithInt:3]];
+    [self.types addObject:[self.expressionBreakdownVisitor checkBoolSingleComponent:ifThenEndIf.expression]];
     [self.elements addObject:ifThenEndIf.expression];
     [self.strings addObject:[self boolExpressionToString:ifThenEndIf.expression]];
 }
@@ -163,9 +164,9 @@
 - (void) visitIfThenElseEndIf:(IfThenElseEndIf *)ifThenElseEndIf {
     [self.types addObject:[NSNumber numberWithInt:1]];
     [self.elements addObject:ifThenElseEndIf];
-    [self.strings addObject:@"If"];
+    [self.strings addObject:@"if"];
     
-    [self.types addObject:[NSNumber numberWithInt:3]];
+    [self.types addObject:[self.expressionBreakdownVisitor checkBoolSingleComponent:ifThenElseEndIf.expression]];
     [self.elements addObject:ifThenElseEndIf.expression];
     [self.strings addObject:[self boolExpressionToString:ifThenElseEndIf.expression]];
 }
@@ -175,9 +176,9 @@
 - (void) visitWhileEndWhile:(WhileEndWhile *)whileEndWhile {
     [self.types addObject:[NSNumber numberWithInt:1]];
     [self.elements addObject:whileEndWhile];
-    [self.strings addObject:@"While"];
+    [self.strings addObject:@"while"];
     
-    [self.types addObject:[NSNumber numberWithInt:3]];
+    [self.types addObject:[self.expressionBreakdownVisitor checkBoolSingleComponent:whileEndWhile.expression]];
     [self.elements addObject:whileEndWhile.expression];
     [self.strings addObject:[self boolExpressionToString:whileEndWhile.expression]];
 }

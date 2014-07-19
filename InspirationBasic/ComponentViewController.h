@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Statement.h"
 
-@interface StatementComponentViewController : UITableViewController
+@interface ComponentViewController : UITableViewController
 
 @property (nonatomic) id <Statement> statement;
 

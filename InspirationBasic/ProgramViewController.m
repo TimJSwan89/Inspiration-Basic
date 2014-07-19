@@ -7,7 +7,7 @@
 //
 
 #import "ProgramViewController.h"
-#import "StatementViewController.h"
+#import "ElementViewController.h"
 #import "StatementFlatteningVisitor.h"
 #import "StatementDeleteVisitor.h"
 #import "StatementMoveVisitor.h"
@@ -357,8 +357,11 @@
 {
     if ([[segue identifier] isEqualToString:@"ProgramToStatements"]) {
         id <Statement> statement = ((StatementAndDisplayString *)(self.flattenedList[[self.tableView indexPathForSelectedRow].row])).statement;
-        StatementViewController * statementViewController = [segue destinationViewController];
-        statementViewController.statement = statement;
+        ElementViewController * statementViewController = [segue destinationViewController];
+        statementViewController.element = statement;
+        statementViewController.type = 1;
+    } else if ([[segue identifier] isEqualToString:@"ProgramToComponent"]) {
+        
     } else if ([[segue identifier] isEqualToString:@"ProgramToOutput"]) {
         [self.program executeWithListener:self];
         OutputViewController * outputViewController = [segue destinationViewController];

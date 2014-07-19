@@ -38,7 +38,7 @@
 - (NSString *) getIndentation {
     NSString * string = @"";
     for (int i = 0; i < self.indentation; i++)
-        string = [string stringByAppendingString:@"  "];
+        string = [string stringByAppendingString:@"   "];
     return string;
 }
 
@@ -61,17 +61,17 @@
 
 - (void) visitPrintInt:(PrintInt *)printInt {
     NSString * string = [self getIndentation];
-    string = [string stringByAppendingString:@"Print "];
+    string = [string stringByAppendingString:@"print "];
     string = [string stringByAppendingString:[self intExpressionToString:printInt.expression]];
-    string = [string stringByAppendingString:@";"];
+    //string = [string stringByAppendingString:@";"];
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:printInt andDisplayString:string]];
 }
 
 - (void) visitPrintBool:(PrintBool *)printBool {
     NSString * string = [self getIndentation];
-    string = [string stringByAppendingString:@"Print "];
+    string = [string stringByAppendingString:@"print "];
     string = [string stringByAppendingString:[self boolExpressionToString:printBool.expression]];
-    string = [string stringByAppendingString:@";"];
+    //string = [string stringByAppendingString:@";"];
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:printBool andDisplayString:string]];
 }
 
@@ -80,7 +80,7 @@
     string = [string stringByAppendingString:intAssignment.variable];
     string = [string stringByAppendingString:@" = "];
     string = [string stringByAppendingString:[self intExpressionToString:intAssignment.expression]];
-    string = [string stringByAppendingString:@";"];
+    //string = [string stringByAppendingString:@";"];
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:intAssignment andDisplayString:string]];
 }
 
@@ -89,7 +89,7 @@
     string = [string stringByAppendingString:boolAssignment.variable];
     string = [string stringByAppendingString:@" = "];
     string = [string stringByAppendingString:[self boolExpressionToString:boolAssignment.expression]];
-    string = [string stringByAppendingString:@";"];
+    //string = [string stringByAppendingString:@";"];
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:boolAssignment andDisplayString:string]];
 }
 
@@ -100,7 +100,7 @@
     string = [string stringByAppendingString:[self intExpressionToString:intArrayElementAssignment.indexExpression]];
     string = [string stringByAppendingString:@"] = "];
     string = [string stringByAppendingString:[self intExpressionToString:intArrayElementAssignment.expression]];
-    string = [string stringByAppendingString:@";"];
+    //string = [string stringByAppendingString:@";"];
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:intArrayElementAssignment andDisplayString:string]];
 }
 
@@ -111,30 +111,30 @@
     string = [string stringByAppendingString:[self intExpressionToString:boolArrayElementAssignment.indexExpression]];
     string = [string stringByAppendingString:@"] = "];
     string = [string stringByAppendingString:[self boolExpressionToString:boolArrayElementAssignment.expression]];
-    string = [string stringByAppendingString:@";"];
+    //string = [string stringByAppendingString:@";"];
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:boolArrayElementAssignment andDisplayString:string]];
 }
 
 - (void) visitIfThenElseEndIf:(IfThenElseEndIf *)ifThenElseEndIf {
     NSString * string = [self getIndentation];
-    string = [string stringByAppendingString:@"If "];
+    string = [string stringByAppendingString:@"if "];
     string = [string stringByAppendingString:[self boolExpressionToString:ifThenElseEndIf.expression]];
-    string = [string stringByAppendingString:@" Then"];
+    string = [string stringByAppendingString:@" then"];
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:ifThenElseEndIf andDisplayString:string]];
     
     [ifThenElseEndIf.thenStatements accept:self];
     
     string = [self getIndentation];
-    string = [string stringByAppendingString:@"Else"];
+    string = [string stringByAppendingString:@"else"];
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:ifThenElseEndIf andDisplayString:string]];
     
     [ifThenElseEndIf.elseStatements accept:self];
 }
 
 - (void) visitIfThenEndIf:(IfThenEndIf *)ifThenEndIf {
-    NSString * string = @"If ";
+    NSString * string = @"if ";
     string = [string stringByAppendingString:[self boolExpressionToString:ifThenEndIf.expression]];
-    string = [string stringByAppendingString:@" Then"];
+    string = [string stringByAppendingString:@" then"];
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:ifThenEndIf andDisplayString:string]];
     
     [ifThenEndIf.thenStatements accept:self];
@@ -149,7 +149,7 @@
 
 - (void) visitWhileEndWhile:(WhileEndWhile *)whileEndWhile {
     NSString * string = [self getIndentation];
-    string = [string stringByAppendingString:@"While "];
+    string = [string stringByAppendingString:@"while "];
     string = [string stringByAppendingString:[self boolExpressionToString:whileEndWhile.expression]];
     string = [string stringByAppendingString:@":"];
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:whileEndWhile andDisplayString:string]];

@@ -24,6 +24,10 @@
 - (void) generateBreakdownInt:(id <IntExpression>)intExpression;
 - (void) generateBreakdownBool:(id <BoolExpression>)boolExpression;
 
+// The following two methods are used by StatementBreakdownVisitor
+- (NSNumber *) checkIntSingleComponent:(id <IntExpression>)intExpression;
+- (NSNumber *) checkBoolSingleComponent:(id <BoolExpression>)boolExpression;
+
 /*
  
  Returning types
@@ -35,6 +39,10 @@
  5. Bool Variable
  6. Int Array Variable
  7. Bool Array Variable
+ 8. Int Expression Component
+ 9. Bool Expression Component
+ 10. Int Single Component Expression
+ 11. Bool Single Component Expression
  
  */
 

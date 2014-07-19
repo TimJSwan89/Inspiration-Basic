@@ -10,6 +10,7 @@
 #import "StatementVisitor.h"
 #import "Statement.h"
 #import "StatementAndDisplayString.h"
+#import "ExpressionBreakdownVisitor.h"
 
 @class IntAssignment;
 @class BoolAssignment;
@@ -39,6 +40,10 @@
 @property NSMutableArray * types;
 @property NSMutableArray * elements;
 @property NSMutableArray * strings;
+
+// For checking if an expression is a single component (leaf node)
+// Keep in mind that we could make a seperate visitor for that if desired
+@property ExpressionBreakdownVisitor * expressionBreakdownVisitor;
 
 - (id) init;
 - (void) generateBreakdown:(id <Statement>)statement;
