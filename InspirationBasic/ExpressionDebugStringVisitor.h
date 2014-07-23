@@ -7,18 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "./ExpressionVisitor.h"
-#import "IntExpression.h"
-#import "BoolExpression.h"
+#import "ExpressionVisitor.h"
 
-@interface ExpressionDisplayStringVisitor : NSObject<ExpressionVisitor>
+@interface ExpressionDebugStringVisitor : NSObject<ExpressionVisitor>
 
 @property NSString * displayString;
-@property bool removeParens;
 
 - (id) init;
-- (NSString *) getStringForInt:(id <IntExpression>)intExpression;
-- (NSString *) getStringForBool:(id <BoolExpression>)boolExpression;
 
 - (void) visitIntValue:(IntValue *)intValue;
 - (void) visitBoolValue:(BoolValue *)boolValue;

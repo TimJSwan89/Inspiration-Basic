@@ -19,7 +19,7 @@
 
 @property (nonatomic) StatementList * loopStatements;
 
-- (id) initWithWhile: (id <BoolExpression>)expression Do: (StatementList *)loopStatements andParent:(id <Statement>) parent;
+- (id) initWithWhile: (id <BoolExpression>)expression Do: (StatementList *)loopStatements;
 
 - (void) executeAgainst: (EnvironmentModel *) environment;
 

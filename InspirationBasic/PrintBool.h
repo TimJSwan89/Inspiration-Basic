@@ -16,7 +16,7 @@
 
 @property (nonatomic) id <BoolExpression> expression;
 
-- (id) initWithExpression:(id <BoolExpression>)expression andParent:(id <Statement>) parent;
+- (id) initWithExpression:(id <BoolExpression>)expression;
 
 - (void) executeAgainst: (EnvironmentModel *) environment;
 

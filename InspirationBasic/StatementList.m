@@ -11,10 +11,9 @@
 
 @implementation StatementList
 
-- (id) initWithParent: (id <Statement>) parent {
+- (id) init {
     if (self = [super init]) {
         self.statementList = [[NSMutableArray alloc] init];
-        self.parent = parent;
     }
     return self;
 }

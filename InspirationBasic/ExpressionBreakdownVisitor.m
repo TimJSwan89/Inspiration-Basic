@@ -50,6 +50,12 @@
     return self;
 }
 
+//- (void) logTypes {
+//    NSLog(@"\nTypes:\n");
+//    for (int i = 0; i < self.types.count; i++)
+//        NSLog(@"%d\n",[self.types[i] intValue]);
+//}
+
 - (void) generateBreakdownInt:(id <IntExpression>)intExpression {
     [intExpression accept:self];
 }
@@ -67,12 +73,12 @@
 }
 
 - (NSNumber *) checkIntSingleComponent:(id <IntExpression>)intExpression {
-    return [NSNumber numberWithInt:[self checkSingleComponent:intExpression] ? 10 : 8];
+    return [NSNumber numberWithInt:[self checkSingleComponent:intExpression] ? 10 : 2];
         
 }
 
 - (NSNumber *) checkBoolSingleComponent:(id <BoolExpression>)boolExpression {
-    return [NSNumber numberWithInt:[self checkSingleComponent:boolExpression] ? 11 : 9];
+    return [NSNumber numberWithInt:[self checkSingleComponent:boolExpression] ? 11 : 3];
 }
 
 - (bool) checkSingleComponent:(id)expression {

@@ -71,11 +71,11 @@
 }
 
 - (IntAssignment *)getIntAssignmentForAssigning:(id <IntExpression>)expression to:(NSString *)variable {
-    return [[IntAssignment alloc] initWith:variable equals:expression andParent:nil];
+    return [[IntAssignment alloc] initWith:variable equals:expression];
 }
 
 - (BoolAssignment *)getBoolAssignmentForAssigning:(id <BoolExpression>)expression to:(NSString *)variable {
-    return [[BoolAssignment alloc] initWith:variable equals:expression andParent:nil];
+    return [[BoolAssignment alloc] initWith:variable equals:expression];
 }
 
 - (int)evaluateVariableToIntAgainstGlobalEnvironment:(NSString *)variable {
@@ -116,14 +116,14 @@
 
 - (void)testEvaluateIntVariableAfterExecutingAssignment
 {
-    IntAssignment * assignment = [[IntAssignment alloc] initWith:@"a" equals:[self getIntValueFor:6] andParent:nil];
+    IntAssignment * assignment = [[IntAssignment alloc] initWith:@"a" equals:[self getIntValueFor:6]];
     [assignment executeAgainst:self.environment];
     XCTAssertTrue([self evaluateVariableToIntAgainstGlobalEnvironment:@"a"] == 6);
 }
 
 - (void)testEvaluateBoolVariableAfterExecutingAssignment
 {
-    BoolAssignment * assignment = [[BoolAssignment alloc] initWith:@"b" equals:[self getBoolValueFor:true] andParent:nil];
+    BoolAssignment * assignment = [[BoolAssignment alloc] initWith:@"b" equals:[self getBoolValueFor:true]];
     [assignment executeAgainst:self.environment];
     XCTAssertTrue([self evaluateVariableToIntAgainstGlobalEnvironment:@"b"]);
 }
@@ -131,7 +131,7 @@
 - (void)testEvaluationAfterIntArrayElementAssignment
 {
     IntArrayElement * element = [[IntArrayElement alloc] initWithVariable:@"x" andIndexExpression:[self getIntValueFor:0]];
-    IntArrayElementAssignment * assigment = [[IntArrayElementAssignment alloc] initWith:element equals:[self getIntValueFor:10] andParent:nil];
+    IntArrayElementAssignment * assigment = [[IntArrayElementAssignment alloc] initWith:element equals:[self getIntValueFor:10]];
     [assigment executeAgainst:self.environment];
     XCTAssertTrue([element evaluateAgainst:self.environment].value == 10);
 }
@@ -139,14 +139,14 @@
 - (void)testEvaluationAfterBoolArrayElementAssignment
 {
     BoolArrayElement * element = [[BoolArrayElement alloc] initWithVariable:@"x" andIndexExpression:[self getIntValueFor:0]];
-    BoolArrayElementAssignment * assigment = [[BoolArrayElementAssignment alloc] initWith:element equals:[self getBoolValueFor:true] andParent:nil];
+    BoolArrayElementAssignment * assigment = [[BoolArrayElementAssignment alloc] initWith:element equals:[self getBoolValueFor:true]];
     [assigment executeAgainst:self.environment];
     XCTAssertTrue([element evaluateAgainst:self.environment].value == true);
 }
 
 - (void)testEvaluateLessThanOfIntVariablesAfterExecutingStatementListOfTheirAssignments
 {
-    StatementList * statementList = [[StatementList alloc] initWithParent:nil];
+    StatementList * statementList = [[StatementList alloc] init];
     [statementList addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:6] to:@"c"]];
     [statementList addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:13] to:@"d"]];
     [statementList executeAgainst:self.environment];
@@ -157,11 +157,11 @@
 
 -(void)testExecutingIfThenElseEndIf
 {
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
     [thenStatements addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"]];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * elseStatements = [[StatementList alloc] init];
     [elseStatements addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:10] to:@"x"]];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     [ifThenElseEndIf executeAgainst:self.environment];
     XCTAssertTrue([self evaluateVariableToIntAgainstGlobalEnvironment:@"x"] == 10);
 }
@@ -169,11 +169,11 @@
 -(void)testExecutingWhileWithIncrementingVariable
 {
     [[self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"] executeAgainst:self.environment];
-    StatementList * loopStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * loopStatements = [[StatementList alloc] init];
     BoolLessThan * lessThan = [[BoolLessThan alloc] initWith:[self getIntVariableFor:@"x"] LessThan:[self getIntValueFor:100]];
     IntSum * sum = [[IntSum alloc] initWith:[self getIntVariableFor:@"x"] plus:[self getIntValueFor:1]];
     [loopStatements addStatement:[self getIntAssignmentForAssigning:sum to:@"x"]];
-    WhileEndWhile * whileEndWhile = [[WhileEndWhile alloc] initWithWhile:lessThan Do:loopStatements andParent:nil];
+    WhileEndWhile * whileEndWhile = [[WhileEndWhile alloc] initWithWhile:lessThan Do:loopStatements];
     [whileEndWhile executeAgainst:self.environment];
     if (self.environment.exception) {
         NSString * string = self.environment.exception.message;
@@ -185,7 +185,7 @@
 - (void)testEvaluateIntVariableAfterExecutingProgramWithAssignment
 {
     Program * program = [[Program alloc] initWithTitle:@"The Test Program :D"];
-    IntAssignment * assignment = [[IntAssignment alloc] initWith:@"a" equals:[self getIntValueFor:6] andParent:nil];
+    IntAssignment * assignment = [[IntAssignment alloc] initWith:@"a" equals:[self getIntValueFor:6]];
     [program addStatement:assignment];
     [program executeProgramAgainst:self.environment];
     XCTAssertTrue([self evaluateVariableToIntAgainstGlobalEnvironment:@"a"] == 6);
@@ -202,7 +202,7 @@
 - (void)testDebugStringVisitorWithProgramWithIntAssignmentStatement
 {
     Program * program = [[Program alloc] initWithTitle:@"The Test Program :D"];
-    IntAssignment * assignment = [[IntAssignment alloc] initWith:@"a" equals:[self getIntValueFor:6] andParent:program];
+    IntAssignment * assignment = [[IntAssignment alloc] initWith:@"a" equals:[self getIntValueFor:6]];
     [program addStatement:assignment];
     StatementDebugStringVisitor * visitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:visitor];
@@ -211,10 +211,10 @@
 
 - (void)testDebugStringVisitorWithIfThenEndIfStatement
 {
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
     [thenStatements addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"]];
     [thenStatements addStatement:[self getBoolAssignmentForAssigning:[self getBoolValueFor:true] to:@"z"]];
-    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements andParent:nil];
+    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements];
     StatementDebugStringVisitor * visitor = [[StatementDebugStringVisitor alloc] init];
     [ifThenEndIf accept:visitor];
     XCTAssertTrue([visitor.displayString isEqualToString:@"F{Aa}"]);
@@ -222,12 +222,12 @@
 
 - (void)testDebugStringVisitorWithIfThenElseEndIfStatement
 {
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
     [thenStatements addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"]];
     [thenStatements addStatement:[self getBoolAssignmentForAssigning:[self getBoolValueFor:true] to:@"z"]];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * elseStatements = [[StatementList alloc] init];
     [elseStatements addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:10] to:@"x"]];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     StatementDebugStringVisitor * visitor = [[StatementDebugStringVisitor alloc] init];
     [ifThenElseEndIf accept:visitor];
     XCTAssertTrue([visitor.displayString isEqualToString:@"F({Aa},{A})"]);
@@ -235,10 +235,10 @@
 
 - (void)testDebugStringVisitorWithWhileEndWhileStatement
 {
-    StatementList * loopStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * loopStatements = [[StatementList alloc] init];
     [loopStatements addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"]];
     [loopStatements addStatement:[self getBoolAssignmentForAssigning:[self getBoolValueFor:true] to:@"z"]];
-    WhileEndWhile * whileEndWhile = [[WhileEndWhile alloc]  initWithWhile:[self getBoolValueFor:false] Do:loopStatements andParent:nil];
+    WhileEndWhile * whileEndWhile = [[WhileEndWhile alloc]  initWithWhile:[self getBoolValueFor:false] Do:loopStatements];
     StatementDebugStringVisitor * visitor = [[StatementDebugStringVisitor alloc] init];
     [whileEndWhile accept:visitor];
     XCTAssertTrue([visitor.displayString isEqualToString:@"W{Aa}"]);
@@ -274,10 +274,10 @@
 
 - (void)testMoveAssignmentWithinIfThenEndIfUpFromThenToOutside {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [thenStatements addStatement:intAssignment];
-    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements andParent:nil];
+    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements];
     [program addStatement:ifThenEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -291,12 +291,12 @@
 
 - (void)testMoveAssignmentWithinIfThenEndIfUpFromThenToThen {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
     BoolAssignment * boolAssignment = [self getBoolAssignmentForAssigning:[self getBoolValueFor:true] to:@"y"];
     [thenStatements addStatement:boolAssignment];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [thenStatements addStatement:intAssignment];
-    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements andParent:nil];
+    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements];
     [program addStatement:ifThenEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -310,8 +310,8 @@
 
 - (void)testMoveAssignmentWithinIfThenEndIfUpFromOutsideToThen {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
-    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements andParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
+    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements];
     [program addStatement:ifThenEndIf];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [program addStatement:intAssignment];
@@ -329,8 +329,8 @@
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [program addStatement:intAssignment];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
-    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements andParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
+    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements];
     [program addStatement:ifThenEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -344,12 +344,12 @@
 
 - (void)testMoveAssignmentWithinIfThenEndIfDownFromThenToThen {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [thenStatements addStatement:intAssignment];
     BoolAssignment * boolAssignment = [self getBoolAssignmentForAssigning:[self getBoolValueFor:true] to:@"y"];
     [thenStatements addStatement:boolAssignment];
-    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements andParent:nil];
+    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements];
     [program addStatement:ifThenEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -363,10 +363,10 @@
 
 - (void)testMoveAssignmentWithinIfThenEndIfDownFromThenToOutside {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [thenStatements addStatement:intAssignment];
-    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements andParent:nil];
+    IfThenEndIf * ifThenEndIf = [[IfThenEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements];
     [program addStatement:ifThenEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -380,11 +380,11 @@
 
 - (void)testMoveAssignmentWithinIfThenElseEndIfUpFromThenToOutside {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [thenStatements addStatement:intAssignment];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    StatementList * elseStatements = [[StatementList alloc] init];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     [program addStatement:ifThenElseEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -398,13 +398,13 @@
 
 - (void)testMoveAssignmentWithinIfThenElseEndIfUpFromThenToThen {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
     BoolAssignment * boolAssignment = [self getBoolAssignmentForAssigning:[self getBoolValueFor:true] to:@"y"];
     [thenStatements addStatement:boolAssignment];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [thenStatements addStatement:intAssignment];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    StatementList * elseStatements = [[StatementList alloc] init];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     [program addStatement:ifThenElseEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -418,11 +418,11 @@
 
 - (void)testMoveAssignmentWithinIfThenElseEndIfUpFromElseToThen {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
+    StatementList * elseStatements = [[StatementList alloc] init];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [elseStatements addStatement:intAssignment];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     [program addStatement:ifThenElseEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -436,13 +436,13 @@
 
 - (void)testMoveAssignmentWithinIfThenElseEndIfUpFromElseToElse {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
+    StatementList * elseStatements = [[StatementList alloc] init];
     BoolAssignment * boolAssignment = [self getBoolAssignmentForAssigning:[self getBoolValueFor:true] to:@"y"];
     [elseStatements addStatement:boolAssignment];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [elseStatements addStatement:intAssignment];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     [program addStatement:ifThenElseEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -456,9 +456,9 @@
 
 - (void)testMoveAssignmentWithinIfThenElseEndIfUpFromOutsideToElse {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
+    StatementList * elseStatements = [[StatementList alloc] init];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     [program addStatement:ifThenElseEndIf];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [program addStatement:intAssignment];
@@ -476,9 +476,9 @@
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [program addStatement:intAssignment];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
+    StatementList * elseStatements = [[StatementList alloc] init];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     [program addStatement:ifThenElseEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -492,13 +492,13 @@
 
 - (void)testMoveAssignmentWithinIfThenElseEndIfDownFromThenToThen {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [thenStatements addStatement:intAssignment];
     BoolAssignment * boolAssignment = [self getBoolAssignmentForAssigning:[self getBoolValueFor:true] to:@"y"];
     [thenStatements addStatement:boolAssignment];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    StatementList * elseStatements = [[StatementList alloc] init];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     [program addStatement:ifThenElseEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -512,11 +512,11 @@
 
 - (void)testMoveAssignmentWithinIfThenElseEndIfDownFromThenToElse {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [thenStatements addStatement:intAssignment];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    StatementList * elseStatements = [[StatementList alloc] init];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     [program addStatement:ifThenElseEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -530,13 +530,13 @@
 
 - (void)testMoveAssignmentWithinIfThenElseEndIfDownFromElseToElse {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
+    StatementList * elseStatements = [[StatementList alloc] init];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [elseStatements addStatement:intAssignment];
     BoolAssignment * boolAssignment = [self getBoolAssignmentForAssigning:[self getBoolValueFor:true] to:@"y"];
     [elseStatements addStatement:boolAssignment];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     [program addStatement:ifThenElseEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -550,11 +550,11 @@
 
 - (void)testMoveAssignmentWithinIfThenElseEndIfDownFromElseToOutside {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
+    StatementList * elseStatements = [[StatementList alloc] init];
     IntAssignment * intAssignment = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [elseStatements addStatement:intAssignment];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     [program addStatement:ifThenElseEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];
@@ -568,19 +568,19 @@
 
 - (void)testDeleteProtectChildrenIfThenElseEndIfDown {
     Program * program = [[Program alloc] initWithTitle:@"Default Title"];
-    StatementList * thenStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * thenStatements = [[StatementList alloc] init];
     BoolAssignment * boolAssignment1 = [self getBoolAssignmentForAssigning:[self getBoolValueFor:true] to:@"y"];
     [thenStatements addStatement:boolAssignment1];
     IntAssignment * intAssignment1 = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [thenStatements addStatement:intAssignment1];
-    StatementList * elseStatements = [[StatementList alloc] initWithParent:nil];
+    StatementList * elseStatements = [[StatementList alloc] init];
     IntAssignment * intAssignment2 = [self getIntAssignmentForAssigning:[self getIntValueFor:5] to:@"x"];
     [elseStatements addStatement:intAssignment2];
     BoolAssignment * boolAssignment2 = [self getBoolAssignmentForAssigning:[self getBoolValueFor:true] to:@"y"];
     [elseStatements addStatement:boolAssignment2];
     BoolAssignment * boolAssignment3 = [self getBoolAssignmentForAssigning:[self getBoolValueFor:true] to:@"y"];
     [elseStatements addStatement:boolAssignment3];
-    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements andParent:nil];
+    IfThenElseEndIf * ifThenElseEndIf = [[IfThenElseEndIf alloc] initWithIf:[self getBoolValueFor:false] Then:thenStatements Else:elseStatements];
     [program addStatement:ifThenElseEndIf];
     StatementDebugStringVisitor * stringBeforeVisitor = [[StatementDebugStringVisitor alloc] init];
     [program accept:stringBeforeVisitor];

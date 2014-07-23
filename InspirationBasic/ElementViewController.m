@@ -7,10 +7,12 @@
 //
 
 #import "ElementViewController.h"
-#import "ComponentViewController.h"
-
+#import "VariableViewController.h"
 #import "StatementBreakdownVisitor.h"
 #import "ExpressionBreakdownVisitor.h"
+#import "ExpressionReplaceChildVisitor.h"
+#import "StatementReplaceChildVisitor.h"
+#import "ExpressionIsLeafVisitor.h"
 
 @interface ElementViewController ()
 
@@ -44,7 +46,22 @@
         self.elements = visitor.elements;
         self.strings = visitor.strings;
     }
+}
+
+- (void)initTypesIndex {
     self.typesIndex = [[NSMutableArray alloc] init];
+    [self.typesIndex addObject:@"Dummy"];               // 0
+    [self.typesIndex addObject:@"ComponentCell"];       // 1
+    [self.typesIndex addObject:@"ExpressionCell"];      // 2
+    [self.typesIndex addObject:@"ExpressionCell"];      // 3
+    [self.typesIndex addObject:@"VariableCell"];        // 4
+    [self.typesIndex addObject:@"VariableCell"];        // 5
+    [self.typesIndex addObject:@"VariableCell"];        // 6
+    [self.typesIndex addObject:@"VariableCell"];        // 7
+    [self.typesIndex addObject:@"ComponentCell"];       // 8
+    [self.typesIndex addObject:@"ComponentCell"];       // 9
+    [self.typesIndex addObject:@"ComponentCell"];       // 10
+    [self.typesIndex addObject:@"ComponentCell"];       // 11
     /*
      
      Returning types
@@ -62,29 +79,62 @@
      11. Bool Single Component Expression
      
      */
-    [self.typesIndex addObject:@"Dummy"];               // 0
-    [self.typesIndex addObject:@"ComponentCell"];       // 1
-    [self.typesIndex addObject:@"ExpressionCell"];      // 2
-    [self.typesIndex addObject:@"ExpressionCell"];      // 3
-    [self.typesIndex addObject:@"VariableCell"];        // 4
-    [self.typesIndex addObject:@"VariableCell"];        // 5
-    [self.typesIndex addObject:@"VariableCell"];        // 6
-    [self.typesIndex addObject:@"VariableCell"];        // 7
-    [self.typesIndex addObject:@"ComponentCell"];       // 8
-    [self.typesIndex addObject:@"ComponentCell"];       // 9
-    [self.typesIndex addObject:@"ComponentCell"];       // 10
-    [self.typesIndex addObject:@"ComponentCell"];       // 11
+}
+
+- (void) acceptElement:(id) element {
+    NSIndexPath * path = [self.tableView indexPathForSelectedRow];
+    int index = path.row;
+    int wasType = [self.types[index] intValue];
+    if (wasType == 2 || wasType == 3 || wasType == 10 || wasType == 11) { // Was a literal or expression
+        ExpressionIsLeafVisitor * leafVisitor = [[ExpressionIsLeafVisitor alloc] init];
+        bool shouldPop;
+        if (wasType == 2 || wasType == 10) {
+            shouldPop = [leafVisitor checkIfIntLeaf:element];
+        } else {
+            shouldPop = [leafVisitor checkIfBoolLeaf:element];
+        }
+        if (self.type == 1) {
+            StatementReplaceChildVisitor * visitor = [[StatementReplaceChildVisitor alloc] init];
+            [visitor replaceChild:self.elements[index] OfStatement:self.element With:element];
+        } else if ((self.type == 2) || (self.type == 3)) {
+            ExpressionReplaceChildVisitor * visitor = [[ExpressionReplaceChildVisitor alloc] init];
+            if (self.type == 2) {
+                [visitor replaceChild:self.elements[index] OfIntExpression:self.element With:element];
+            } else {
+                [visitor replaceChild:self.elements[index] OfBoolExpression:self.element With:element];
+            }
+        } else {
+            [NSException raise:@"Invalid type value" format:@"value of %d is invalid", self.type];
+        }
+        [self reload];
+        [self.tableView selectRowAtIndexPath:path animated:false scrollPosition:UITableViewScrollPositionNone];
+        if (shouldPop) {
+            [self.navigationController popToViewController:self animated:true];
+        } else {
+            [self.navigationController popToViewController:self animated:false];
+            [self performSegueWithIdentifier:[self getElementToElementSegueIdentifier] sender:self];
+        }
+    } else {
+        [self.delegate acceptElement:element];
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self initCellModels];
+    [self initTypesIndex];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void) reload {
+    [self initCellModels];
+    [self.tableView reloadData];
+    [self.delegate reload];
 }
 
 - (void)didReceiveMemoryWarning
@@ -112,7 +162,6 @@
     [[cell textLabel] setText:self.strings[indexPath.row]];
     return cell;
 }
-
 
 /*
 // Override to support conditional editing of the table view.
@@ -151,22 +200,33 @@
     return YES;
 }
 */
-
+- (NSString *) getElementToElementSegueIdentifier {
+    return @"ElementToElement";
+}
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    int index = [self.tableView indexPathForSelectedRow].row;
+    id nextElement = self.elements[index];
+    int nextType = [self.types[index] integerValue];
+    if (nextType < 1 || nextType > 11)
+        [NSException raise:@"Invalid type value" format:@"value of %d is invalid", nextType];
     if ([[segue identifier] isEqualToString:@"ElementToComponent"]) {
-        ComponentViewController * statementComponentViewController = [segue destinationViewController];
-        statementComponentViewController.statement = self.element;
-    } else if ([[segue identifier] isEqualToString:@"ElementToElement"]) {
-        int index = [self.tableView indexPathForSelectedRow].row;
-        id expression = self.elements[index];
+        ComponentViewController * componentViewController = [segue destinationViewController];
+        componentViewController.element = nextElement;
+        componentViewController.type = nextType;
+        componentViewController.delegate = self;
+    } else if ([[segue identifier] isEqualToString:[self getElementToElementSegueIdentifier]]) {
         ElementViewController * statementViewController = [segue destinationViewController];
-        statementViewController.element = expression;
-        statementViewController.type = [(NSNumber *) self.types[index] intValue];
+        statementViewController.element = nextElement;
+        statementViewController.type = nextType;
+        statementViewController.delegate = self;
     } else if ([[segue identifier] isEqualToString:@"ElementToVariable"]) {
-        
+        VariableViewController * variableViewController = [segue destinationViewController];
+        variableViewController.element = nextElement;
+        variableViewController.type = nextType;
+        variableViewController.delegate = self;
     }
 }
 

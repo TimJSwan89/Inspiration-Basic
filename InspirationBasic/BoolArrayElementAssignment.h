@@ -19,7 +19,7 @@
 @property (nonatomic) id <IntExpression> indexExpression;
 @property (nonatomic) id <BoolExpression> expression;
 
-- (id) initWith:(BoolArrayElement *)element equals:(id <BoolExpression>)expression andParent:(id <Statement>) parent;
+- (id) initWith:(BoolArrayElement *)element equals:(id <BoolExpression>)expression;
 
 - (void) executeAgainst: (EnvironmentModel *) environment;
 

@@ -13,12 +13,11 @@
 
 @implementation BoolArrayElementAssignment
 
-- (id) initWith:(BoolArrayElement *)element equals:(id <BoolExpression>)expression andParent:(id <Statement>) parent {
+- (id) initWith:(BoolArrayElement *)element equals:(id <BoolExpression>)expression {
     if (self = [super init]) {
         self.variable = element.variable;
         self.indexExpression = element.indexExpression;
         self.expression = expression;
-        self.parent = parent;
     }
     return self;
 }

@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "Program.h"
+#import "ComponentViewController.h" // For ElementAccepter
+#import "ElementViewController.h"
 
 #import "StatementHasStatementListVisitor.h"
 #import "OutputListener.h" // remove later
 
-@interface ProgramViewController : UITableViewController <OutputListener>
+@interface ProgramViewController : UITableViewController <OutputListener, ElementAccepter, Reloadable>
 
 @property Program * program;
 
@@ -23,6 +25,10 @@
 @property (nonatomic) NSMutableArray * flattenedList;
 
 - (void) initStatements;
+
+- (void) reload;
+
+- (void) acceptElement:(id)element;
 
 - (IBAction)deleteAll:(UIButton *)sender;
 

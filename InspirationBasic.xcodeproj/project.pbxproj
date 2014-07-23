@@ -15,8 +15,6 @@
 		AE1B88261935B16B002962FA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE1B88241935B16B002962FA /* InfoPlist.strings */; };
 		AE1B88281935B16B002962FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B88271935B16B002962FA /* main.m */; };
 		AE1B882C1935B16B002962FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B882B1935B16B002962FA /* AppDelegate.m */; };
-		AE1B882F1935B16B002962FA /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1B882D1935B16B002962FA /* Main_iPhone.storyboard */; };
-		AE1B88321935B16B002962FA /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1B88301935B16B002962FA /* Main_iPad.storyboard */; };
 		AE1B88351935B16B002962FA /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B88341935B16B002962FA /* MasterViewController.m */; };
 		AE1B88381935B16B002962FA /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE1B88371935B16B002962FA /* DetailViewController.m */; };
 		AE1B883A1935B16B002962FA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE1B88391935B16B002962FA /* Images.xcassets */; };
@@ -31,6 +29,11 @@
 		AE208379193EBFB70035C965 /* StatementFlatteningVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AE208378193EBFB70035C965 /* StatementFlatteningVisitor.m */; };
 		AE20837C193EF0FF0035C965 /* IntArrayElementAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20837B193EF0FF0035C965 /* IntArrayElementAssignment.m */; };
 		AE20837F193EF1120035C965 /* BoolArrayElementAssignment.m in Sources */ = {isa = PBXBuildFile; fileRef = AE20837E193EF1120035C965 /* BoolArrayElementAssignment.m */; };
+		AE36FB9F197EFDEB00AA7457 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1B882D1935B16B002962FA /* Main_iPhone.storyboard */; };
+		AE36FBA0197EFDFF00AA7457 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE1B88301935B16B002962FA /* Main_iPad.storyboard */; };
+		AE36FBA3197EFFE700AA7457 /* ExpressionReplaceChildVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AE36FBA2197EFFE700AA7457 /* ExpressionReplaceChildVisitor.m */; };
+		AE36FBA6197F0A3300AA7457 /* StatementReplaceChildVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AE36FBA5197F0A3300AA7457 /* StatementReplaceChildVisitor.m */; };
+		AE36FBA9197F3C7600AA7457 /* ExpressionIsLeafVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AE36FBA8197F3C7600AA7457 /* ExpressionIsLeafVisitor.m */; };
 		AE3701501936E4CF00426393 /* Value.m in Sources */ = {isa = PBXBuildFile; fileRef = AE37014F1936E4CF00426393 /* Value.m */; };
 		AE37015A1936EFC200426393 /* IntValue.m in Sources */ = {isa = PBXBuildFile; fileRef = AE3701591936EFC200426393 /* IntValue.m */; };
 		AE37015D1936EFCD00426393 /* BoolValue.m in Sources */ = {isa = PBXBuildFile; fileRef = AE37015C1936EFCD00426393 /* BoolValue.m */; };
@@ -40,6 +43,8 @@
 		AE604323194E96C10050CAC5 /* OutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE604322194E96C10050CAC5 /* OutputViewController.m */; };
 		AE60432D194EB0CF0050CAC5 /* PrintInt.m in Sources */ = {isa = PBXBuildFile; fileRef = AE60432C194EB0CF0050CAC5 /* PrintInt.m */; };
 		AE604330194EBD400050CAC5 /* PrintBool.m in Sources */ = {isa = PBXBuildFile; fileRef = AE60432F194EBD400050CAC5 /* PrintBool.m */; };
+		AE73E25B197C4072001F1507 /* HardcodeIntViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE73E25A197C4072001F1507 /* HardcodeIntViewController.m */; };
+		AE73E25E197C4092001F1507 /* VariableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE73E25D197C4092001F1507 /* VariableViewController.m */; };
 		AE7B98C6193A0FAC004C8C82 /* IntSum.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98C5193A0FAC004C8C82 /* IntSum.m */; };
 		AE7B98C9193A51F6004C8C82 /* IntVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98C8193A51F6004C8C82 /* IntVariable.m */; };
 		AE7B98CF193A57F0004C8C82 /* IfThenElseEndIf.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98CE193A57F0004C8C82 /* IfThenElseEndIf.m */; };
@@ -96,6 +101,8 @@
 		AEB41FD81977395C00227B68 /* StatementDeleteVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41FD71977395C00227B68 /* StatementDeleteVisitor.m */; };
 		AEB41FDB1977397200227B68 /* StatementInsertAfterVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41FDA1977397200227B68 /* StatementInsertAfterVisitor.m */; };
 		AEBD7D3C1956C2CF00F0DCD1 /* StatementMoveVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD7D3B1956C2CF00F0DCD1 /* StatementMoveVisitor.m */; };
+		AEC1AA461980387800001E0C /* StatementDebugStringVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC1AA451980387800001E0C /* StatementDebugStringVisitor.m */; };
+		AEC1AA491980388B00001E0C /* ExpressionDebugStringVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC1AA481980388B00001E0C /* ExpressionDebugStringVisitor.m */; };
 		AEFA0F311945744D006AEA4B /* ProgramException.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA0F301945744D006AEA4B /* ProgramException.m */; };
 /* End PBXBuildFile section */
 
@@ -148,6 +155,12 @@
 		AE20837B193EF0FF0035C965 /* IntArrayElementAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntArrayElementAssignment.m; sourceTree = "<group>"; };
 		AE20837D193EF1120035C965 /* BoolArrayElementAssignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoolArrayElementAssignment.h; sourceTree = "<group>"; };
 		AE20837E193EF1120035C965 /* BoolArrayElementAssignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolArrayElementAssignment.m; sourceTree = "<group>"; };
+		AE36FBA1197EFFE700AA7457 /* ExpressionReplaceChildVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionReplaceChildVisitor.h; sourceTree = "<group>"; };
+		AE36FBA2197EFFE700AA7457 /* ExpressionReplaceChildVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionReplaceChildVisitor.m; sourceTree = "<group>"; };
+		AE36FBA4197F0A3300AA7457 /* StatementReplaceChildVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementReplaceChildVisitor.h; sourceTree = "<group>"; };
+		AE36FBA5197F0A3300AA7457 /* StatementReplaceChildVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementReplaceChildVisitor.m; sourceTree = "<group>"; };
+		AE36FBA7197F3C7600AA7457 /* ExpressionIsLeafVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionIsLeafVisitor.h; sourceTree = "<group>"; };
+		AE36FBA8197F3C7600AA7457 /* ExpressionIsLeafVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionIsLeafVisitor.m; sourceTree = "<group>"; };
 		AE37014E1936E4CF00426393 /* Value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Value.h; sourceTree = "<group>"; };
 		AE37014F1936E4CF00426393 /* Value.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Value.m; sourceTree = "<group>"; };
 		AE3701541936ECEF00426393 /* Statement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Statement.h; sourceTree = "<group>"; };
@@ -170,6 +183,10 @@
 		AE60432C194EB0CF0050CAC5 /* PrintInt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintInt.m; sourceTree = "<group>"; };
 		AE60432E194EBD400050CAC5 /* PrintBool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintBool.h; sourceTree = "<group>"; };
 		AE60432F194EBD400050CAC5 /* PrintBool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintBool.m; sourceTree = "<group>"; };
+		AE73E259197C4072001F1507 /* HardcodeIntViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HardcodeIntViewController.h; sourceTree = "<group>"; };
+		AE73E25A197C4072001F1507 /* HardcodeIntViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HardcodeIntViewController.m; sourceTree = "<group>"; };
+		AE73E25C197C4092001F1507 /* VariableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableViewController.h; sourceTree = "<group>"; };
+		AE73E25D197C4092001F1507 /* VariableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableViewController.m; sourceTree = "<group>"; };
 		AE7B98C4193A0FAC004C8C82 /* IntSum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntSum.h; sourceTree = "<group>"; };
 		AE7B98C5193A0FAC004C8C82 /* IntSum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntSum.m; sourceTree = "<group>"; };
 		AE7B98C7193A51F6004C8C82 /* IntVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntVariable.h; sourceTree = "<group>"; };
@@ -269,6 +286,10 @@
 		AEB41FDA1977397200227B68 /* StatementInsertAfterVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementInsertAfterVisitor.m; sourceTree = "<group>"; };
 		AEBD7D3A1956C2CF00F0DCD1 /* StatementMoveVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementMoveVisitor.h; sourceTree = "<group>"; };
 		AEBD7D3B1956C2CF00F0DCD1 /* StatementMoveVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementMoveVisitor.m; sourceTree = "<group>"; };
+		AEC1AA441980387800001E0C /* StatementDebugStringVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementDebugStringVisitor.h; sourceTree = "<group>"; };
+		AEC1AA451980387800001E0C /* StatementDebugStringVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementDebugStringVisitor.m; sourceTree = "<group>"; };
+		AEC1AA471980388B00001E0C /* ExpressionDebugStringVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionDebugStringVisitor.h; sourceTree = "<group>"; };
+		AEC1AA481980388B00001E0C /* ExpressionDebugStringVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionDebugStringVisitor.m; sourceTree = "<group>"; };
 		AEFA0F2F1945744D006AEA4B /* ProgramException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramException.h; sourceTree = "<group>"; };
 		AEFA0F301945744D006AEA4B /* ProgramException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramException.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -384,8 +405,6 @@
 		AE1B88561935B1CD002962FA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AE7B98D7193A8D8A004C8C82 /* StatementVisitor.h */,
-				AE7B98D0193A6D4F004C8C82 /* ExpressionVisitor.h */,
 				AE7B98E2193C284A004C8C82 /* Program.h */,
 				AE7B98E3193C284A004C8C82 /* Program.m */,
 				AE1B88571935B2D0002962FA /* EnvironmentModel.h */,
@@ -485,10 +504,8 @@
 		AE7B98D8193A916E004C8C82 /* Visitors */ = {
 			isa = PBXGroup;
 			children = (
-				AE7B98D9193A91C1004C8C82 /* ExpressionDisplayStringVisitor.h */,
-				AE7B98DA193A91C1004C8C82 /* ExpressionDisplayStringVisitor.m */,
-				AEA5E57B1978879E0090A9F2 /* ExpressionBreakdownVisitor.h */,
-				AEA5E57C1978879E0090A9F2 /* ExpressionBreakdownVisitor.m */,
+				AE7B98D7193A8D8A004C8C82 /* StatementVisitor.h */,
+				AE7B98D0193A6D4F004C8C82 /* ExpressionVisitor.h */,
 				AE208377193EBFB70035C965 /* StatementFlatteningVisitor.h */,
 				AE208378193EBFB70035C965 /* StatementFlatteningVisitor.m */,
 				AEB41FD61977395C00227B68 /* StatementDeleteVisitor.h */,
@@ -497,10 +514,24 @@
 				AEB41FDA1977397200227B68 /* StatementInsertAfterVisitor.m */,
 				AEBD7D3A1956C2CF00F0DCD1 /* StatementMoveVisitor.h */,
 				AEBD7D3B1956C2CF00F0DCD1 /* StatementMoveVisitor.m */,
+				AE7B98D9193A91C1004C8C82 /* ExpressionDisplayStringVisitor.h */,
+				AE7B98DA193A91C1004C8C82 /* ExpressionDisplayStringVisitor.m */,
+				AEA5E57B1978879E0090A9F2 /* ExpressionBreakdownVisitor.h */,
+				AEA5E57C1978879E0090A9F2 /* ExpressionBreakdownVisitor.m */,
 				AEB41FD31976FB9E00227B68 /* StatementBreakdownVisitor.h */,
 				AEB41FD41976FB9E00227B68 /* StatementBreakdownVisitor.m */,
 				AEA6FF9419777E33007F6457 /* StatementHasStatementListVisitor.h */,
 				AEA6FF9519777E33007F6457 /* StatementHasStatementListVisitor.m */,
+				AE36FBA1197EFFE700AA7457 /* ExpressionReplaceChildVisitor.h */,
+				AE36FBA2197EFFE700AA7457 /* ExpressionReplaceChildVisitor.m */,
+				AE36FBA4197F0A3300AA7457 /* StatementReplaceChildVisitor.h */,
+				AE36FBA5197F0A3300AA7457 /* StatementReplaceChildVisitor.m */,
+				AE36FBA7197F3C7600AA7457 /* ExpressionIsLeafVisitor.h */,
+				AE36FBA8197F3C7600AA7457 /* ExpressionIsLeafVisitor.m */,
+				AEC1AA441980387800001E0C /* StatementDebugStringVisitor.h */,
+				AEC1AA451980387800001E0C /* StatementDebugStringVisitor.m */,
+				AEC1AA471980388B00001E0C /* ExpressionDebugStringVisitor.h */,
+				AEC1AA481980388B00001E0C /* ExpressionDebugStringVisitor.m */,
 			);
 			name = Visitors;
 			sourceTree = "<group>";
@@ -508,16 +539,20 @@
 		AE7B98E5193C2BC7004C8C82 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				AE0E13D819529CFD00E17E7D /* ProgramListViewController.h */,
+				AE0E13D919529CFD00E17E7D /* ProgramListViewController.m */,
 				AE7B98E8193C2CC1004C8C82 /* ProgramViewController.h */,
 				AE7B98E9193C2CC1004C8C82 /* ProgramViewController.m */,
 				AE7B98EB193C3813004C8C82 /* ElementViewController.h */,
 				AE7B98EC193C3813004C8C82 /* ElementViewController.m */,
-				AE604321194E96C10050CAC5 /* OutputViewController.h */,
-				AE604322194E96C10050CAC5 /* OutputViewController.m */,
 				AE0E13CF19529B3400E17E7D /* ComponentViewController.h */,
 				AE0E13D019529B3400E17E7D /* ComponentViewController.m */,
-				AE0E13D819529CFD00E17E7D /* ProgramListViewController.h */,
-				AE0E13D919529CFD00E17E7D /* ProgramListViewController.m */,
+				AE73E25C197C4092001F1507 /* VariableViewController.h */,
+				AE73E25D197C4092001F1507 /* VariableViewController.m */,
+				AE73E259197C4072001F1507 /* HardcodeIntViewController.h */,
+				AE73E25A197C4072001F1507 /* HardcodeIntViewController.m */,
+				AE604321194E96C10050CAC5 /* OutputViewController.h */,
+				AE604322194E96C10050CAC5 /* OutputViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -620,11 +655,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE36FBA0197EFDFF00AA7457 /* Main_iPad.storyboard in Resources */,
+				AE36FB9F197EFDEB00AA7457 /* Main_iPhone.storyboard in Resources */,
 				AEA6FF8E19777B71007F6457 /* RedButtonX.png in Resources */,
 				AEA6FF8319777B71007F6457 /* BlueButtonPlus.png in Resources */,
 				AEA6FF8719777B71007F6457 /* GreenButtonOriginal.png in Resources */,
 				AEA6FF8419777B71007F6457 /* BlueButtonPlusCropped.png in Resources */,
-				AE1B88321935B16B002962FA /* Main_iPad.storyboard in Resources */,
 				AEA6FF8F19777B71007F6457 /* RedButtonXCropped.png in Resources */,
 				AEA6FF8C19777B71007F6457 /* RedButtonMinus.png in Resources */,
 				AEA6FF8B19777B71007F6457 /* RedButtonCropped.png in Resources */,
@@ -637,7 +673,6 @@
 				AEA6FF8519777B71007F6457 /* GreenButton.png in Resources */,
 				AE1B883A1935B16B002962FA /* Images.xcassets in Resources */,
 				AEA6FF8119777B71007F6457 /* BlueButton.png in Resources */,
-				AE1B882F1935B16B002962FA /* Main_iPhone.storyboard in Resources */,
 				AE1B88261935B16B002962FA /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -664,6 +699,7 @@
 				AE1B88591935B2D0002962FA /* EnvironmentModel.m in Sources */,
 				AE7B98E4193C284A004C8C82 /* Program.m in Sources */,
 				AE0E13D119529B3400E17E7D /* ComponentViewController.m in Sources */,
+				AEC1AA461980387800001E0C /* StatementDebugStringVisitor.m in Sources */,
 				AE7B98EA193C2CC1004C8C82 /* ProgramViewController.m in Sources */,
 				AE7B9905193D5EE4004C8C82 /* BoolIntDoesNotEqual.m in Sources */,
 				AE0E13DA19529CFD00E17E7D /* ProgramListViewController.m in Sources */,
@@ -671,10 +707,12 @@
 				AE208379193EBFB70035C965 /* StatementFlatteningVisitor.m in Sources */,
 				AEA5E57D1978879E0090A9F2 /* ExpressionBreakdownVisitor.m in Sources */,
 				AE7B98D6193A8C7D004C8C82 /* WhileEndWhile.m in Sources */,
+				AEC1AA491980388B00001E0C /* ExpressionDebugStringVisitor.m in Sources */,
 				AE604323194E96C10050CAC5 /* OutputViewController.m in Sources */,
 				AE7B990B193D5F03004C8C82 /* BoolBoolDoesNotEqual.m in Sources */,
 				AE7B98CF193A57F0004C8C82 /* IfThenElseEndIf.m in Sources */,
 				AE7B98C6193A0FAC004C8C82 /* IntSum.m in Sources */,
+				AE73E25E197C4092001F1507 /* VariableViewController.m in Sources */,
 				AE7B98D3193A6F8D004C8C82 /* StatementList.m in Sources */,
 				AE7B9923193D7853004C8C82 /* BoolNor.m in Sources */,
 				AE7B9935193D78C5004C8C82 /* BoolReverseImplies.m in Sources */,
@@ -698,12 +736,15 @@
 				AE7B9908193D5EF4004C8C82 /* BoolBoolEquals.m in Sources */,
 				AE7B9938193D8699004C8C82 /* BoolNonImplies.m in Sources */,
 				AE37015D1936EFCD00426393 /* BoolValue.m in Sources */,
+				AE36FBA9197F3C7600AA7457 /* ExpressionIsLeafVisitor.m in Sources */,
 				AE7B9902193D5ED1004C8C82 /* BoolIntEquals.m in Sources */,
 				AE60432D194EB0CF0050CAC5 /* PrintInt.m in Sources */,
 				AE7B98C9193A51F6004C8C82 /* IntVariable.m in Sources */,
+				AE73E25B197C4072001F1507 /* HardcodeIntViewController.m in Sources */,
 				AE7B9911193D5F89004C8C82 /* IntDifference.m in Sources */,
 				AE7B98E1193BA6E9004C8C82 /* BoolLessThan.m in Sources */,
 				AEB41FD51976FB9E00227B68 /* StatementBreakdownVisitor.m in Sources */,
+				AE36FBA6197F0A3300AA7457 /* StatementReplaceChildVisitor.m in Sources */,
 				AEB41FD81977395C00227B68 /* StatementDeleteVisitor.m in Sources */,
 				AE7B9932193D78B4004C8C82 /* BoolImplies.m in Sources */,
 				AE7B990E193D5F3C004C8C82 /* BoolNegation.m in Sources */,
@@ -713,6 +754,7 @@
 				AE1B88381935B16B002962FA /* DetailViewController.m in Sources */,
 				AE7B991D193D5FD1004C8C82 /* IntRemainder.m in Sources */,
 				AE7B98F9193D5E48004C8C82 /* BoolGreaterThanOrEquals.m in Sources */,
+				AE36FBA3197EFFE700AA7457 /* ExpressionReplaceChildVisitor.m in Sources */,
 				AE7B98F0193D5BCD004C8C82 /* IfThenEndIf.m in Sources */,
 				AE604320194E615E0050CAC5 /* StatementAndDisplayString.m in Sources */,
 				AE20837F193EF1120035C965 /* BoolArrayElementAssignment.m in Sources */,

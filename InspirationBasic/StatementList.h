@@ -15,7 +15,7 @@
 
 @property id <Statement> parent;
 
-- (id) initWithParent: (id <Statement>) parent;
+- (id) init;
 
 - (void) addStatement:(id <Statement>)statement;
 

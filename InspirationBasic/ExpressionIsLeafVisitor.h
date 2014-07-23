@@ -8,17 +8,19 @@
 
 #import <Foundation/Foundation.h>
 #import "./ExpressionVisitor.h"
+
+#import "ExpressionDisplayStringVisitor.h"
+
 #import "IntExpression.h"
 #import "BoolExpression.h"
 
-@interface ExpressionDisplayStringVisitor : NSObject<ExpressionVisitor>
+@interface ExpressionIsLeafVisitor : NSObject<ExpressionVisitor>
 
-@property NSString * displayString;
-@property bool removeParens;
+@property bool isLeaf;
 
 - (id) init;
-- (NSString *) getStringForInt:(id <IntExpression>)intExpression;
-- (NSString *) getStringForBool:(id <BoolExpression>)boolExpression;
+- (bool) checkIfIntLeaf:(id <IntExpression>)intExpression;
+- (bool) checkIfBoolLeaf:(id <BoolExpression>)boolExpression;
 
 - (void) visitIntValue:(IntValue *)intValue;
 - (void) visitBoolValue:(BoolValue *)boolValue;

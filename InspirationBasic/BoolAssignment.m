@@ -11,11 +11,10 @@
 
 @implementation BoolAssignment
 
-- (id) initWith:(NSString *)variable equals:(id <BoolExpression>)expression andParent:(id <Statement>) parent {
+- (id) initWith:(NSString *)variable equals:(id <BoolExpression>)expression {
     if (self = [super init]) {
         self.variable = variable;
         self.expression = expression;
-        self.parent = parent;
     }
     return self;
 }

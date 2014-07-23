@@ -8,17 +8,20 @@
 
 #import <Foundation/Foundation.h>
 #import "./ExpressionVisitor.h"
+
+#import "ExpressionDisplayStringVisitor.h"
+
 #import "IntExpression.h"
 #import "BoolExpression.h"
 
-@interface ExpressionDisplayStringVisitor : NSObject<ExpressionVisitor>
+@interface ExpressionReplaceChildVisitor : NSObject<ExpressionVisitor>
 
-@property NSString * displayString;
-@property bool removeParens;
+@property id theOldChild;
+@property id theNewChild;
 
 - (id) init;
-- (NSString *) getStringForInt:(id <IntExpression>)intExpression;
-- (NSString *) getStringForBool:(id <BoolExpression>)boolExpression;
+- (void) replaceChild:(id)oldChild OfIntExpression:(id <IntExpression>)intExpression With:(id)newChild;
+- (void) replaceChild:(id)oldChild OfBoolExpression:(id <BoolExpression>)boolExpression With:(id)newChild;
 
 - (void) visitIntValue:(IntValue *)intValue;
 - (void) visitBoolValue:(BoolValue *)boolValue;

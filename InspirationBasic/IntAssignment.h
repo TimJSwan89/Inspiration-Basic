@@ -18,7 +18,7 @@
 
 @property (nonatomic) id <IntExpression> expression;
 
-- (id) initWith:(NSString *)variable equals:(id <IntExpression>)expression andParent:(id <Statement>) parent;
+- (id) initWith:(NSString *)variable equals:(id <IntExpression>)expression;
 
 - (void) executeAgainst: (EnvironmentModel *) environment;
 

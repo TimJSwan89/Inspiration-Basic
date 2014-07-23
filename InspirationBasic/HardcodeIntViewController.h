@@ -1,0 +1,23 @@
+//
+//  HardcodeIntViewController.h
+//  InspirationBasic
+//
+//  Created by Timothy Swan on 7/20/14.
+//  Copyright (c) 2014 ___InspirationTeam___. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@protocol IntAccepter
+- (void) acceptInt:(int)integer;
+@end
+
+@interface HardcodeIntViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+@property (strong, nonatomic) IBOutlet UITextField *inputField;
+@property (nonatomic) id<IntAccepter> delegate;
+@property (nonatomic) int currentValue;
+- (IBAction)fieldWasEdited:(UITextField *)sender;
+- (IBAction)donePressed:(UIBarButtonItem *)sender;
+@end
+

@@ -18,7 +18,7 @@
 @property (nonatomic) id <IntExpression> indexExpression;
 @property (nonatomic) id <IntExpression> expression;
 
-- (id) initWith:(IntArrayElement *)element equals:(id <IntExpression>)expression andParent:(id <Statement>) parent;
+- (id) initWith:(IntArrayElement *)element equals:(id <IntExpression>)expression;
 
 - (void) executeAgainst: (EnvironmentModel *) environment;
 

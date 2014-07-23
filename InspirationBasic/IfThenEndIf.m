@@ -11,12 +11,11 @@
 
 @implementation IfThenEndIf
 
-- (id) initWithIf: (id <BoolExpression>)expression Then: (StatementList *)thenStatements andParent:(id <Statement>) parent {
+- (id) initWithIf: (id <BoolExpression>)expression Then: (StatementList *)thenStatements {
     if (self = [super init]) {
         self.expression = expression;
         self.thenStatements = thenStatements;
         thenStatements.parent = self;
-        self.parent = parent;
     }
     return self;
 }

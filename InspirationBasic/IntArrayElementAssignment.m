@@ -12,12 +12,11 @@
 
 @implementation IntArrayElementAssignment
 
-- (id) initWith:(IntArrayElement *)element equals:(id <IntExpression>)expression andParent:(id <Statement>) parent {
+- (id) initWith:(IntArrayElement *)element equals:(id <IntExpression>)expression {
     if (self = [super init]) {
         self.variable = element.variable;
         self.indexExpression = element.indexExpression;
         self.expression = expression;
-        self.parent = parent;
     }
     return self;
 }

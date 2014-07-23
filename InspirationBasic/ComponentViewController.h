@@ -8,9 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import "Statement.h"
+#import "HardcodeIntViewController.h"
 
-@interface ComponentViewController : UITableViewController
+@protocol ElementAccepter
+- (void) acceptElement:(id) element;
+@end
 
-@property (nonatomic) id <Statement> statement;
+@interface ComponentViewController : UITableViewController<IntAccepter>
+
+@property (nonatomic) id element;
+@property (nonatomic) int type;
+@property (nonatomic) id <ElementAccepter> delegate;
+
+- (void) acceptInt:(int)integer;
 
 @end

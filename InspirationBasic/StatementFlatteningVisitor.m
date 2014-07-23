@@ -49,14 +49,12 @@
 
 - (NSString *) intExpressionToString:(id <IntExpression>) intExpression {
     ExpressionDisplayStringVisitor * visitor = [[ExpressionDisplayStringVisitor alloc] init];
-    [intExpression accept:visitor];
-    return [visitor displayString];
+    return [visitor getStringForInt:intExpression];
 }
 
 - (NSString *) boolExpressionToString:(id <BoolExpression>) boolExpression {
     ExpressionDisplayStringVisitor * visitor = [[ExpressionDisplayStringVisitor alloc] init];
-    [boolExpression accept:visitor];
-    return [visitor displayString];
+    return [visitor getStringForBool:boolExpression];
 }
 
 - (void) visitPrintInt:(PrintInt *)printInt {

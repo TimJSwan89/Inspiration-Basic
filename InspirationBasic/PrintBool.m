@@ -11,10 +11,9 @@
 
 @implementation PrintBool
 
-- (id) initWithExpression:(id <BoolExpression>)expression andParent:(id <Statement>) parent{
+- (id) initWithExpression:(id <BoolExpression>)expression {
     if (self = [super init]) {
         self.expression = expression;
-        self.parent = parent;
     }
     return self;
 }

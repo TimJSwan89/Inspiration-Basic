@@ -11,12 +11,11 @@
 
 @implementation WhileEndWhile
 
-- (id) initWithWhile: (id <BoolExpression>)expression Do: (StatementList *)loopStatements andParent:(id <Statement>) parent {
+- (id) initWithWhile: (id <BoolExpression>)expression Do: (StatementList *)loopStatements {
     if (self = [super init]) {
         self.expression = expression;
         self.loopStatements = loopStatements;
         loopStatements.parent = self;
-        self.parent = parent;
     }
     return self;
 }

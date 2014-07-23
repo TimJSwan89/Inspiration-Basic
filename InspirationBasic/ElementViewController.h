@@ -8,8 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "Program.h"
+#import "ComponentViewController.h"
 
-@interface ElementViewController : UITableViewController
+@protocol Reloadable
+- (void) reload;
+@end
+
+@interface ElementViewController : UITableViewController<ElementAccepter, Reloadable>
 
 @property (nonatomic) id element;
 @property (nonatomic) int type;
@@ -17,7 +22,9 @@
 @property NSMutableArray * types;
 @property NSMutableArray * elements;
 @property NSMutableArray * strings;
+@property (nonatomic) id <ElementAccepter, Reloadable> delegate;
 
 - (void) initCellModels;
+- (void) reload;
 
 @end

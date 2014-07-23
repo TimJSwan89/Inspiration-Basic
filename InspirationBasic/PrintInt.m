@@ -11,10 +11,9 @@
 
 @implementation PrintInt
 
-- (id) initWithExpression:(id <IntExpression>)expression andParent:(id <Statement>) parent{
+- (id) initWithExpression:(id <IntExpression>)expression {
     if (self = [super init]) {
         self.expression = expression;
-        self.parent = parent;
     }
     return self;
 }

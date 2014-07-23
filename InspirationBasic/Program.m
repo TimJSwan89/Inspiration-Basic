@@ -11,8 +11,9 @@
 @implementation Program
 
 - (id) initWithTitle:(NSString *) title {
-    if (self = [super initWithParent:nil]) {
+    if (self = [super init]) {
         self.title = title;
+        self.parent = nil;
     }
     return self;
 }

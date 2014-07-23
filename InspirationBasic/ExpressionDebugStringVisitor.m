@@ -6,74 +6,47 @@
 //  Copyright (c) 2014 ___InspirationTeam___. All rights reserved.
 //
 
-#import "ExpressionDisplayStringVisitor.h"
-#import "./BoolVariable.h"
-#import "./IntVariable.h"
-#import "./BoolArrayElement.h"
-#import "./IntArrayElement.h"
-#import "./IntValue.h"
-#import "./BoolValue.h"
-#import "./IntNegation.h"
-#import "./IntSum.h"
-#import "./IntDifference.h"
-#import "./IntProduct.h"
-#import "./IntQuotient.h"
-#import "./IntRemainder.h"
-#import "./BoolNegation.h"
-#import "./BoolOr.h"
-#import "./BoolNor.h"
-#import "./BoolAnd.h"
-#import "./BoolNand.h"
-#import "./BoolImplies.h"
-#import "./BoolNonImplies.h"
-#import "./BoolReverseImplies.h"
-#import "./BoolReverseNonImplies.h"
-#import "./BoolBoolEquals.h"
-#import "./BoolBoolDoesNotEqual.h"
-#import "./BoolIntEquals.h"
-#import "./BoolIntDoesNotEqual.h"
-#import "./BoolLessThan.h"
-#import "./BoolLessThanOrEquals.h"
-#import "./BoolGreaterThan.h"
-#import "./BoolGreaterThanOrEquals.h"
+#import "ExpressionDebugStringVisitor.h"
+#import "../InspirationBasic/BoolVariable.h"
+#import "../InspirationBasic/IntVariable.h"
+#import "../InspirationBasic/BoolArrayElement.h"
+#import "../InspirationBasic/IntArrayElement.h"
+#import "../InspirationBasic/IntValue.h"
+#import "../InspirationBasic/BoolValue.h"
+#import "../InspirationBasic/IntNegation.h"
+#import "../InspirationBasic/IntSum.h"
+#import "../InspirationBasic/IntDifference.h"
+#import "../InspirationBasic/IntProduct.h"
+#import "../InspirationBasic/IntQuotient.h"
+#import "../InspirationBasic/IntRemainder.h"
+#import "../InspirationBasic/BoolNegation.h"
+#import "../InspirationBasic/BoolOr.h"
+#import "../InspirationBasic/BoolNor.h"
+#import "../InspirationBasic/BoolAnd.h"
+#import "../InspirationBasic/BoolNand.h"
+#import "../InspirationBasic/BoolImplies.h"
+#import "../InspirationBasic/BoolNonImplies.h"
+#import "../InspirationBasic/BoolReverseImplies.h"
+#import "../InspirationBasic/BoolReverseNonImplies.h"
+#import "../InspirationBasic/BoolBoolEquals.h"
+#import "../InspirationBasic/BoolBoolDoesNotEqual.h"
+#import "../InspirationBasic/BoolIntEquals.h"
+#import "../InspirationBasic/BoolIntDoesNotEqual.h"
+#import "../InspirationBasic/BoolLessThan.h"
+#import "../InspirationBasic/BoolLessThanOrEquals.h"
+#import "../InspirationBasic/BoolGreaterThan.h"
+#import "../InspirationBasic/BoolGreaterThanOrEquals.h"
 
-@implementation ExpressionDisplayStringVisitor
+@implementation ExpressionDebugStringVisitor
 
 - (id) init {
     if (self = [super init]) {
         self.displayString = @"";
-        self.removeParens = false;
     }
     return self;
 }
 
-- (NSString *) getDisplayStringNoOuterParens {
-    return [self removeOuterParens:self.displayString];
-}
-
-- (NSString *) removeOuterParens:(NSString *)string {
-    if ([string characterAtIndex:0] == '(' && [string characterAtIndex:(string.length - 1)] == ')')
-        string = [string substringWithRange:(NSRange){1, string.length - 2}];
-    return string;
-}
-
-- (NSString *) getStringForInt:(id <IntExpression>)intExpression {
-    self.displayString = @"";
-    [intExpression accept:self];
-    return [self getDisplayStringNoOuterParens];
-}
-
-- (NSString *) getStringForBool:(id <BoolExpression>)boolExpression {
-    self.displayString = @"";
-    [boolExpression accept:self];
-    return [self getDisplayStringNoOuterParens];
-}
-
 - (void) append:(NSString *)string {
-    if (self.removeParens) {
-        string = [self removeOuterParens:string];
-        self.removeParens = false;
-    }
     self.displayString = [self.displayString stringByAppendingString:string];
 }
 
@@ -99,7 +72,6 @@
 - (void) visitIntArrayElement:(IntArrayElement *)intArrayElement {
     [self append:intArrayElement.variable];
     [self append:@"["];
-    self.removeParens = true;
     [intArrayElement.indexExpression accept:self];
     [self append:@"]"];
 }
@@ -107,7 +79,6 @@
 - (void) visitBoolArrayElement:(BoolArrayElement *)boolArrayElement {
     [self append:boolArrayElement.variable];
     [self append:@"["];
-    self.removeParens = true;
     [boolArrayElement.indexExpression accept:self];
     [self append:@"]"];
 }

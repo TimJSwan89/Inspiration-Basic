@@ -19,7 +19,7 @@
 
 @property (nonatomic) StatementList * thenStatements;
 
-- (id) initWithIf: (id <BoolExpression>)expression Then: (StatementList *)thenStatements andParent:(id <Statement>) parent;
+- (id) initWithIf: (id <BoolExpression>)expression Then: (StatementList *)thenStatements;
 
 - (void) executeAgainst: (EnvironmentModel *) environment;
 
