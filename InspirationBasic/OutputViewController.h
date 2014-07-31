@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Program.h"
+#import "ViewSettings.h"
 
-@interface OutputViewController : UIViewController
+@interface OutputViewController : UIViewController<OutputListener>
+@property ViewSettings * settings;
 @property (strong, nonatomic) IBOutlet UITextView * outputTextView;
 @property (nonatomic, strong) NSString * outputText;
+@property (nonatomic) Program * program;
 @end

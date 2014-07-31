@@ -18,15 +18,21 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
     }
     return self;
+}
+
+- (void) initViewModel {
+    self.variables = [self.delegate getScope];
+    self.button = nil;
+    self.textField = nil;
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self.settings setSettingsForTableView:self.tableView];
+    [self initViewModel];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -42,30 +48,40 @@
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-//#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 2;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return (section == 0) ? 1 : self.variables.count;
 }
 
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:(indexPath.section == 0) ? @"NewVariableCell" : @"ExistingVariableCell" forIndexPath:indexPath];
+    if (indexPath.section == 0) {
+        UIView * view = cell.contentView;
+        self.textField = (UITextField *) view.subviews[0];
+        [self.settings setSettingsForTextField:self.textField];
+        self.button = (UIButton *) view.subviews[1];
+        [self.button setEnabled:false];
+    } else {
+        [[cell textLabel] setText:self.variables[indexPath.row]];
+    }
+    [self.settings setSettingsForCell:cell];
     return cell;
 }
-*/
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section > 0) {
+        [self.delegate acceptVar:self.variables[indexPath.row]];
+    }
+}
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -116,4 +132,18 @@
 }
 */
 
+- (IBAction)edited:(UITextField *)sender {
+    NSString * string = self.textField.text;
+    int value = [string intValue];
+    NSString * intString = [NSString stringWithFormat:@"%d", value];
+    bool qualifiedVariable = ![string isEqualToString:intString];
+    if ([string isEqualToString:@""])
+        qualifiedVariable = false;
+    [self.button setEnabled:qualifiedVariable];
+    [self.settings setFeedbackForTextField:sender to:qualifiedVariable];
+}
+
+- (IBAction)pressedUse:(UIButton *)sender {
+    [self.delegate acceptVar:self.textField.text];
+}
 @end

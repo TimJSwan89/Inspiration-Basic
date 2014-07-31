@@ -6,7 +6,54 @@
 //  Copyright (c) 2014 ___InspirationTeam___. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "ProgramListViewController.h"
+#import "ProgramViewController.h"
+
+#import "StatementToDBVisitor.h"
+#import "DBToStatementVisitor.h"
+
+// Remove later
+#import "Program.h"
+#import "StatementList.h"
+#import "PrintInt.h"
+#import "IntAssignment.h"
+#import "BoolAssignment.h"
+#import "IntArrayElementAssignment.h"
+#import "BoolArrayElementAssignment.h"
+#import "IfThenElseEndIf.h"
+#import "IfThenEndIf.h"
+#import "WhileEndWhile.h"
+
+#import "./BoolVariable.h"
+#import "./IntVariable.h"
+#import "./BoolArrayElement.h"
+#import "./IntArrayElement.h"
+#import "./IntValue.h"
+#import "./BoolValue.h"
+#import "./IntNegation.h"
+#import "./IntSum.h"
+#import "./IntDifference.h"
+#import "./IntProduct.h"
+#import "./IntQuotient.h"
+#import "./IntRemainder.h"
+#import "./BoolNegation.h"
+#import "./BoolOr.h"
+#import "./BoolNor.h"
+#import "./BoolAnd.h"
+#import "./BoolNand.h"
+#import "./BoolImplies.h"
+#import "./BoolNonImplies.h"
+#import "./BoolReverseImplies.h"
+#import "./BoolReverseNonImplies.h"
+#import "./BoolBoolEquals.h"
+#import "./BoolBoolDoesNotEqual.h"
+#import "./BoolIntEquals.h"
+#import "./BoolIntDoesNotEqual.h"
+#import "./BoolLessThan.h"
+#import "./BoolLessThanOrEquals.h"
+#import "./BoolGreaterThan.h"
+#import "./BoolGreaterThanOrEquals.h"
 
 @interface ProgramListViewController ()
 
@@ -18,15 +65,60 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
     }
     return self;
+}
+
+- (void)initializePrograms {
+    
+    self.programs = [self getProgramsFromCoreData];
+    [self.programs addObject:[self createDefaultProgram]];
+
+}
+
+- (NSMutableArray *) getProgramsFromCoreData {
+    DBToStatementVisitor * visitor = [[DBToStatementVisitor alloc] init];
+    AppDelegate * appDelegate = UIApplication.sharedApplication.delegate;
+    NSManagedObjectContext * context = appDelegate.managedObjectContext;
+    return [visitor loadProgramsFromDBContext:context];
+}
+
+- (void) addProgramToCoreData:(Program *)program {
+    StatementToDBVisitor * visitor = [[StatementToDBVisitor alloc] init];
+    AppDelegate * appDelegate = UIApplication.sharedApplication.delegate;
+    NSManagedObjectContext * context = appDelegate.managedObjectContext;
+    [visitor saveProgramToDB:program context:context];
+}
+
+- (IBAction)savePrograms:(UIBarButtonItem *)sender {
+    for (int i = 0; i < self.programs.count; i++) {
+        [self addProgramToCoreData:self.programs[i]];
+    }
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.editingState = false;
     
+    self.settings = [[ViewSettings alloc] initWithFont:[UIFont fontWithName:@"Ariel" size:18.0]
+                                       backgroundColor:[UIColor blackColor]
+                                             textColor:[UIColor cyanColor]
+                                   textBackgroundColor:[UIColor blackColor]
+                                 positiveFeedbackColor:[UIColor greenColor]
+                                 negativeFeedbackColor:[UIColor redColor]];
+    [self.settings setSettingsForTableView:self.tableView];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, nil, NSFontAttributeName, nil]];
+    //[[UINavigationBarButtonItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIColor whiteColor], NSShadowAttributeName, [UIFont fontWithName:@"Ariel" size:10.0], NSFontAttributeName, nil]];
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        // iOS 6.1 or earlier
+        self.navigationController.navigationBar.tintColor = [UIColor blackColor];
+    } else {
+        // iOS 7.0 or later
+        self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
+        self.navigationController.navigationBar.translucent = NO;
+    }
+    [self initializePrograms];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -44,76 +136,182 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return (section == 0) ? self.programs.count : 1;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
+    int index = indexPath.row;
+    NSString * cellText;
+    NSString * identifier;
+    if (indexPath.section == 1) {
+        identifier = @"InsertCell";
+        cellText = @"Create Program";
+    } else {
+        identifier = @"ProgramCell";
+        Program * program = (Program *) self.programs[index];
+        cellText = program.title;
+    }
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    [[cell textLabel] setText:cellText];
+    [self.settings setSettingsForCell:cell];
     return cell;
 }
-*/
 
-/*
+- (UITableView *) didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    return nil;
+}
+
+- (IBAction)ToggleEdit:(UIBarButtonItem *)sender {
+    self.editingState = !self.editingState;
+    [self.tableView setEditing:self.editingState animated:true];
+    if (self.editingState) {
+        [sender setTitle:@"Done"];
+    } else {
+        [sender setTitle:@"Edit"];
+    }
+}
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return indexPath.section == 0;
 }
-*/
 
-/*
+
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
+        [self.programs removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
-*/
 
-/*
+- (NSIndexPath *) tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)fromIndexPath toProposedIndexPath:(NSIndexPath *)toIndexPath {
+    if (toIndexPath.section == 1)
+        toIndexPath = [NSIndexPath indexPathForRow:self.programs.count - 1 inSection:0];
+    return toIndexPath;
+}
+
 // Override to support rearranging the table view.
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+    id object = [self.programs objectAtIndex:fromIndexPath.row];
+    [self.programs removeObjectAtIndex:fromIndexPath.row];
+    [self.programs insertObject:object atIndex:toIndexPath.row];
 }
-*/
 
-/*
 // Override to support conditional rearranging of the table view.
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
+    return true;
 }
-*/
 
-/*
+- (NSMutableArray *) getScope {
+    return [[NSMutableArray alloc] init];
+}
+
+- (void) acceptVar:(NSString *)variable {
+    Program * program = [[Program alloc] initWithTitle:variable];
+    [self.programs addObject:program];
+    [self addProgramToCoreData:program];
+    [self.tableView reloadData];
+    [self.navigationController popToViewController:self animated:true];
+    
+}
+
+- (Program *) createDefaultProgram {
+    
+    Program * program = [[Program alloc] initWithTitle:@"Default Program"];
+    
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:5]]];
+    StatementList * loopStatements = [[StatementList alloc] init];
+    BoolLessThan * lessThan = [[BoolLessThan alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] LessThan:[[IntValue alloc] initWithValue:10]];
+    IntSum * sum = [[IntSum alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] plus:[[IntValue alloc] initWithValue:1]];
+    [loopStatements addStatement:[[IntAssignment alloc] initWith:@"x" equals:sum]];
+    [loopStatements addStatement:[[PrintInt alloc] initWithExpression:[[IntVariable alloc] initWithVariable:@"x"]]];
+    WhileEndWhile * whileEndWhile = [[WhileEndWhile alloc] initWithWhile:lessThan Do:loopStatements];
+    [program addStatement:whileEndWhile];
+    
+    StatementList * loopStatements1 = [[StatementList alloc] init];
+    BoolLessThan * lessThan1 = [[BoolLessThan alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] LessThan:[[IntValue alloc] initWithValue:10]];
+    IntSum * sum1 = [[IntSum alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] plus:[[IntValue alloc] initWithValue:1]];
+    [loopStatements1 addStatement:[[IntAssignment alloc] initWith:@"x" equals:sum1]];
+    [loopStatements1 addStatement:[[PrintInt alloc] initWithExpression:[[IntVariable alloc] initWithVariable:@"x"]]];
+    WhileEndWhile * whileEndWhile1 = [[WhileEndWhile alloc] initWithWhile:lessThan1 Do:loopStatements1];
+    [whileEndWhile.loopStatements addStatement:whileEndWhile1];
+    
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:6]]];
+    NSInteger num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:7]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
+    num = program.statementList.count;
+    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
+    num = program.statementList.count;
+    return program;
+}
+
+
+
 #pragma mark - Navigation
+ 
+ 
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([[segue identifier] isEqualToString:@"ProgramListToProgram"]) {
+        ProgramViewController * programViewController = [segue destinationViewController];
+        Program * program = (Program *) self.programs[[self.tableView indexPathForSelectedRow].row];
+        programViewController.settings = self.settings;
+        programViewController.program = program;
+        programViewController.navigationItem.title = program.title;
+    } else if ([[segue identifier] isEqualToString:@"ProgramListToVariable"]) {
+        VariableViewController * variableViewController = [segue destinationViewController];
+        variableViewController.delegate = self;
+        variableViewController.settings = self.settings;
+        variableViewController.navigationItem.title = @"New Program Title";
+    }
 }
-*/
 
 @end

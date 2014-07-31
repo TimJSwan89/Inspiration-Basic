@@ -54,10 +54,10 @@
 - (void) visitBoolAssigment:(BoolAssignment *)boolAssignment {
     self.hasStatementList = false;
 }
-- (void) visitIntArrayElementAssigment:(IntArrayElementAssignment *)intArrayElementAssignment {
+- (void) visitIntArrayElementAssignment:(IntArrayElementAssignment *)intArrayElementAssignment {
     self.hasStatementList = false;
 }
-- (void) visitBoolArrayElementAssigment:(BoolArrayElementAssignment *)boolArrayElementAssignment {
+- (void) visitBoolArrayElementAssignment:(BoolArrayElementAssignment *)boolArrayElementAssignment {
     self.hasStatementList = false;
 }
 - (void) visitWhileEndWhile:(WhileEndWhile *)whileEndWhile {

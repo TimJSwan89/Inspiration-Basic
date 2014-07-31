@@ -12,51 +12,7 @@
 #import "StatementMoveVisitor.h"
 #import "StatementAndDisplayString.h"
 
-//#import "../InspirationBasicTests/StatementDebugStringVisitor.h"
-//#import "../InspirationBasicTests/ExpressionDebugStringVisitor.h"
-#import "StatementDebugStringVisitor.h"
-#import "ExpressionDebugStringVisitor.h"
-
-// Remove later
-#import "StatementList.h"
-#import "PrintInt.h"
-#import "IntAssignment.h"
-#import "BoolAssignment.h"
-#import "IntArrayElementAssignment.h"
-#import "BoolArrayElementAssignment.h"
-#import "IfThenElseEndIf.h"
-#import "IfThenEndIf.h"
-#import "WhileEndWhile.h"
-
-#import "./BoolVariable.h"
-#import "./IntVariable.h"
-#import "./BoolArrayElement.h"
-#import "./IntArrayElement.h"
-#import "./IntValue.h"
-#import "./BoolValue.h"
-#import "./IntNegation.h"
-#import "./IntSum.h"
-#import "./IntDifference.h"
-#import "./IntProduct.h"
-#import "./IntQuotient.h"
-#import "./IntRemainder.h"
-#import "./BoolNegation.h"
-#import "./BoolOr.h"
-#import "./BoolNor.h"
-#import "./BoolAnd.h"
-#import "./BoolNand.h"
-#import "./BoolImplies.h"
-#import "./BoolNonImplies.h"
-#import "./BoolReverseImplies.h"
-#import "./BoolReverseNonImplies.h"
-#import "./BoolBoolEquals.h"
-#import "./BoolBoolDoesNotEqual.h"
-#import "./BoolIntEquals.h"
-#import "./BoolIntDoesNotEqual.h"
-#import "./BoolLessThan.h"
-#import "./BoolLessThanOrEquals.h"
-#import "./BoolGreaterThan.h"
-#import "./BoolGreaterThanOrEquals.h"
+#import "StatementFindOrReplaceVariables.h"
 
 #import "OutputViewController.h"
 
@@ -68,94 +24,37 @@
 
 @implementation ProgramViewController
 
-- (void) postOutput:(NSString *)string {
-    self.output = [self.output stringByAppendingString:string];
-}
-
-- (void) initStatements {
-    
-    self.statementHasStatementListVisitor = [[StatementHasStatementListVisitor alloc] init];
-
-    self.output = @""; // temporary
-    
-    self.program = [[Program alloc] initWithTitle:@"Default Program"];
-    
-    
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:5]]];
-    StatementList * loopStatements = [[StatementList alloc] init];
-    BoolLessThan * lessThan = [[BoolLessThan alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] LessThan:[[IntValue alloc] initWithValue:10]];
-    IntSum * sum = [[IntSum alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] plus:[[IntValue alloc] initWithValue:1]];
-    [loopStatements addStatement:[[IntAssignment alloc] initWith:@"x" equals:sum]];
-    [loopStatements addStatement:[[PrintInt alloc] initWithExpression:[[IntVariable alloc] initWithVariable:@"x"]]];
-    WhileEndWhile * whileEndWhile = [[WhileEndWhile alloc] initWithWhile:lessThan Do:loopStatements];
-    [self.program addStatement:whileEndWhile];
-    
-    StatementList * loopStatements1 = [[StatementList alloc] init];
-    BoolLessThan * lessThan1 = [[BoolLessThan alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] LessThan:[[IntValue alloc] initWithValue:10]];
-    IntSum * sum1 = [[IntSum alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] plus:[[IntValue alloc] initWithValue:1]];
-    [loopStatements1 addStatement:[[IntAssignment alloc] initWith:@"x" equals:sum1]];
-    [loopStatements1 addStatement:[[PrintInt alloc] initWithExpression:[[IntVariable alloc] initWithVariable:@"x"]]];
-    WhileEndWhile * whileEndWhile1 = [[WhileEndWhile alloc] initWithWhile:lessThan1 Do:loopStatements1];
-    [whileEndWhile.loopStatements addStatement:whileEndWhile1];
-    
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:6]]];
-    NSInteger num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:7]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
-    num = self.program.statementList.count;
-    [self.program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
-    num = self.program.statementList.count;
-    [self reflattenProgram];
-}
-
 - (void) reload {
     [self reflattenProgram];
     [self.tableView reloadData];
-    [self logProgram];
+  //  [self logProgram];
 }
-
+/*
 - (void) logProgram {
     StatementDebugStringVisitor * visitor = [[StatementDebugStringVisitor alloc] init];
     [self.program accept:visitor];
     NSLog(@"\n%@",visitor.displayString);
 }
+*/
+- (NSMutableArray *) getScope:(int)type {
+    StatementFindOrReplaceVariables * visitor = [[StatementFindOrReplaceVariables alloc] init];
+    return [visitor findVariables:self.program withType:type];
+}
 
 - (void) acceptElement:(id)element {
-    id <Statement> statement = ((StatementAndDisplayString *)(self.flattenedList[[self.tableView indexPathForSelectedRow].row])).statement;
-    StatementList * list = ((StatementList *) statement.parent);
-    NSUInteger index = [list.statementList indexOfObject:statement];
-    [list.statementList removeObjectAtIndex:index];
-    [list.statementList insertObject:element atIndex:index];
-    ((id <Statement>) element).parent = list;
+    int row = [self.tableView indexPathForSelectedRow].row;
+    if (row == self.flattenedList.count) {
+        [self.program.statementList addObject:element];
+        ((id <Statement>) element).parent = self.program;
+    } else {
+        id <Statement> statement = ((StatementAndDisplayString *)(self.flattenedList[row])).statement;
+        StatementList * list = ((StatementList *) statement.parent);
+        NSUInteger index = [list.statementList indexOfObject:statement];
+        if (!self.inserting)
+            [list.statementList removeObjectAtIndex:index];
+        [list.statementList insertObject:element atIndex:index];
+        ((id <Statement>) element).parent = list;
+    }
     [self reload];
     NSUInteger newIndex = (NSInteger) [self getFlattenedIndexForStatement:element];
     NSUInteger newSection = 0;
@@ -164,7 +63,6 @@
     [self.tableView selectRowAtIndexPath:path animated:false scrollPosition:UITableViewScrollPositionMiddle];
     [self.navigationController popToViewController:self animated:false];
     [self performSegueWithIdentifier:@"ProgramToElement" sender:self];
-    
 }
 
 - (int) getFlattenedIndexForStatement:(id <Statement>)statement {
@@ -210,12 +108,11 @@
 }
 
 - (IBAction)insertAfter:(UIButton *)sender {
+    [self performSegueWithIdentifier:@"ProgramToComponent" sender:self];
 }
 
 - (void) reflattenProgram {
-    
-    // Determine flattened statement list
-    StatementFlatteningVisitor * visitor = [[StatementFlatteningVisitor alloc] init];
+    StatementFlatteningVisitor * visitor = [[StatementFlatteningVisitor alloc] initWithIndentationString:self.indentString];
     self.flattenedList = [visitor getFlattenedList:self.program];
 }
 
@@ -277,7 +174,7 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        [self initStatements];
+        //[self initStatements];
     }
     return self;
 }
@@ -285,10 +182,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initStatements];
-    
+    self.indentString = @"   ";
+    [self.settings setSettingsForTableView:self.tableView];
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    [self reflattenProgram];
     // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    //self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -313,44 +212,56 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.flattenedList.count;
+    return self.flattenedList.count + 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StatementCell" forIndexPath:indexPath];
-    
-    // Configure the cell...
-    StatementAndDisplayString * statementAndString = (StatementAndDisplayString *) self.flattenedList[indexPath.row];
-    NSString * string = statementAndString.displayString;
-    [[cell textLabel] setText:string];
-    [[cell textLabel] setFont:[UIFont fontWithName:@"Chalkduster" size:18.0]];
-    [[cell textLabel] setFont:[UIFont fontWithName:@"Courier" size:18.0]];
-    NSArray * families = [UIFont familyNames];
-    NSString * family;
-    for (family in families) {
-        NSString * font;
-        //NSLog(@"%@",family);
-        for (font in families) {
-            //NSLog(@"%@",font);
-        }
+    NSString * identifier;
+    NSString * string;
+    bool show = false;
+    if (indexPath.row == self.flattenedList.count) {
+        identifier = @"InsertCell";
+        string = @"Add Statement";
+    } else {
+        identifier = @"StatementCell";
+        StatementAndDisplayString * statementAndString = (StatementAndDisplayString *) self.flattenedList[indexPath.row];
+        StatementHasStatementListVisitor * visitor = [[StatementHasStatementListVisitor alloc] init];
+        show = ![visitor hasStatementList:statementAndString.statement];
+        string = statementAndString.displayString;
     }
-     
-    //NSLog(@"%@",[UIFont fontWithName:@"Chalkduster" size:36.0]);
-    [self setButtonsOnCell:cell to:false];
-    ((UIButton *) [cell.contentView viewWithTag:1]).hidden = ![self.statementHasStatementListVisitor hasStatementList:statementAndString.statement];
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    [[cell textLabel] setText:string];
+    [self.settings setSettingsForCellWithNoSelectionColorAndIndentLines:cell indentString:self.indentString];
+//    NSArray * families = [UIFont familyNames];
+//    NSString * family;
+//    for (family in families) {
+//        NSString * font;
+//        //NSLog(@"%@",family);
+//        for (font in families) {
+//            //NSLog(@"%@",font);
+//        }
+//    }
+    [self setButtonsOnCell:cell to:([tableView indexPathForSelectedRow] && ([tableView indexPathForSelectedRow].row == indexPath.row))];
+    if (show)
+        [((UIButton *) [cell.contentView viewWithTag:1]) removeFromSuperview];
     return cell;
 }
 
 - (void) setButtonsOnCell:(UITableViewCell *)cell to:(bool)enabled {
-    //id <Statement> statement = ((StatementAndDisplayString *) self.flattenedList[[[(UITableView *)[[cell superview] superview] indexPathForCell:cell] row]]).statement;
-    //bool hasChildren = [self.statementHasStatementListVisitor hasStatementList:statement];
     for (int i = 1; i < 7; i++) {
-        [((UIButton *) [cell.contentView viewWithTag:i]) setEnabled:enabled];//(hasChildren ? enabled : false)];
+        UIButton * button = ((UIButton *) [cell.contentView viewWithTag:i]);
+        [button setEnabled:enabled];
+        [button setAlpha:1.0];
+//        if (button.superview == cell)
+//            NSLog(@"%@",@"is");
+//        else
+//            NSLog(@"%@",@"is not");
+        [button.superview bringSubviewToFront:button];
+        [button setHidden:!enabled];
+        //[cell insertSubview:button aboveSubview:cell.contentView];
     }
-    //int i = [[(UITableView *)[[cell superview] superview] indexPathForCell:cell] row];
-    //((UIButton *) [cell.contentView viewWithTag:1]).hidden = !hasChildren;
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -409,12 +320,18 @@
         statementViewController.element = statement;
         statementViewController.type = 1;
         statementViewController.delegate = self;
+        statementViewController.settings = self.settings;
+        self.inserting = false;
     } else if ([[segue identifier] isEqualToString:@"ProgramToComponent"]) {
-        
+        ComponentViewController * componentViewController = [segue destinationViewController];
+        componentViewController.type = 1;
+        componentViewController.delegate = self;
+        componentViewController.settings = self.settings;
+        self.inserting = true;
     } else if ([[segue identifier] isEqualToString:@"ProgramToOutput"]) {
-        [self.program executeWithListener:self];
         OutputViewController * outputViewController = [segue destinationViewController];
-        outputViewController.outputText = self.output;
+        outputViewController.program = self.program;
+        outputViewController.settings = self.settings;
     }
 }
 

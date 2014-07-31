@@ -79,11 +79,11 @@
     [self assertParentFor:boolAssignment withStatementList:nil AndDisplayString:@"a"];
 }
 
-- (void) visitIntArrayElementAssigment:(IntArrayElementAssignment *)intArrayElementAssignment {
+- (void) visitIntArrayElementAssignment:(IntArrayElementAssignment *)intArrayElementAssignment {
     [self assertParentFor:intArrayElementAssignment withStatementList:nil AndDisplayString:@"E"];
 }
 
-- (void) visitBoolArrayElementAssigment:(BoolArrayElementAssignment *)boolArrayElementAssignment {
+- (void) visitBoolArrayElementAssignment:(BoolArrayElementAssignment *)boolArrayElementAssignment {
     [self assertParentFor:boolArrayElementAssignment withStatementList:nil AndDisplayString:@"e"];
 }
 

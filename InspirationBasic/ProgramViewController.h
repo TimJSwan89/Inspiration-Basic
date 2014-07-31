@@ -10,25 +10,25 @@
 #import "Program.h"
 #import "ComponentViewController.h" // For ElementAccepter
 #import "ElementViewController.h"
+#import "ViewSettings.h"
 
 #import "StatementHasStatementListVisitor.h"
 #import "OutputListener.h" // remove later
 
-@interface ProgramViewController : UITableViewController <OutputListener, ElementAccepter, Reloadable>
+@interface ProgramViewController : UITableViewController <ElementAccepter, Reloadable, SpecificScopeFinder>
 
 @property Program * program;
 
-@property NSString * output; // Temporary
-
-@property StatementHasStatementListVisitor * statementHasStatementListVisitor; // Made into a property for efficiency
-
 @property (nonatomic) NSMutableArray * flattenedList;
-
-- (void) initStatements;
+@property ViewSettings * settings;
+@property (nonatomic) bool inserting;
+@property (nonatomic) NSString * indentString;
 
 - (void) reload;
 
 - (void) acceptElement:(id)element;
+
+- (NSMutableArray *) getScope:(int)type;
 
 - (IBAction)deleteAll:(UIButton *)sender;
 
@@ -37,5 +37,7 @@
 - (IBAction)moveUp:(UIButton *)sender;
 
 - (IBAction)moveDown:(UIButton *)sender;
+
+- (IBAction)insertAfter:(UIButton *)sender;
 
 @end

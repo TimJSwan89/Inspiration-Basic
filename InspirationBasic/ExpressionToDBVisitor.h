@@ -1,24 +1,55 @@
-//
-//  displayStringVisitor.h
-//  InspirationBasic
-//
-//  Created by Timothy Swan on 5/31/14.
-//  Copyright (c) 2014 ___InspirationTeam___. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 #import "ExpressionVisitor.h"
+#import "ElementDB.h"
+#import "IntExpression.h"
+#import "BoolExpression.h"
 
-@interface ExpressionDebugStringVisitor : NSObject<ExpressionVisitor>
+@class IntValue;
+@class BoolValue;
+@class IntVariable;
+@class BoolVariable;
+@class IntArrayElement;
+@class BoolArrayElement;
+@class IntNegation;
+@class IntSum;
+@class IntDifference;
+@class IntProduct;
+@class IntQuotient;
+@class IntRemainder;
+@class BoolNegation;
+@class BoolBoolEquals;
+@class BoolBoolDoesNotEqual;
+@class BoolOr;
+@class BoolNor;
+@class BoolAnd;
+@class BoolNand;
+@class BoolImplies;
+@class BoolNonImplies;
+@class BoolReverseImplies;
+@class BoolReverseNonImplies;
+@class BoolIntEquals;
+@class BoolIntDoesNotEqual;
+@class BoolLessThan;
+@class BoolLessThanOrEquals;
+@class BoolGreaterThan;
+@class BoolGreaterThanOrEquals;
 
-@property NSString * displayString;
+@interface ExpressionToDBVisitor : NSObject <ExpressionVisitor>
+
+@property NSManagedObjectContext * context;
+@property ElementDB * element;
 
 - (id) init;
+
+- (ElementDB *) addIntExpression:(id <IntExpression>)intExpression forContext:(NSManagedObjectContext *)context;
+- (ElementDB *) addBoolExpression:(id <BoolExpression>)boolExpression forContext:(NSManagedObjectContext *)context;
 
 - (void) visitIntValue:(IntValue *)intValue;
 - (void) visitBoolValue:(BoolValue *)boolValue;
 - (void) visitIntVariable:(IntVariable *)intVariable;
 - (void) visitBoolVariable:(BoolVariable *)boolVariable;
+- (void) visitIntArrayElement:(IntArrayElement *)intArrayElement;
+- (void) visitBoolArrayElement:(BoolArrayElement *)boolArrayElement;
 - (void) visitIntNegation:(IntNegation *)intNegation;
 - (void) visitIntSum:(IntSum *)intSum;
 - (void) visitIntDifference:(IntDifference *)intDifference;

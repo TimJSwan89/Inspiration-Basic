@@ -113,7 +113,7 @@
     [self.strings addObject:[self boolExpressionToString:boolAssignment.expression]];
 }
 
-- (void) visitIntArrayElementAssigment:(IntArrayElementAssignment *)intArrayElementAssignment {
+- (void) visitIntArrayElementAssignment:(IntArrayElementAssignment *)intArrayElementAssignment {
     [self.types addObject:[NSNumber numberWithInt:6]];
     [self.elements addObject:intArrayElementAssignment.variable];
     [self.strings addObject:intArrayElementAssignment.variable];
@@ -131,7 +131,7 @@
     [self.strings addObject:[self intExpressionToString:intArrayElementAssignment.expression]];
 }
 
-- (void) visitBoolArrayElementAssigment:(BoolArrayElementAssignment *)boolArrayElementAssignment {
+- (void) visitBoolArrayElementAssignment:(BoolArrayElementAssignment *)boolArrayElementAssignment {
     [self.types addObject:[NSNumber numberWithInt:7]];
     [self.elements addObject:boolArrayElementAssignment.variable];
     [self.strings addObject:boolArrayElementAssignment.variable];

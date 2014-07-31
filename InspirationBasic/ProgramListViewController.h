@@ -7,7 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VariableViewController.h"
+#import "ViewSettings.h"
 
-@interface ProgramListViewController : UITableViewController
+@interface ProgramListViewController : UITableViewController<ScopeFinder, VarAccepter, UITableViewDelegate, UITableViewDataSource>
+
+@property NSMutableArray * programs;
+@property bool editingState;
+@property ViewSettings * settings;
+- (IBAction)ToggleEdit:(UIBarButtonItem *)sender;
+- (IBAction)savePrograms:(UIBarButtonItem *)sender;
 
 @end

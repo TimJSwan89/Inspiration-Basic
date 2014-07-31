@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "StatementVisitor.h"
 #import "Statement.h"
-#import "StatementAndDisplayString.h"
 
 @class IntAssignment;
 @class BoolAssignment;
@@ -20,19 +19,21 @@
 @class StatementList;
 @class WhileEndWhile;
 
-@interface StatementDebugStringVisitor : NSObject <StatementVisitor>
+@interface StatementFindOrReplaceVariables : NSObject <StatementVisitor>
 
-@property NSString * displayString;
-@property id <Statement> assertingParent;
-
+@property NSMutableArray * variables;
+@property int type;
+@property NSString * replacementVariable;
+- (NSMutableArray *) findVariables:(id <Statement>)statement withType:(int)type;
+- (void) replaceVariable:(id <Statement>)statement withVariable:(NSString *)variable;
 - (id) init;
 
 - (void) visitPrintInt:(PrintInt *)printInt;
 - (void) visitPrintBool:(PrintInt *)printBool;
 - (void) visitIntAssigment:(IntAssignment *)intAssignment;
 - (void) visitBoolAssigment:(BoolAssignment *)boolAssignment;
-- (void) visitIntArrayElementAssigment:(IntArrayElementAssignment *)intArrayElementAssignment;
-- (void) visitBoolArrayElementAssigment:(BoolArrayElementAssignment *)boolArrayElementAssignment;
+- (void) visitIntArrayElementAssignment:(IntArrayElementAssignment *)intArrayElementAssignment;
+- (void) visitBoolArrayElementAssignment:(BoolArrayElementAssignment *)boolArrayElementAssignment;
 - (void) visitIfThenElseEndIf:(IfThenElseEndIf *)ifThenElseEndIf;
 - (void) visitIfThenEndIf:(IfThenEndIf *)ifThenEndIf;
 - (void) visitStatementList:(StatementList *)statementList;

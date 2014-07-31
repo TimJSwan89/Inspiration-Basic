@@ -27,10 +27,11 @@
 
 @implementation StatementFlatteningVisitor
 
-- (id) init {
+- (id) initWithIndentationString:(NSString *)indentation {
     if (self = [super init]) {
         self.flattenedList = [[NSMutableArray alloc] init];
         self.indentation = -1;
+        self.indentString = indentation;
     }
     return self;
 }
@@ -38,7 +39,7 @@
 - (NSString *) getIndentation {
     NSString * string = @"";
     for (int i = 0; i < self.indentation; i++)
-        string = [string stringByAppendingString:@"   "];
+        string = [string stringByAppendingString:self.indentString];
     return string;
 }
 
@@ -91,7 +92,7 @@
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:boolAssignment andDisplayString:string]];
 }
 
-- (void) visitIntArrayElementAssigment:(IntArrayElementAssignment *)intArrayElementAssignment {
+- (void) visitIntArrayElementAssignment:(IntArrayElementAssignment *)intArrayElementAssignment {
     NSString * string = [self getIndentation];
     string = [string stringByAppendingString:intArrayElementAssignment.variable];
     string = [string stringByAppendingString:@"["];
@@ -102,7 +103,7 @@
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:intArrayElementAssignment andDisplayString:string]];
 }
 
-- (void) visitBoolArrayElementAssigment:(BoolArrayElementAssignment *)boolArrayElementAssignment {
+- (void) visitBoolArrayElementAssignment:(BoolArrayElementAssignment *)boolArrayElementAssignment {
     NSString * string = [self getIndentation];
     string = [string stringByAppendingString:boolArrayElementAssignment.variable];
     string = [string stringByAppendingString:@"["];
@@ -130,7 +131,8 @@
 }
 
 - (void) visitIfThenEndIf:(IfThenEndIf *)ifThenEndIf {
-    NSString * string = @"if ";
+    NSString * string = [self getIndentation];
+    string = [string stringByAppendingString:@"if "];
     string = [string stringByAppendingString:[self boolExpressionToString:ifThenEndIf.expression]];
     string = [string stringByAppendingString:@" then"];
     [self.flattenedList addObject:[[StatementAndDisplayString alloc] initWithStatement:ifThenEndIf andDisplayString:string]];
@@ -140,8 +142,10 @@
 
 - (void) visitStatementList:(StatementList *)statementList {
     self.indentation++;
-    for (int i = 0; i < statementList.statementList.count; i++)
+    for (int i = 0; i < statementList.statementList.count; i++) {
         [statementList.statementList[i] accept:self];
+        NSLog(@"%@%d", @"Flattener statement: ", i);
+    }
     self.indentation--;
 }
 

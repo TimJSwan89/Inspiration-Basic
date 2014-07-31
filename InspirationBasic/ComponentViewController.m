@@ -60,13 +60,25 @@
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
 
 - (void) acceptInt:(int)integer {
     [self.delegate acceptElement:[[IntValue alloc] initWithValue:integer]];
+}
+
+- (void) acceptVar:(NSString *)variable {
+    if (self.type < 8 || self.type > 11)
+        [NSException raise:@"Invalid type value" format:@"value of %d is invalid", self.type];
+    if (self.type == 8 || self.type == 10)
+        [self.delegate acceptElement:[[IntVariable alloc] initWithVariable:variable]];
+    else
+        [self.delegate acceptElement:[[BoolVariable alloc] initWithVariable:variable]];
+}
+
+- (NSMutableArray *) getScope {
+    return [self.delegate getScope:(self.type == 8 || self.type == 10) ? 4 : 5];
 }
 
 NSMutableArray * listOfElements[3];
@@ -138,6 +150,10 @@ NSMutableArray * listOfElements[3];
 }
 
 - (NSString *)defaultVar {
+    return [ComponentViewController defaultVar];
+}
+
++ (NSString *)defaultVar {
     return @"x";
 }
 
@@ -276,6 +292,7 @@ NSMutableArray * listOfElements[3];
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.settings setSettingsForTableView:self.tableView];
     [self initMenus];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -355,7 +372,7 @@ NSMutableArray * listOfElements[3];
         [NSException raise:@"Invalid type value" format:@"value of '%@' or '%@' is invalid", identifier, title];
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     [[cell textLabel] setText:title];
-    [[cell textLabel] setFont:[UIFont fontWithName:@"Chalkduster" size:18.0]];
+    [self.settings setSettingsForCell:cell];
     return cell;
 }
 
@@ -433,10 +450,13 @@ NSMutableArray * listOfElements[3];
     if ([[segue identifier] isEqualToString:@"ComponentToComponent"]) {
         // To be removed
     } else if ([[segue identifier] isEqualToString:@"ComponentToVariable"]) {
-        
+        VariableViewController * variableViewController = [segue destinationViewController];
+        variableViewController.delegate = self;
+        variableViewController.settings = self.settings;
     } else if ([[segue identifier] isEqualToString:@"ComponentToHardcodeInt"]) {
         HardcodeIntViewController * hardcodeIntViewController = [segue destinationViewController];
         hardcodeIntViewController.delegate = self;
+        hardcodeIntViewController.settings = self.settings;
     }
 }
 

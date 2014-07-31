@@ -1,12 +1,7 @@
-//
-//  StatementVisitor.h
-//  InspirationBasic
-//
-//  Created by Timothy Swan on 5/31/14.
-//  Copyright (c) 2014 ___InspirationTeam___. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
+#import "StatementVisitor.h"
+#import "Program.h"
+#import "ElementDB.h"
 @class StatementList;
 @class PrintInt;
 @class PrintBool;
@@ -18,8 +13,13 @@
 @class IfThenEndIf;
 @class WhileEndWhile;
 
-@protocol StatementVisitor <NSObject>
+@interface StatementToDBVisitor : NSObject <StatementVisitor>
 
+@property ElementDB * element;
+@property NSManagedObjectContext * context;
+
+- (id) init;
+- (void) saveProgramToDB:(Program *)program context:(NSManagedObjectContext *)context;
 - (void) visitPrintInt:(PrintInt *)printInt;
 - (void) visitPrintBool:(PrintBool *)printBool;
 - (void) visitIntAssigment:(IntAssignment *)intAssignment;

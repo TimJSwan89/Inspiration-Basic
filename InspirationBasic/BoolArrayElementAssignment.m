@@ -30,7 +30,7 @@
 }
 
 - (void) accept:(id <StatementVisitor>)visitor {
-    [visitor visitBoolArrayElementAssigment:self];
+    [visitor visitBoolArrayElementAssignment:self];
 }
 
 @end

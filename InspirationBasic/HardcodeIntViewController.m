@@ -26,6 +26,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.settings setSettingsForView:self.view];
+    [self.settings setSettingsForTextField:self.inputField];
     [self initialize];
 }
 
@@ -45,6 +47,7 @@
     NSString * intString = [NSString stringWithFormat:@"%d", value];
     bool equal = [string isEqualToString:intString];
     self.currentValue = value;
+    [self.settings setFeedbackForTextField:self.inputField to:equal];
     [self.doneButton setEnabled:equal];
 }
 
@@ -64,6 +67,7 @@
 }
 
 - (IBAction)donePressed:(UIBarButtonItem *)sender {
+    [self.doneButton setEnabled:false];
     [self.delegate acceptInt:self.currentValue];
 }
 @end

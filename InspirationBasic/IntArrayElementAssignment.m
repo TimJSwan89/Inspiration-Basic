@@ -28,7 +28,7 @@
 }
 
 - (void) accept:(id <StatementVisitor>)visitor {
-    [visitor visitIntArrayElementAssigment:self];
+    [visitor visitIntArrayElementAssignment:self];
 }
 
 @end

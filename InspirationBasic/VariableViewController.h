@@ -7,11 +7,26 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewSettings.h"
+
+@protocol ScopeFinder
+- (NSMutableArray *) getScope;
+@end
+
+@protocol VarAccepter
+- (void) acceptVar:(NSString *)variable;
+@end
 
 @interface VariableViewController : UITableViewController
 
-@property (nonatomic) id element;
-@property (nonatomic) int type;
-@property (nonatomic) id delegate;
+@property (nonatomic) id<ScopeFinder, VarAccepter> delegate;
+@property ViewSettings * settings;
+@property (nonatomic) UITextField * textField;
+@property (nonatomic) UIButton * button;
+
+@property (nonatomic) NSMutableArray * variables;
+
+- (IBAction)edited:(UITextField *)sender;
+- (IBAction)pressedUse:(UIButton *)sender;
 
 @end

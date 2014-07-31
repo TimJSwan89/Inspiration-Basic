@@ -7,19 +7,29 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Statement.h"
 #import "HardcodeIntViewController.h"
+#import "VariableViewController.h"
+#import "ViewSettings.h"
+
+@protocol SpecificScopeFinder
+- (NSMutableArray *) getScope:(int)type;
+@end
 
 @protocol ElementAccepter
 - (void) acceptElement:(id) element;
 @end
 
-@interface ComponentViewController : UITableViewController<IntAccepter>
+@interface ComponentViewController : UITableViewController<IntAccepter, VarAccepter, ScopeFinder>
 
-@property (nonatomic) id element;
+//@property (nonatomic) id element;
 @property (nonatomic) int type;
-@property (nonatomic) id <ElementAccepter> delegate;
+@property (nonatomic) id <ElementAccepter, SpecificScopeFinder> delegate;
+@property ViewSettings * settings;
 
 - (void) acceptInt:(int)integer;
+- (void) acceptVar:(NSString *)variable;
+- (NSMutableArray *) getScope;
+
++ (NSString *)defaultVar;
 
 @end

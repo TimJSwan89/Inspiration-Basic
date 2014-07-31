@@ -73,7 +73,7 @@
         [NSException raise:[self oldChildDoesNotExistException] format:@"OldChild"];
     }
 }
-- (void) visitIntArrayElementAssigment:(IntArrayElementAssignment *)intArrayElementAssignment {
+- (void) visitIntArrayElementAssignment:(IntArrayElementAssignment *)intArrayElementAssignment {
     if (intArrayElementAssignment.indexExpression == self.theOldChild) {
         intArrayElementAssignment.indexExpression = self.theNewChild;
     } else if (intArrayElementAssignment.expression == self.theOldChild) {
@@ -82,7 +82,7 @@
         [NSException raise:[self oldChildDoesNotExistException] format:@"OldChild"];
     }
 }
-- (void) visitBoolArrayElementAssigment:(BoolArrayElementAssignment *)boolArrayElementAssignment {
+- (void) visitBoolArrayElementAssignment:(BoolArrayElementAssignment *)boolArrayElementAssignment {
     if (boolArrayElementAssignment.indexExpression == self.theOldChild) {
         boolArrayElementAssignment.indexExpression = self.theNewChild;
     } else if (boolArrayElementAssignment.expression == self.theOldChild) {

@@ -13,6 +13,7 @@
 #import "ExpressionReplaceChildVisitor.h"
 #import "StatementReplaceChildVisitor.h"
 #import "ExpressionIsLeafVisitor.h"
+#import "StatementFindOrReplaceVariables.h"
 
 @interface ElementViewController ()
 
@@ -40,8 +41,10 @@
         ExpressionBreakdownVisitor * visitor = [[ExpressionBreakdownVisitor alloc] init];
         if (self.type == 2)
             [visitor generateBreakdownInt:self.element];
-        else
+        else if (self.type == 3)
             [visitor generateBreakdownBool:self.element];
+        else
+            [NSException raise:@"Invalid type value" format:@"value of %d is invalid", self.type];
         self.types = visitor.types;
         self.elements = visitor.elements;
         self.strings = visitor.strings;
@@ -81,6 +84,30 @@
      */
 }
 
+- (NSMutableArray *) getScope {
+    NSIndexPath * path = [self.tableView indexPathForSelectedRow];
+    int index = path.row;
+    int wasType = [self.types[index] intValue];
+    if (wasType < 4 || wasType > 7)
+        [NSException raise:@"Invalid type value" format:@"value of %d is invalid", wasType];
+    return [self.delegate getScope:wasType];
+}
+
+- (NSMutableArray *) getScope:(int)type {
+    return [self.delegate getScope:type];
+}
+
+- (void) acceptVar:(NSString *)variable {
+    if (self.type != 1)
+        [NSException raise:@"Invalid type value" format:@"value of %d is invalid", self.type];
+    NSIndexPath * path = [self.tableView indexPathForSelectedRow];
+    StatementFindOrReplaceVariables * visitor = [[StatementFindOrReplaceVariables alloc] init];
+    [visitor replaceVariable:(id <Statement>) self.element withVariable:variable];
+    [self reload];
+    [self.tableView selectRowAtIndexPath:path animated:false scrollPosition:UITableViewScrollPositionNone];
+    [self.navigationController popToViewController:self animated:true];
+}
+
 - (void) acceptElement:(id) element {
     NSIndexPath * path = [self.tableView indexPathForSelectedRow];
     int index = path.row;
@@ -108,10 +135,8 @@
         }
         [self reload];
         [self.tableView selectRowAtIndexPath:path animated:false scrollPosition:UITableViewScrollPositionNone];
-        if (shouldPop) {
-            [self.navigationController popToViewController:self animated:true];
-        } else {
-            [self.navigationController popToViewController:self animated:false];
+        [self.navigationController popToViewController:self animated:shouldPop];
+        if (!shouldPop) {
             [self performSegueWithIdentifier:[self getElementToElementSegueIdentifier] sender:self];
         }
     } else {
@@ -122,6 +147,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.settings setSettingsForTableView:self.tableView];
     [self initCellModels];
     [self initTypesIndex];
     // Uncomment the following line to preserve selection between presentations.
@@ -160,6 +186,7 @@
 {
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:(NSString *)self.typesIndex[[((NSNumber *)self.types[indexPath.row]) intValue]] forIndexPath:indexPath];
     [[cell textLabel] setText:self.strings[indexPath.row]];
+    [self.settings setSettingsForCell:cell];
     return cell;
 }
 
@@ -214,19 +241,19 @@
         [NSException raise:@"Invalid type value" format:@"value of %d is invalid", nextType];
     if ([[segue identifier] isEqualToString:@"ElementToComponent"]) {
         ComponentViewController * componentViewController = [segue destinationViewController];
-        componentViewController.element = nextElement;
         componentViewController.type = nextType;
         componentViewController.delegate = self;
+        componentViewController.settings = self.settings;
     } else if ([[segue identifier] isEqualToString:[self getElementToElementSegueIdentifier]]) {
         ElementViewController * statementViewController = [segue destinationViewController];
         statementViewController.element = nextElement;
         statementViewController.type = nextType;
         statementViewController.delegate = self;
+        statementViewController.settings = self.settings;
     } else if ([[segue identifier] isEqualToString:@"ElementToVariable"]) {
         VariableViewController * variableViewController = [segue destinationViewController];
-        variableViewController.element = nextElement;
-        variableViewController.type = nextType;
         variableViewController.delegate = self;
+        variableViewController.settings = self.settings;
     }
 }
 

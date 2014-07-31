@@ -18,7 +18,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -26,14 +25,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.outputText = @"";
     [self.outputTextView setText:self.outputText];
-    // Do any additional setup after loading the view.
+    [self.settings setSettingsForTextView:self.outputTextView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self.program executeWithListener:self];
+}
+
+//- (void) runProgram {
+//    [self.program executeWithListener:self];
+//}
+
+- (void) postOutput:(NSString *)string {
+    self.outputText = [self.outputText stringByAppendingString:string];
+    [self.outputTextView setText:self.outputText];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 /*

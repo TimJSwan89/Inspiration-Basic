@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "Program.h"
 #import "ComponentViewController.h"
+#import "ViewSettings.h"
 
 @protocol Reloadable
 - (void) reload;
 @end
 
-@interface ElementViewController : UITableViewController<ElementAccepter, Reloadable>
+@interface ElementViewController : UITableViewController<ElementAccepter, Reloadable, ScopeFinder, SpecificScopeFinder, VarAccepter>
 
 @property (nonatomic) id element;
 @property (nonatomic) int type;
@@ -22,9 +23,13 @@
 @property NSMutableArray * types;
 @property NSMutableArray * elements;
 @property NSMutableArray * strings;
-@property (nonatomic) id <ElementAccepter, Reloadable> delegate;
+@property ViewSettings * settings;
+@property (nonatomic) id <ElementAccepter, Reloadable, SpecificScopeFinder> delegate;
 
 - (void) initCellModels;
+- (void) acceptElement:(id)element;
 - (void) reload;
+- (NSMutableArray *) getScope:(int)type;
+- (void) acceptVar:(NSString *)variable;
 
 @end

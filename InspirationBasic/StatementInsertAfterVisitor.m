@@ -83,8 +83,8 @@
 - (void) visitPrintBool:(PrintBool *)printBool { }
 - (void) visitIntAssigment:(IntAssignment *)intAssignment { }
 - (void) visitBoolAssigment:(BoolAssignment *)boolAssignment { }
-- (void) visitIntArrayElementAssigment:(IntArrayElementAssignment *)intArrayElementAssignment { }
-- (void) visitBoolArrayElementAssigment:(BoolArrayElementAssignment *)boolArrayElementAssignment { }
+- (void) visitIntArrayElementAssignment:(IntArrayElementAssignment *)intArrayElementAssignment { }
+- (void) visitBoolArrayElementAssignment:(BoolArrayElementAssignment *)boolArrayElementAssignment { }
 - (void) visitWhileEndWhile:(WhileEndWhile *)whileEndWhile {
     if (self.targetStatement == self.referenceStatement)
         [whileEndWhile.loopStatements accept:self];

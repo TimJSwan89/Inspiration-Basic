@@ -79,6 +79,8 @@
 		AE7B9938193D8699004C8C82 /* BoolNonImplies.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B9937193D8699004C8C82 /* BoolNonImplies.m */; };
 		AE7B993B193D86A8004C8C82 /* BoolReverseNonImplies.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B993A193D86A8004C8C82 /* BoolReverseNonImplies.m */; };
 		AEA5E57D1978879E0090A9F2 /* ExpressionBreakdownVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEA5E57C1978879E0090A9F2 /* ExpressionBreakdownVisitor.m */; };
+		AEA6DC051985D476004C2850 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEA6DC041985D476004C2850 /* CoreData.framework */; };
+		AEA6DC081985D8D6004C2850 /* SavedPrograms.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AEA6DC061985D8D6004C2850 /* SavedPrograms.xcdatamodeld */; };
 		AEA6FF8119777B71007F6457 /* BlueButton.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7219777B71007F6457 /* BlueButton.png */; };
 		AEA6FF8219777B71007F6457 /* BlueButtonOriginal.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7319777B71007F6457 /* BlueButtonOriginal.png */; };
 		AEA6FF8319777B71007F6457 /* BlueButtonPlus.png in Resources */ = {isa = PBXBuildFile; fileRef = AEA6FF7419777B71007F6457 /* BlueButtonPlus.png */; };
@@ -100,10 +102,15 @@
 		AEB41FD51976FB9E00227B68 /* StatementBreakdownVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41FD41976FB9E00227B68 /* StatementBreakdownVisitor.m */; };
 		AEB41FD81977395C00227B68 /* StatementDeleteVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41FD71977395C00227B68 /* StatementDeleteVisitor.m */; };
 		AEB41FDB1977397200227B68 /* StatementInsertAfterVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41FDA1977397200227B68 /* StatementInsertAfterVisitor.m */; };
+		AEBBDBA61988797D00452544 /* ElementDB.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBBDBA51988797D00452544 /* ElementDB.m */; };
+		AEBBDBA91988797E00452544 /* ProgramDB.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBBDBA81988797E00452544 /* ProgramDB.m */; };
+		AEBBDBAC19887A5900452544 /* StatementToDBVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBBDBAB19887A5900452544 /* StatementToDBVisitor.m */; };
+		AEBBDBAF19887A6B00452544 /* DBToStatementVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBBDBAE19887A6B00452544 /* DBToStatementVisitor.m */; };
+		AEBBDBB219887AD000452544 /* ExpressionToDBVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBBDBB119887AD000452544 /* ExpressionToDBVisitor.m */; };
 		AEBD7D3C1956C2CF00F0DCD1 /* StatementMoveVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD7D3B1956C2CF00F0DCD1 /* StatementMoveVisitor.m */; };
-		AEC1AA461980387800001E0C /* StatementDebugStringVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC1AA451980387800001E0C /* StatementDebugStringVisitor.m */; };
-		AEC1AA491980388B00001E0C /* ExpressionDebugStringVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC1AA481980388B00001E0C /* ExpressionDebugStringVisitor.m */; };
+		AEC1AA4C198080CD00001E0C /* StatementFindOrReplaceVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC1AA4B198080CD00001E0C /* StatementFindOrReplaceVariables.m */; };
 		AEFA0F311945744D006AEA4B /* ProgramException.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFA0F301945744D006AEA4B /* ProgramException.m */; };
+		AEFFE0B919899357002B1503 /* ViewSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFFE0B719899091002B1503 /* ViewSettings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -255,8 +262,11 @@
 		AE7B9937193D8699004C8C82 /* BoolNonImplies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolNonImplies.m; sourceTree = "<group>"; };
 		AE7B9939193D86A8004C8C82 /* BoolReverseNonImplies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BoolReverseNonImplies.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		AE7B993A193D86A8004C8C82 /* BoolReverseNonImplies.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BoolReverseNonImplies.m; sourceTree = "<group>"; };
+		AE965CFB1988820A00DF3083 /* ExpressionToDBVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionToDBVisitor.h; sourceTree = "<group>"; };
 		AEA5E57B1978879E0090A9F2 /* ExpressionBreakdownVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionBreakdownVisitor.h; sourceTree = "<group>"; };
 		AEA5E57C1978879E0090A9F2 /* ExpressionBreakdownVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionBreakdownVisitor.m; sourceTree = "<group>"; };
+		AEA6DC041985D476004C2850 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		AEA6DC071985D8D6004C2850 /* SavedPrograms.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SavedPrograms.xcdatamodel; sourceTree = "<group>"; };
 		AEA6FF7219777B71007F6457 /* BlueButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButton.png; sourceTree = "<group>"; };
 		AEA6FF7319777B71007F6457 /* BlueButtonOriginal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButtonOriginal.png; sourceTree = "<group>"; };
 		AEA6FF7419777B71007F6457 /* BlueButtonPlus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BlueButtonPlus.png; sourceTree = "<group>"; };
@@ -284,14 +294,23 @@
 		AEB41FD71977395C00227B68 /* StatementDeleteVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementDeleteVisitor.m; sourceTree = "<group>"; };
 		AEB41FD91977397200227B68 /* StatementInsertAfterVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementInsertAfterVisitor.h; sourceTree = "<group>"; };
 		AEB41FDA1977397200227B68 /* StatementInsertAfterVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementInsertAfterVisitor.m; sourceTree = "<group>"; };
+		AEBBDBA41988797D00452544 /* ElementDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementDB.h; sourceTree = "<group>"; };
+		AEBBDBA51988797D00452544 /* ElementDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementDB.m; sourceTree = "<group>"; };
+		AEBBDBA71988797E00452544 /* ProgramDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDB.h; sourceTree = "<group>"; };
+		AEBBDBA81988797E00452544 /* ProgramDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramDB.m; sourceTree = "<group>"; };
+		AEBBDBAA19887A5900452544 /* StatementToDBVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementToDBVisitor.h; sourceTree = "<group>"; };
+		AEBBDBAB19887A5900452544 /* StatementToDBVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementToDBVisitor.m; sourceTree = "<group>"; };
+		AEBBDBAD19887A6B00452544 /* DBToStatementVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBToStatementVisitor.h; sourceTree = "<group>"; };
+		AEBBDBAE19887A6B00452544 /* DBToStatementVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBToStatementVisitor.m; sourceTree = "<group>"; };
+		AEBBDBB119887AD000452544 /* ExpressionToDBVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionToDBVisitor.m; sourceTree = "<group>"; };
 		AEBD7D3A1956C2CF00F0DCD1 /* StatementMoveVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementMoveVisitor.h; sourceTree = "<group>"; };
 		AEBD7D3B1956C2CF00F0DCD1 /* StatementMoveVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementMoveVisitor.m; sourceTree = "<group>"; };
-		AEC1AA441980387800001E0C /* StatementDebugStringVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementDebugStringVisitor.h; sourceTree = "<group>"; };
-		AEC1AA451980387800001E0C /* StatementDebugStringVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementDebugStringVisitor.m; sourceTree = "<group>"; };
-		AEC1AA471980388B00001E0C /* ExpressionDebugStringVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionDebugStringVisitor.h; sourceTree = "<group>"; };
-		AEC1AA481980388B00001E0C /* ExpressionDebugStringVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionDebugStringVisitor.m; sourceTree = "<group>"; };
+		AEC1AA4A198080CD00001E0C /* StatementFindOrReplaceVariables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementFindOrReplaceVariables.h; sourceTree = "<group>"; };
+		AEC1AA4B198080CD00001E0C /* StatementFindOrReplaceVariables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementFindOrReplaceVariables.m; sourceTree = "<group>"; };
 		AEFA0F2F1945744D006AEA4B /* ProgramException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramException.h; sourceTree = "<group>"; };
 		AEFA0F301945744D006AEA4B /* ProgramException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramException.m; sourceTree = "<group>"; };
+		AEFFE0B619899091002B1503 /* ViewSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewSettings.h; sourceTree = "<group>"; };
+		AEFFE0B719899091002B1503 /* ViewSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewSettings.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,6 +318,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEA6DC051985D476004C2850 /* CoreData.framework in Frameworks */,
 				AE1B881E1935B16B002962FA /* CoreGraphics.framework in Frameworks */,
 				AE1B88201935B16B002962FA /* UIKit.framework in Frameworks */,
 				AE1B881C1935B16B002962FA /* Foundation.framework in Frameworks */,
@@ -340,6 +360,7 @@
 		AE1B881A1935B16B002962FA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AEA6DC041985D476004C2850 /* CoreData.framework */,
 				AE1B881B1935B16B002962FA /* Foundation.framework */,
 				AE1B881D1935B16B002962FA /* CoreGraphics.framework */,
 				AE1B881F1935B16B002962FA /* UIKit.framework */,
@@ -497,6 +518,11 @@
 				AE7B98F5193D5E36004C8C82 /* BoolGreaterThan.m */,
 				AE7B98F7193D5E48004C8C82 /* BoolGreaterThanOrEquals.h */,
 				AE7B98F8193D5E48004C8C82 /* BoolGreaterThanOrEquals.m */,
+				AEA6DC061985D8D6004C2850 /* SavedPrograms.xcdatamodeld */,
+				AEBBDBA71988797E00452544 /* ProgramDB.h */,
+				AEBBDBA81988797E00452544 /* ProgramDB.m */,
+				AEBBDBA41988797D00452544 /* ElementDB.h */,
+				AEBBDBA51988797D00452544 /* ElementDB.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -528,10 +554,14 @@
 				AE36FBA5197F0A3300AA7457 /* StatementReplaceChildVisitor.m */,
 				AE36FBA7197F3C7600AA7457 /* ExpressionIsLeafVisitor.h */,
 				AE36FBA8197F3C7600AA7457 /* ExpressionIsLeafVisitor.m */,
-				AEC1AA441980387800001E0C /* StatementDebugStringVisitor.h */,
-				AEC1AA451980387800001E0C /* StatementDebugStringVisitor.m */,
-				AEC1AA471980388B00001E0C /* ExpressionDebugStringVisitor.h */,
-				AEC1AA481980388B00001E0C /* ExpressionDebugStringVisitor.m */,
+				AEC1AA4A198080CD00001E0C /* StatementFindOrReplaceVariables.h */,
+				AEC1AA4B198080CD00001E0C /* StatementFindOrReplaceVariables.m */,
+				AEBBDBAA19887A5900452544 /* StatementToDBVisitor.h */,
+				AEBBDBAB19887A5900452544 /* StatementToDBVisitor.m */,
+				AE965CFB1988820A00DF3083 /* ExpressionToDBVisitor.h */,
+				AEBBDBB119887AD000452544 /* ExpressionToDBVisitor.m */,
+				AEBBDBAD19887A6B00452544 /* DBToStatementVisitor.h */,
+				AEBBDBAE19887A6B00452544 /* DBToStatementVisitor.m */,
 			);
 			name = Visitors;
 			sourceTree = "<group>";
@@ -553,6 +583,8 @@
 				AE73E25A197C4072001F1507 /* HardcodeIntViewController.m */,
 				AE604321194E96C10050CAC5 /* OutputViewController.h */,
 				AE604322194E96C10050CAC5 /* OutputViewController.m */,
+				AEFFE0B619899091002B1503 /* ViewSettings.h */,
+				AEFFE0B719899091002B1503 /* ViewSettings.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -692,14 +724,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEFFE0B919899357002B1503 /* ViewSettings.m in Sources */,
 				AE7B9920193D7839004C8C82 /* BoolOr.m in Sources */,
 				AE39C1E11947E1B3004F47BF /* BoolVariable.m in Sources */,
 				AE37016B1936F77000426393 /* BoolAssignment.m in Sources */,
+				AEBBDBB219887AD000452544 /* ExpressionToDBVisitor.m in Sources */,
 				AE7B9917193D5FA5004C8C82 /* IntQuotient.m in Sources */,
 				AE1B88591935B2D0002962FA /* EnvironmentModel.m in Sources */,
 				AE7B98E4193C284A004C8C82 /* Program.m in Sources */,
 				AE0E13D119529B3400E17E7D /* ComponentViewController.m in Sources */,
-				AEC1AA461980387800001E0C /* StatementDebugStringVisitor.m in Sources */,
+				AEBBDBAC19887A5900452544 /* StatementToDBVisitor.m in Sources */,
 				AE7B98EA193C2CC1004C8C82 /* ProgramViewController.m in Sources */,
 				AE7B9905193D5EE4004C8C82 /* BoolIntDoesNotEqual.m in Sources */,
 				AE0E13DA19529CFD00E17E7D /* ProgramListViewController.m in Sources */,
@@ -707,12 +741,14 @@
 				AE208379193EBFB70035C965 /* StatementFlatteningVisitor.m in Sources */,
 				AEA5E57D1978879E0090A9F2 /* ExpressionBreakdownVisitor.m in Sources */,
 				AE7B98D6193A8C7D004C8C82 /* WhileEndWhile.m in Sources */,
-				AEC1AA491980388B00001E0C /* ExpressionDebugStringVisitor.m in Sources */,
 				AE604323194E96C10050CAC5 /* OutputViewController.m in Sources */,
+				AEBBDBAF19887A6B00452544 /* DBToStatementVisitor.m in Sources */,
 				AE7B990B193D5F03004C8C82 /* BoolBoolDoesNotEqual.m in Sources */,
 				AE7B98CF193A57F0004C8C82 /* IfThenElseEndIf.m in Sources */,
 				AE7B98C6193A0FAC004C8C82 /* IntSum.m in Sources */,
+				AEBBDBA61988797D00452544 /* ElementDB.m in Sources */,
 				AE73E25E197C4092001F1507 /* VariableViewController.m in Sources */,
+				AEC1AA4C198080CD00001E0C /* StatementFindOrReplaceVariables.m in Sources */,
 				AE7B98D3193A6F8D004C8C82 /* StatementList.m in Sources */,
 				AE7B9923193D7853004C8C82 /* BoolNor.m in Sources */,
 				AE7B9935193D78C5004C8C82 /* BoolReverseImplies.m in Sources */,
@@ -757,6 +793,8 @@
 				AE36FBA3197EFFE700AA7457 /* ExpressionReplaceChildVisitor.m in Sources */,
 				AE7B98F0193D5BCD004C8C82 /* IfThenEndIf.m in Sources */,
 				AE604320194E615E0050CAC5 /* StatementAndDisplayString.m in Sources */,
+				AEA6DC081985D8D6004C2850 /* SavedPrograms.xcdatamodeld in Sources */,
+				AEBBDBA91988797E00452544 /* ProgramDB.m in Sources */,
 				AE20837F193EF1120035C965 /* BoolArrayElementAssignment.m in Sources */,
 				AE7B98DB193A91C1004C8C82 /* ExpressionDisplayStringVisitor.m in Sources */,
 				AE7B98F3193D5E27004C8C82 /* BoolLessThanOrEquals.m in Sources */,
@@ -990,6 +1028,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		AEA6DC061985D8D6004C2850 /* SavedPrograms.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				AEA6DC071985D8D6004C2850 /* SavedPrograms.xcdatamodel */,
+			);
+			currentVersion = AEA6DC071985D8D6004C2850 /* SavedPrograms.xcdatamodel */;
+			path = SavedPrograms.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AE1B88101935B16B002962FA /* Project object */;
 }

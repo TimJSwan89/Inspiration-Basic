@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewSettings.h"
 
 @protocol IntAccepter
 - (void) acceptInt:(int)integer;
@@ -16,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (strong, nonatomic) IBOutlet UITextField *inputField;
 @property (nonatomic) id<IntAccepter> delegate;
+@property ViewSettings * settings;
 @property (nonatomic) int currentValue;
 - (IBAction)fieldWasEdited:(UITextField *)sender;
 - (IBAction)donePressed:(UIBarButtonItem *)sender;

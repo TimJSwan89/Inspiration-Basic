@@ -24,16 +24,17 @@
 
 @property (nonatomic) NSMutableArray * flattenedList;
 @property (nonatomic) int indentation;
+@property (nonatomic) NSString * indentString;
 
-- (id) init;
+- (id) initWithIndentationString:(NSString *)indentation;
 - (NSMutableArray *) getFlattenedList:(id <Statement>)statement;
 
 - (void) visitPrintInt:(PrintInt *)printInt;
 - (void) visitPrintBool:(PrintInt *)printBool;
 - (void) visitIntAssigment:(IntAssignment *)intAssignment;
 - (void) visitBoolAssigment:(BoolAssignment *)boolAssignment;
-- (void) visitIntArrayElementAssigment:(IntArrayElementAssignment *)intArrayElementAssignment;
-- (void) visitBoolArrayElementAssigment:(BoolArrayElementAssignment *)boolArrayElementAssignment;
+- (void) visitIntArrayElementAssignment:(IntArrayElementAssignment *)intArrayElementAssignment;
+- (void) visitBoolArrayElementAssignment:(BoolArrayElementAssignment *)boolArrayElementAssignment;
 - (void) visitIfThenElseEndIf:(IfThenElseEndIf *)ifThenElseEndIf;
 - (void) visitIfThenEndIf:(IfThenEndIf *)ifThenEndIf;
 - (void) visitStatementList:(StatementList *)statementList;
