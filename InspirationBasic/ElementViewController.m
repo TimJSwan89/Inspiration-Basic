@@ -44,7 +44,7 @@
         else if (self.type == 3)
             [visitor generateBreakdownBool:self.element];
         else
-            [NSException raise:@"Invalid type value" format:@"value of %d is invalid", self.type];
+            [NSException raise:@"Invalid type value" format:@"value of %ld is invalid", self.type];
         self.types = visitor.types;
         self.elements = visitor.elements;
         self.strings = visitor.strings;
@@ -86,7 +86,7 @@
 
 - (NSMutableArray *) getScope {
     NSIndexPath * path = [self.tableView indexPathForSelectedRow];
-    int index = path.row;
+    long index = path.row;
     int wasType = [self.types[index] intValue];
     if (wasType < 4 || wasType > 7)
         [NSException raise:@"Invalid type value" format:@"value of %d is invalid", wasType];
@@ -99,7 +99,7 @@
 
 - (void) acceptVar:(NSString *)variable {
     if (self.type != 1)
-        [NSException raise:@"Invalid type value" format:@"value of %d is invalid", self.type];
+        [NSException raise:@"Invalid type value" format:@"value of %ld is invalid", self.type];
     NSIndexPath * path = [self.tableView indexPathForSelectedRow];
     StatementFindOrReplaceVariables * visitor = [[StatementFindOrReplaceVariables alloc] init];
     [visitor replaceVariable:(id <Statement>) self.element withVariable:variable];
@@ -110,7 +110,7 @@
 
 - (void) acceptElement:(id) element {
     NSIndexPath * path = [self.tableView indexPathForSelectedRow];
-    int index = path.row;
+    long index = path.row;
     int wasType = [self.types[index] intValue];
     if (wasType == 2 || wasType == 3 || wasType == 10 || wasType == 11) { // Was a literal or expression
         ExpressionIsLeafVisitor * leafVisitor = [[ExpressionIsLeafVisitor alloc] init];
@@ -131,7 +131,7 @@
                 [visitor replaceChild:self.elements[index] OfBoolExpression:self.element With:element];
             }
         } else {
-            [NSException raise:@"Invalid type value" format:@"value of %d is invalid", self.type];
+            [NSException raise:@"Invalid type value" format:@"value of %ld is invalid", self.type];
         }
         [self reload];
         [self.tableView selectRowAtIndexPath:path animated:false scrollPosition:UITableViewScrollPositionNone];
@@ -234,11 +234,11 @@
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    int index = [self.tableView indexPathForSelectedRow].row;
+    long index = [self.tableView indexPathForSelectedRow].row;
     id nextElement = self.elements[index];
-    int nextType = [self.types[index] integerValue];
+    long nextType = [self.types[index] integerValue];
     if (nextType < 1 || nextType > 11)
-        [NSException raise:@"Invalid type value" format:@"value of %d is invalid", nextType];
+        [NSException raise:@"Invalid type value" format:@"value of %ld is invalid", nextType];
     if ([[segue identifier] isEqualToString:@"ElementToComponent"]) {
         ComponentViewController * componentViewController = [segue destinationViewController];
         componentViewController.type = nextType;

@@ -14,8 +14,6 @@
 #import "StatementDebugStringVisitor.h"
 #import "StatementFindOrReplaceVariables.h"
 
-#import "OutputViewController.h"
-
 #import <AudioToolbox/AudioToolbox.h>
 
 @interface ProgramViewController ()
@@ -43,7 +41,7 @@
 }
 
 - (void) acceptElement:(id)element {
-    int row = [self.tableView indexPathForSelectedRow].row;
+    long row = [self.tableView indexPathForSelectedRow].row;
     if (row == self.flattenedList.count) {
         [self.program.statementList addObject:element];
         ((id <Statement>) element).parent = self.program;
@@ -64,6 +62,10 @@
     [self.tableView selectRowAtIndexPath:path animated:false scrollPosition:UITableViewScrollPositionMiddle];
     [self.navigationController popToViewController:self animated:false];
     [self performSegueWithIdentifier:@"ProgramToElement" sender:self];
+}
+
+- (void) finishedExecuting {
+    
 }
 
 - (int) getFlattenedIndexForStatement:(id <Statement>)statement {
@@ -332,6 +334,7 @@
     } else if ([[segue identifier] isEqualToString:@"ProgramToOutput"]) {
         OutputViewController * outputViewController = [segue destinationViewController];
         outputViewController.program = self.program;
+        outputViewController.delegate = self;
         outputViewController.settings = self.settings;
     }
 }

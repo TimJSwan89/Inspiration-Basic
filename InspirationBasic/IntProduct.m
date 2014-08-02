@@ -19,18 +19,18 @@
     return self;
 }
 
--(IntValue *) evaluateAgainst:(EnvironmentModel *)environment {
+-(int) evaluateAgainst:(EnvironmentModel *)environment {
     
     IntValue * firstValue = [self.expression1 evaluateAgainst:environment];
     if ([ProgramException checkException:firstValue withEnvironment:environment andIdentifier:@"IntProduct Expression 1"])
-        return nil;
+        return 0;
     
     IntValue * secondValue = [self.expression2 evaluateAgainst:environment];
     if ([ProgramException checkException:secondValue withEnvironment:environment andIdentifier:@"IntProduct Expression 2"])
-        return nil;
+        return 0;
     
     int newValue = firstValue.value * secondValue.value;
-    return [[IntValue alloc] initWithValue:newValue];
+    return newValue;
     
 }
 

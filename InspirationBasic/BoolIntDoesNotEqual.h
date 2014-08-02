@@ -17,7 +17,7 @@
 
 - (id) initWith: (id <IntExpression>) expression1 IntDoesNotEqual:(id <IntExpression>) expression2;
 
-- (BoolValue *) evaluateAgainst: (EnvironmentModel *) environment;
+- (bool) evaluateAgainst: (EnvironmentModel *) environment;
 
 - (void) accept:(id <ExpressionVisitor>) visitor;
 

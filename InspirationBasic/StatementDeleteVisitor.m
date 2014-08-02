@@ -44,8 +44,8 @@
 }
 - (void) copyStatementsFrom:(StatementList *)inner toParentListOf:(id <Statement>)statement {
     StatementList * list = (StatementList *) statement.parent;
-    int index = [list.statementList indexOfObject:statement];
-    for (int i = inner.statementList.count - 1; i >= 0; i--) {
+    long index = [list.statementList indexOfObject:statement];
+    for (long i = inner.statementList.count - 1; i >= 0; i--) {
         [list.statementList insertObject:inner.statementList[i] atIndex:index];
         ((id <Statement>) inner.statementList[i]).parent = list;
     }

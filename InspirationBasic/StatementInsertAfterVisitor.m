@@ -50,7 +50,7 @@
         self.targetStatement.parent = statementList;
         self.insertAtEnd = false;
     } else {
-        int index = [statementList.statementList indexOfObject:self.referenceStatement];
+        long index = [statementList.statementList indexOfObject:self.referenceStatement];
         if (self.referenceStatement == self.targetStatement) {
             [statementList.statementList removeObjectAtIndex:index];
             index += self.up ? -1 : 0;

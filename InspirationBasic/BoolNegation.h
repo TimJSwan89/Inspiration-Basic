@@ -15,7 +15,7 @@
 
 - (id) initWith: (id <BoolExpression>) expression;
 
-- (BoolValue *) evaluateAgainst: (EnvironmentModel *) environment;
+- (bool) evaluateAgainst: (EnvironmentModel *) environment;
 
 - (void) accept:(id <ExpressionVisitor>) visitor;
 

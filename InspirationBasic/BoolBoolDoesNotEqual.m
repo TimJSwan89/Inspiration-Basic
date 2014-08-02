@@ -19,18 +19,18 @@
     return self;
 }
 
--(BoolValue *) evaluateAgainst:(EnvironmentModel *)environment {
+-(bool) evaluateAgainst:(EnvironmentModel *)environment {
     
     BoolValue * firstValue = [self.expression1 evaluateAgainst:environment];
     if ([ProgramException checkException:firstValue withEnvironment:environment andIdentifier:@"BoolBoolDoesNotEqual Expression 1"])
-        return nil;
+        return false;
     
     BoolValue * secondValue = [self.expression2 evaluateAgainst:environment];
     if ([ProgramException checkException:secondValue withEnvironment:environment andIdentifier:@"BoolBoolDoesNotEqual Expression 2"])
-        return nil;
+        return false;
     
     BOOL newValue = firstValue.value != secondValue.value;
-    return [[BoolValue alloc] initWithValue:newValue];
+    return newValue;
     
 }
 

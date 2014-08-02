@@ -18,13 +18,13 @@
     return self;
 }
 
--(BoolValue *) evaluateAgainst:(EnvironmentModel *)environment {
+-(bool) evaluateAgainst:(EnvironmentModel *)environment {
     
     BoolValue * theValue = [self.expression evaluateAgainst:environment];
     if ([ProgramException checkException:theValue withEnvironment:environment andIdentifier:@"BoolNegation Expression"])
-        return nil;
+        return false;
 
-    return [[BoolValue alloc] initWithValue:!theValue.value];
+    return !theValue.value;
     
 }
 

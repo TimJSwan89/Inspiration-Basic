@@ -25,7 +25,7 @@
 -(void) executeAgainst:(EnvironmentModel *)environment {
     if (environment.exception)
         return;
-    if ([self.expression evaluateAgainst:environment].value)
+    if ([self.expression evaluateAgainst:environment])
         [self.thenStatements executeAgainst:environment];
     else
         [self.elseStatements executeAgainst:environment];

@@ -15,6 +15,7 @@
 - (id) initWithValue:(int) value {
     if (self = [super init]) {
         self.value = value;
+        NSLog(@"%@",@"Int Value");
     }
     return self;
 }

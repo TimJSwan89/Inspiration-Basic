@@ -18,13 +18,13 @@
     return self;
 }
 
--(IntValue *) evaluateAgainst:(EnvironmentModel *)environment {
+-(int) evaluateAgainst:(EnvironmentModel *)environment {
     
     IntValue * theValue = [self.expression evaluateAgainst:environment];
     if ([ProgramException checkException:theValue withEnvironment:environment andIdentifier:@"IntNegation Expression"])
-        return nil;
+        return 0;
     
-    return [[IntValue alloc] initWithValue:-theValue.value];
+    return -theValue.value;
     
 }
 

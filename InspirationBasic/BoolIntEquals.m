@@ -20,7 +20,7 @@
     return self;
 }
 
--(BoolValue *) evaluateAgainst:(EnvironmentModel *)environment {
+-(bool) evaluateAgainst:(EnvironmentModel *)environment {
     
     IntValue * firstValue = [self.expression1 evaluateAgainst:environment];
     if ([ProgramException checkException:firstValue withEnvironment:environment andIdentifier:@"BoolIntEquals Expression 1"])

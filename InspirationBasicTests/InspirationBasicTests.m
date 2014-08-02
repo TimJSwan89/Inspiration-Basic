@@ -105,13 +105,13 @@
 - (void)testEvaluateOfSumOfValues
 {
     IntSum * sum = [[IntSum alloc] initWith:[self getIntValueFor:4] plus:[self getIntValueFor:7]];
-    XCTAssertTrue([sum evaluateAgainst:self.environment].value == 11);
+    XCTAssertTrue([sum evaluateAgainst:self.environment] == 11);
 }
 
 - (void)testEvaluateBoolLessThanOfValues
 {
     BoolLessThan * lessThan = [[BoolLessThan alloc] initWith:[self getIntValueFor:12] LessThan:[self getIntValueFor:9]];
-    XCTAssertTrue([lessThan evaluateAgainst:self.environment].value == false);
+    XCTAssertTrue([lessThan evaluateAgainst:self.environment] == false);
 }
 
 - (void)testEvaluateIntVariableAfterExecutingAssignment
@@ -152,7 +152,7 @@
     [statementList executeAgainst:self.environment];
     
     BoolLessThan * lessThan = [[BoolLessThan alloc] initWith:[self getIntVariableFor:@"c"] LessThan:[self getIntVariableFor:@"d"]];
-    XCTAssertTrue([lessThan evaluateAgainst:self.environment].value);
+    XCTAssertTrue([lessThan evaluateAgainst:self.environment]);
 }
 
 -(void)testExecutingIfThenElseEndIf

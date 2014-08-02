@@ -22,7 +22,7 @@
 @interface ComponentViewController : UITableViewController<IntAccepter, VarAccepter, ScopeFinder>
 
 //@property (nonatomic) id element;
-@property (nonatomic) int type;
+@property (nonatomic) long type;
 @property (nonatomic) id <ElementAccepter, SpecificScopeFinder> delegate;
 @property ViewSettings * settings;
 

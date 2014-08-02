@@ -82,10 +82,10 @@
 }
 
 - (bool) checkSingleComponent:(id)expression {
-    int n = self.types.count;
+    long n = self.types.count;
     [expression accept:self];
     bool isSingleComponent = (self.types.count - n == 1);
-    for (int i = self.types.count - 1; self.types.count > n; i = self.types.count - 1) {
+    while (self.types.count > n) {
         [self.types removeLastObject];
         [self.elements removeLastObject];
         [self.strings removeLastObject];

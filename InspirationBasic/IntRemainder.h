@@ -16,7 +16,7 @@
 
 - (id) initWith: (id <IntExpression>) expression1 dividedBy:(id <IntExpression>) expression2;
 
-- (IntValue *) evaluateAgainst: (EnvironmentModel *) environment;
+- (int) evaluateAgainst: (EnvironmentModel *) environment;
 
 - (void) accept:(id <ExpressionVisitor>) visitor;
 

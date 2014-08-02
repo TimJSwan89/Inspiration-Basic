@@ -23,7 +23,7 @@
 -(void) executeAgainst:(EnvironmentModel *)environment {
     if (environment.exception)
         return;
-    while ([self.expression evaluateAgainst:environment].value) {
+    while ([self.expression evaluateAgainst:environment]) {
         if (environment.exception)
             return;
         [self.loopStatements executeAgainst:environment];

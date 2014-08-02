@@ -13,6 +13,7 @@
 - (id) initWithValue:(BOOL) value {
     if (self = [super init]) {
         self.value = value;
+        NSLog(@"%@",@"Bool Value");
     }
     return self;
 }

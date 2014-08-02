@@ -20,18 +20,18 @@
     return self;
 }
 
--(BoolValue *) evaluateAgainst:(EnvironmentModel *)environment {
+-(bool) evaluateAgainst:(EnvironmentModel *)environment {
     
     IntValue * firstValue = [self.expression1 evaluateAgainst:environment];
     if ([ProgramException checkException:firstValue withEnvironment:environment andIdentifier:@"BoolLessThanOrEquals Expression 1"])
-        return nil;
+        return false;
     
     IntValue * secondValue = [self.expression2 evaluateAgainst:environment];
     if ([ProgramException checkException:secondValue withEnvironment:environment andIdentifier:@"BoolLessThanOrEquals Expression 2"])
-        return nil;
+        return false;
     
     BOOL value = firstValue.value <= secondValue.value;
-    return [[BoolValue alloc] initWithValue:value];
+    return value;
     
 }
 

@@ -19,16 +19,16 @@
     return self;
 }
 
--(IntValue *) evaluateAgainst:(EnvironmentModel *)environment {
+-(int) evaluateAgainst:(EnvironmentModel *)environment {
     
     IntValue * numeratorValue = [self.expression1 evaluateAgainst:environment];
     if ([ProgramException checkException:numeratorValue withEnvironment:environment andIdentifier:@"IntRemainder Expression 1"])
-        return nil;
+        return 0;
     int numerator = numeratorValue.value;
     
     IntValue * denominatorValue = [self.expression2 evaluateAgainst:environment];
     if ([ProgramException checkException:denominatorValue withEnvironment:environment andIdentifier:@"IntRemainder Expression 2"])
-        return nil;
+        return 0;
     int denominator = denominatorValue.value;
     
     if (denominator == 0) {
@@ -36,11 +36,11 @@
         message = [message stringByAppendingString:[[NSNumber numberWithInt:numerator] stringValue]];
         message = [message stringByAppendingString:@" by an expression denominator with the value 0 does not exist."];
         environment.exception = [[ProgramException alloc] initWithMessage:message];
-        return nil;
+        return 0;
     }
     
     int newValue = numerator % denominator;
-    return [[IntValue alloc] initWithValue:newValue];
+    return newValue;
     
 }
 

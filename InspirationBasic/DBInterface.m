@@ -101,7 +101,7 @@
     return programs;
 }
 
-- (void) removeProgramInDBAtIndex:(int)index {
+- (void) removeProgramInDBAtIndex:(long)index {
     //The following is a necessary hack for the next commented line.
     NSMutableOrderedSet * tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.list.program];
     [tempSet removeObjectAtIndex:index];
@@ -111,10 +111,10 @@
     [self.context save:&error];
     if (error)
         NSLog(@"%@",[error localizedDescription]);
-    NSLog(@"Replaced program at index %d.", index);
+    NSLog(@"Replaced program at index %ld.", index);
 }
 
-- (void) moveProgramInDBFromIndex:(int)fromIndex toIndex:(int)toIndex {
+- (void) moveProgramInDBFromIndex:(long)fromIndex toIndex:(long)toIndex {
     //The following is a necessary hack for the next commented lines.
     NSMutableOrderedSet * tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.list.program];
     ProgramDB * programDB = tempSet[fromIndex];
@@ -128,10 +128,10 @@
     [self.context save:&error];
     if (error)
         NSLog(@"%@",[error localizedDescription]);
-    NSLog(@"Moved program from index %d to %d.", fromIndex, toIndex);
+    NSLog(@"Moved program from index %ld to %ld.", fromIndex, toIndex);
 }
 
-- (void) replaceProgramInDB:(Program *)program atIndex:(int)index {
+- (void) replaceProgramInDB:(Program *)program atIndex:(long)index {
     ProgramDB * programDB = [self.visitor generateProgramDB:program];
     //The following is a necessary hack for the next commented line.
     NSMutableOrderedSet * tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.list.program];
@@ -142,7 +142,7 @@
     [self.context save:&error];
     if (error)
         NSLog(@"%@",[error localizedDescription]);
-    NSLog(@"Replaced program at index %d.", index);
+    NSLog(@"Replaced program at index %ld.", index);
 }
 
 - (void) addProgramToDB:(Program *)program {

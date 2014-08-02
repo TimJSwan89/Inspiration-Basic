@@ -55,7 +55,7 @@
 }
 
 - (void) save {
-    int index = [self.tableView indexPathForSelectedRow].row;
+    long index = [self.tableView indexPathForSelectedRow].row;
     Program * program = (Program *) self.programs[index];
     [self.interface replaceProgramInDB:program atIndex:index];
 }
@@ -113,7 +113,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    int index = indexPath.row;
+    long index = indexPath.row;
     NSString * cellText;
     NSString * identifier;
     if (indexPath.section == 1) {

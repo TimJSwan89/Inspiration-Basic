@@ -70,7 +70,7 @@
 
 - (void) acceptVar:(NSString *)variable {
     if (self.type < 8 || self.type > 11)
-        [NSException raise:@"Invalid type value" format:@"value of %d is invalid", self.type];
+        [NSException raise:@"Invalid type value" format:@"value of %ld is invalid", self.type];
     if (self.type == 8 || self.type == 10)
         [self.delegate acceptElement:[[IntVariable alloc] initWithVariable:variable]];
     else
@@ -87,7 +87,7 @@ NSMutableArray * listOfElements[3];
     for (int i = 0; i < 3; i++)
         listOfElements[i] = [[NSMutableArray alloc] init];
     if ((self.type >= 2 && self.type <= 7) || self.type < 1 || self.type > 11)
-        [NSException raise:@"Invalid type value" format:@"value of %d is invalid", self.type];
+        [NSException raise:@"Invalid type value" format:@"value of %ld is invalid", self.type];
     if (self.type == 1) { // Statement
         [listOfElements[0] addObject:@"IntegerVar = ?"];
         [listOfElements[0] addObject:@"BooleanVar = ?"];
@@ -129,7 +129,7 @@ NSMutableArray * listOfElements[3];
         [listOfElements[2] addObject:@"? > ?"];
         [listOfElements[2] addObject:@"? ≥ ?"];
     } else {
-        [NSException raise:@"Invalid type value" format:@"value of %d is invalid", self.type];
+        [NSException raise:@"Invalid type value" format:@"value of %ld is invalid", self.type];
     }
 }
 
@@ -265,7 +265,7 @@ NSMutableArray * listOfElements[3];
             }
         }
     } else {
-        [NSException raise:@"Invalid type value" format:@"value of %d is invalid", self.type];
+        [NSException raise:@"Invalid type value" format:@"value of %ld is invalid", self.type];
     }
     if (element != nil)
         [self.delegate acceptElement:element];

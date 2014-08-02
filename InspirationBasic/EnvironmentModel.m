@@ -21,8 +21,10 @@
 }
 
 -(void)printLine: (NSString *)string {
+    NSLog(@"%@",@"Printing");
     if (self.listener != nil) // For unit testing
         [self.listener postOutput:[string stringByAppendingString:@"\n"]];
+    NSLog(@"%@",@"Done Printing");
 }
 
 -(NSString *)arraySyntaxFor: (NSString *)variable atIndex:(int)index {
@@ -34,7 +36,9 @@
 }
 
 -(void)setValue: (Value*)value For: (NSString *)variableName {
+    NSLog(@"%@",@"Setting Value");
     [self.dictionary setValue:value forKey:variableName];
+    NSLog(@"%@",@"Done Setting Value");
 }
 
 -(void)setValue: (Value*)value For: (NSString *)variableName atIndex: (int) index {
@@ -58,6 +62,7 @@
 }
 
 - (Value*)getValueFor: (NSString *)variableName {
+    NSLog(@"%@",@"Getting Value");
     Value * value = [self.dictionary objectForKey:variableName];
     if (value == nil) {
         NSString * message = @"Variable \"";
@@ -66,11 +71,12 @@
         self.exception = [[ProgramException alloc] initWithMessage:message];
         return nil;
     }
+    NSLog(@"%@",@"Done Getting Value");
     return value;
 }
 
-- (Value*)getValueFor: (NSString *)variableName atIndex:(int) index {
-    NSMutableArray * array = [self.arrayDictionary objectForKey:variableName];
+- (Value *)getIntFor: (NSString *)variableName atIndex:(int) index {
+    NSMutableArray * array = [self.intArrayDictionary objectForKey:variableName];
     if (array == nil) {
         NSString * message = @"Element ";
         message = [message stringByAppendingString:[self arraySyntaxFor:variableName atIndex:index]];
@@ -86,9 +92,36 @@
         message = [message stringByAppendingString:@" does not exist. The size of \""];
         message = [message stringByAppendingString:variableName];
         message = [message stringByAppendingString:@"[]\" is "];
-        message = [message stringByAppendingString:[[NSNumber numberWithInt:array.count] stringValue]];
+        message = [message stringByAppendingString:[[NSNumber numberWithLong:array.count] stringValue]];
         message = [message stringByAppendingString:@", thus only values at some index ranged 0 to "];
-        message = [message stringByAppendingString:[[NSNumber numberWithInt:array.count - 1] stringValue]];
+        message = [message stringByAppendingString:[[NSNumber numberWithLong:array.count - 1] stringValue]];
+        message = [message stringByAppendingString:@"may be evaluated."];
+        self.exception = [[ProgramException alloc] initWithMessage:message];
+        return nil;
+    } else
+        return array[index];
+}
+
+- (Value *)getBoolFor: (NSString *)variableName atIndex:(int) index {
+    NSMutableArray * array = [self.boolArrayDictionary objectForKey:variableName];
+    if (array == nil) {
+        NSString * message = @"Element ";
+        message = [message stringByAppendingString:[self arraySyntaxFor:variableName atIndex:index]];
+        message = [message stringByAppendingString:@" does not exist because the array \""];
+        message = [message stringByAppendingString:variableName];
+        message = [message stringByAppendingString:@"[]\" does not exist."];
+        self.exception = [[ProgramException alloc] initWithMessage:message];
+        return nil;
+    }
+    if (index < 0 || array.count <= index) {
+        NSString * message = @"Element ";
+        message = [message stringByAppendingString:[self arraySyntaxFor:variableName atIndex:index]];
+        message = [message stringByAppendingString:@" does not exist. The size of \""];
+        message = [message stringByAppendingString:variableName];
+        message = [message stringByAppendingString:@"[]\" is "];
+        message = [message stringByAppendingString:[[NSNumber numberWithLong:array.count] stringValue]];
+        message = [message stringByAppendingString:@", thus only values at some index ranged 0 to "];
+        message = [message stringByAppendingString:[[NSNumber numberWithLong:array.count - 1] stringValue]];
         message = [message stringByAppendingString:@"may be evaluated."];
         self.exception = [[ProgramException alloc] initWithMessage:message];
         return nil;

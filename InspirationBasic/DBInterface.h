@@ -12,9 +12,9 @@
 
 - (id) initWithContext:(NSManagedObjectContext *)context;
 - (NSMutableArray *) loadPrograms;
-- (void) removeProgramInDBAtIndex:(int)index;
-- (void) moveProgramInDBFromIndex:(int)fromIndex toIndex:(int)toIndex;
+- (void) removeProgramInDBAtIndex:(long)index;
+- (void) moveProgramInDBFromIndex:(long)fromIndex toIndex:(long)toIndex;
 - (void) addProgramToDB:(Program *)program;
-- (void) replaceProgramInDB:(Program *)program atIndex:(int)index;
+- (void) replaceProgramInDB:(Program *)program atIndex:(long)index;
 
 @end

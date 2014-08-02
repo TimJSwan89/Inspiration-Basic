@@ -11,15 +11,15 @@
 #import "ComponentViewController.h" // For ElementAccepter
 #import "ElementViewController.h"
 #import "ViewSettings.h"
+#import "OutputViewController.h"
 
 #import "StatementHasStatementListVisitor.h"
-#import "OutputListener.h" // remove later
 
 @protocol Saveable
 - (void) save;
 @end
 
-@interface ProgramViewController : UITableViewController <ElementAccepter, Reloadable, SpecificScopeFinder>
+@interface ProgramViewController : UITableViewController <ElementAccepter, Reloadable, SpecificScopeFinder, ExecutionDelegate>
 
 @property Program * program;
 
@@ -32,6 +32,8 @@
 - (void) reload;
 
 - (void) acceptElement:(id)element;
+
+- (void) finishedExecuting;
 
 - (NSMutableArray *) getScope:(int)type;
 

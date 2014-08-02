@@ -18,7 +18,7 @@
 @interface ElementViewController : UITableViewController<ElementAccepter, Reloadable, ScopeFinder, SpecificScopeFinder, VarAccepter>
 
 @property (nonatomic) id element;
-@property (nonatomic) int type;
+@property (nonatomic) long type;
 @property NSMutableArray * typesIndex;
 @property NSMutableArray * types;
 @property NSMutableArray * elements;
