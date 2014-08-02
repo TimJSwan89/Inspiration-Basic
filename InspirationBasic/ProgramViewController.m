@@ -11,7 +11,7 @@
 #import "StatementDeleteVisitor.h"
 #import "StatementMoveVisitor.h"
 #import "StatementAndDisplayString.h"
-
+#import "StatementDebugStringVisitor.h"
 #import "StatementFindOrReplaceVariables.h"
 
 #import "OutputViewController.h"
@@ -25,17 +25,18 @@
 @implementation ProgramViewController
 
 - (void) reload {
+    [self.delegate save];
     [self reflattenProgram];
     [self.tableView reloadData];
-  //  [self logProgram];
+    [self logProgram];
 }
-/*
+
 - (void) logProgram {
     StatementDebugStringVisitor * visitor = [[StatementDebugStringVisitor alloc] init];
     [self.program accept:visitor];
     NSLog(@"\n%@",visitor.displayString);
 }
-*/
+
 - (NSMutableArray *) getScope:(int)type {
     StatementFindOrReplaceVariables * visitor = [[StatementFindOrReplaceVariables alloc] init];
     return [visitor findVariables:self.program withType:type];

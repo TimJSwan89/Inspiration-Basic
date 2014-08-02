@@ -1,9 +1,9 @@
 #import <Foundation/Foundation.h>
-#import "DBToStatementVisitor.h"
-#import "Program.h"
+#import "DBInterface.h"
 #import "Statement.h"
 #import "ProgramDB.h"
 #import "ElementDB.h"
+#import "DemoPrograms.h"
 
 #import "StatementList.h"
 #import "PrintInt.h"
@@ -46,36 +46,117 @@
 #import "./BoolGreaterThan.h"
 #import "./BoolGreaterThanOrEquals.h"
 
-@implementation DBToStatementVisitor
-- (id) init {
+@implementation DBInterface
+- (id) initWithContext:(NSManagedObjectContext *)context {
     if (self = [super init]) {
+        self.context = context;
+        self.visitor = [[StatementToDBVisitor alloc] initWithContext:context];
+        [self setUpProgramList];
     }
     return self;
 }
-- (NSMutableArray *) loadProgramsFromDBContext:(NSManagedObjectContext *)context {
-    NSMutableArray * programs = [[NSMutableArray alloc] init];
-    
-    NSEntityDescription * entityDescription = [NSEntityDescription entityForName:@"ProgramDB" inManagedObjectContext:context];
+
+- (void) setUpProgramList {
+    NSEntityDescription * entityDescription = [NSEntityDescription entityForName:@"ProgramListDB" inManagedObjectContext:self.context];
     NSFetchRequest * request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDescription];
     NSPredicate * predicate = nil;// Gets all //[NSPredicate predicateWithFormat:@"(title = %@)", @"Test Title"];
     [request setPredicate:predicate];
-    ProgramDB * matches;
     NSError * error;
-    NSArray * objects = [context executeFetchRequest:request error:&error];
+    NSArray * objects = [self.context executeFetchRequest:request error:&error];
     if ([objects count] == 0) {
-        NSLog(@"No matches found in memory.");
+        NSLog(@"Creating initial program list...");
+        self.list = [NSEntityDescription insertNewObjectForEntityForName:@"ProgramListDB" inManagedObjectContext:self.context];
+        NSError * error;
+        [self.context save:&error];
+        NSLog(@"%@",[error localizedDescription]);
+        NSLog(@"Saved newly created program list. Adding default programs:");
+        [self addDefaultPrograms];
+    } else if ([objects count] == 1) {
+        NSLog(@"Program list found.");
+        self.list = objects[0];
     } else {
-        for (int i = 0; i < objects.count; i++) {
-            matches = objects[i];
-            Program * program = [[Program alloc] initWithTitle:matches.title];
-            for (int i = 0; i < matches.programChild.count; i++) {
-                [program.statementList addObject:[self convertToStatement:matches.programChild[i]]];
-            }
-            [programs addObject:program];
+        NSLog(@"Error, more than one save exists.");
+        [NSException raise:@"Error, more than one save exists." format:@"Error, more than one save exists."];
+    }
+}
+
+- (void) addDefaultPrograms {
+    NSMutableArray * defaultPrograms = [DemoPrograms getDefaultListOfDempPrograms];
+    for (int i = 0; i < defaultPrograms.count; i++)
+        [self addProgramToDB:defaultPrograms[i]];
+}
+
+- (NSMutableArray *) loadPrograms {
+    NSMutableArray * programs = [[NSMutableArray alloc] init];
+    ProgramDB * programDB;
+    for (int i = 0; i < self.list.program.count; i++) {
+        programDB = self.list.program[i];
+        Program * program = [[Program alloc] initWithTitle:programDB.title];
+        for (int i = 0; i < programDB.programChild.count; i++) {
+            [program addStatement:[self convertToStatement:programDB.programChild[i]]];
         }
+        [programs addObject:program];
     }
     return programs;
+}
+
+- (void) removeProgramInDBAtIndex:(int)index {
+    //The following is a necessary hack for the next commented line.
+    NSMutableOrderedSet * tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.list.program];
+    [tempSet removeObjectAtIndex:index];
+    self.list.program = tempSet;
+    //[self.list removeObjectFromProgramAtIndex:index];
+    NSError * error;
+    [self.context save:&error];
+    if (error)
+        NSLog(@"%@",[error localizedDescription]);
+    NSLog(@"Replaced program at index %d.", index);
+}
+
+- (void) moveProgramInDBFromIndex:(int)fromIndex toIndex:(int)toIndex {
+    //The following is a necessary hack for the next commented lines.
+    NSMutableOrderedSet * tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.list.program];
+    ProgramDB * programDB = tempSet[fromIndex];
+    [tempSet removeObjectAtIndex:fromIndex];
+    [tempSet insertObject:programDB atIndex:toIndex];
+    self.list.program = tempSet;
+    //ProgramDB * programDB = self.list.program[fromIndex];
+    //[self.list removeObjectFromProgramAtIndex:fromIndex];
+    //[self.list insertObject:programDB inProgramAtIndex:toIndex];
+    NSError * error;
+    [self.context save:&error];
+    if (error)
+        NSLog(@"%@",[error localizedDescription]);
+    NSLog(@"Moved program from index %d to %d.", fromIndex, toIndex);
+}
+
+- (void) replaceProgramInDB:(Program *)program atIndex:(int)index {
+    ProgramDB * programDB = [self.visitor generateProgramDB:program];
+    //The following is a necessary hack for the next commented line.
+    NSMutableOrderedSet * tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.list.program];
+    [tempSet replaceObjectAtIndex:index withObject:programDB];
+    self.list.program = tempSet;
+    //[self.list replaceObjectInProgramAtIndex:index withObject:programDB];
+    NSError * error;
+    [self.context save:&error];
+    if (error)
+        NSLog(@"%@",[error localizedDescription]);
+    NSLog(@"Replaced program at index %d.", index);
+}
+
+- (void) addProgramToDB:(Program *)program {
+    ProgramDB * programDB = [self.visitor generateProgramDB:program];
+    //The following is a necessary hack for the next commented line.
+    NSMutableOrderedSet * tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.list.program];
+    [tempSet addObject:programDB];
+    self.list.program = tempSet;
+    //[self.list addProgramObject:programDB];
+    NSError * error;
+    [self.context save:&error];
+    if (error)
+        NSLog(@"%@",[error localizedDescription]);
+    NSLog(@"Saved new program.");
 }
 
 - (BoolArrayElement *) getBoolArrayElementVariable:(NSString *)variable indexExpression:(id <IntExpression>)indexExpression {
@@ -88,7 +169,7 @@
 
 - (id <Statement>) convertToStatement:(ElementDB *) element {
     id <Statement> statement = nil;
-    NSLog(@"%@",element.type);
+    //NSLog(@"%@",element.type);
     if ([element.type isEqualToString:@"PrintInt"]) {
         statement = [[PrintInt alloc] initWithExpression:[self convertToIntExpression:element.expression[0]]];
     } else if ([element.type isEqualToString:@"PrintBool"]) {
@@ -120,9 +201,9 @@
 
 - (id <IntExpression>) convertToIntExpression:(ElementDB *) element {
     id <IntExpression> intExpression = nil;
-    NSLog(@"  %@",element.type);
+    //NSLog(@"  %@",element.type);
     if ([element.type isEqualToString:@"IntValue"]) {
-        NSLog(@"  %d",[element.integer intValue]);
+        //NSLog(@"  %d",[element.integer intValue]);
         intExpression = [[IntValue alloc] initWithValue:[element.integer intValue]];
     } else if ([element.type isEqualToString:@"IntVariable"]) {
         intExpression = [[IntVariable alloc] initWithVariable:element.string];
@@ -133,13 +214,13 @@
     } else if ([element.type isEqualToString:@"IntSum"]) {
         intExpression = [[IntSum alloc] initWith:[self convertToIntExpression:element.expression[0]] plus:[self convertToIntExpression:element.expression[1]]];
     } else if ([element.type isEqualToString:@"IntDifference"]) {
-        intExpression = [[IntDifference alloc] initWith:[self convertToIntExpression:element.expression[0]] plus:[self convertToIntExpression:element.expression[1]]];
+        intExpression = [[IntDifference alloc] initWith:[self convertToIntExpression:element.expression[0]] minus:[self convertToIntExpression:element.expression[1]]];
     } else if ([element.type isEqualToString:@"IntProduct"]) {
-        intExpression = [[IntProduct alloc] initWith:[self convertToIntExpression:element.expression[0]] plus:[self convertToIntExpression:element.expression[1]]];
+        intExpression = [[IntProduct alloc] initWith:[self convertToIntExpression:element.expression[0]] times:[self convertToIntExpression:element.expression[1]]];
     } else if ([element.type isEqualToString:@"IntQuotient"]) {
-        intExpression = [[IntQuotient alloc] initWith:[self convertToIntExpression:element.expression[0]] plus:[self convertToIntExpression:element.expression[1]]];
+        intExpression = [[IntQuotient alloc] initWith:[self convertToIntExpression:element.expression[0]] dividedBy:[self convertToIntExpression:element.expression[1]]];
     } else if ([element.type isEqualToString:@"IntRemainder"]) {
-        intExpression = [[IntRemainder alloc] initWith:[self convertToIntExpression:element.expression[0]] plus:[self convertToIntExpression:element.expression[1]]];
+        intExpression = [[IntRemainder alloc] initWith:[self convertToIntExpression:element.expression[0]] dividedBy:[self convertToIntExpression:element.expression[1]]];
     } else {
         [NSException raise:@"Type does not exist." format:@"Type does not exist."];
     }
@@ -148,7 +229,7 @@
 
 - (id <BoolExpression>) convertToBoolExpression:(ElementDB *) element {
     id <BoolExpression> boolExpression = nil;
-    NSLog(@"  %@",element.type);
+    //NSLog(@"  %@",element.type);
     if ([element.type isEqualToString:@"BoolValue"]) {
         boolExpression = [[BoolValue alloc] initWithValue:[element.integer intValue] != 0];
     } else if ([element.type isEqualToString:@"BoolVariable"]) {

@@ -13,16 +13,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProgramCell" id="xZo-zI-M4U">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProgramCell" id="9hz-YX-ISm">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xZo-zI-M4U" id="EhS-Q4-sh8">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="9hz-YX-ISm" id="H9c-aQ-oOY">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="j4i-qh-ynO" kind="push" identifier="ProgramListToProgram" id="rJg-Dg-PfE"/>
-                                </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="InsertCell" id="0Po-dX-Jo6">
                                 <rect key="frame" x="0.0" y="130" width="320" height="44"/>
@@ -43,9 +40,9 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Program List" id="NQC-ko-MIe">
-                        <barButtonItem key="leftBarButtonItem" title="Save" id="oeV-P8-Wlc">
+                        <barButtonItem key="leftBarButtonItem" title="Rename" id="oeV-P8-Wlc">
                             <connections>
-                                <action selector="savePrograms:" destination="cR4-YY-DF6" id="BWq-O7-02I"/>
+                                <action selector="renamePrograms:" destination="cR4-YY-DF6" id="bHn-OS-Wp4"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="H7O-Pf-n2Q">
@@ -55,6 +52,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="editButton" destination="H7O-Pf-n2Q" id="aqw-i5-cLq"/>
+                        <outlet property="renameButton" destination="oeV-P8-Wlc" id="o4v-cu-BdW"/>
+                        <segue destination="j4i-qh-ynO" kind="push" identifier="ProgramListToProgram" id="Ztl-zM-1SZ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W4l-eI-v36" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -445,8 +447,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="IWT-Rr-xrn"/>
         <segue reference="KyC-it-gGV"/>
         <segue reference="lQC-tp-KFV"/>
+        <segue reference="zpB-A7-8dc"/>
     </inferredMetricsTieBreakers>
 </document>

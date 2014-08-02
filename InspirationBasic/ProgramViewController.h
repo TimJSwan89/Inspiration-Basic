@@ -15,6 +15,10 @@
 #import "StatementHasStatementListVisitor.h"
 #import "OutputListener.h" // remove later
 
+@protocol Saveable
+- (void) save;
+@end
+
 @interface ProgramViewController : UITableViewController <ElementAccepter, Reloadable, SpecificScopeFinder>
 
 @property Program * program;
@@ -23,6 +27,7 @@
 @property ViewSettings * settings;
 @property (nonatomic) bool inserting;
 @property (nonatomic) NSString * indentString;
+@property (nonatomic) id <Saveable> delegate;
 
 - (void) reload;
 

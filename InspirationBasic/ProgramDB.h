@@ -2,19 +2,20 @@
 //  ProgramDB.h
 //  InspirationBasic
 //
-//  Created by Timothy Swan on 7/29/14.
+//  Created by Timothy Swan on 8/1/14.
 //  Copyright (c) 2014 ___InspirationTeam___. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class ElementDB;
+@class ElementDB, ProgramListDB;
 
 @interface ProgramDB : NSManagedObject
 
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSOrderedSet *programChild;
+@property (nonatomic, retain) ProgramListDB *programList;
 @end
 
 @interface ProgramDB (CoreDataGeneratedAccessors)

@@ -19,12 +19,20 @@
 @implementation StatementToDBVisitor
 - (id) init {
     if (self = [super init]) {
+        [NSException raise:@"You must specify context." format:@"You must specify context."];
     }
     return self;
 }
-- (void) saveProgramToDB:(Program *)program context:(NSManagedObjectContext *)context {
-    self.context = context;
-    ProgramDB * newProgram = [NSEntityDescription insertNewObjectForEntityForName:@"ProgramDB" inManagedObjectContext:context];
+
+- (id) initWithContext:(NSManagedObjectContext *)context {
+    if (self = [super init]) {
+        self.context = context;
+    }
+    return self;
+}
+
+- (ProgramDB *) generateProgramDB:(Program *)program {
+    ProgramDB * newProgram = [NSEntityDescription insertNewObjectForEntityForName:@"ProgramDB" inManagedObjectContext:self.context];
     newProgram.title = program.title;
     for (int i = 0; i < program.statementList.count; i++) {
         [program.statementList[i] accept:self];
@@ -34,11 +42,9 @@
         newProgram.programChild = tempSet;
         //[newProgram addProgramChildObject:self.element];
     }
-    NSError * error;
-    [context save:&error];
-    NSLog(@"%@",[error localizedDescription]);
-    NSLog(@"Saved");
+    return newProgram;
 }
+
 - (ElementDB *) createElementWithType:(NSString *)type {
     ElementDB * element = [NSEntityDescription insertNewObjectForEntityForName:@"ElementDB" inManagedObjectContext:self.context];
     element.type = type;

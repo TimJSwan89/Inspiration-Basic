@@ -43,6 +43,12 @@
 		AE604323194E96C10050CAC5 /* OutputViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE604322194E96C10050CAC5 /* OutputViewController.m */; };
 		AE60432D194EB0CF0050CAC5 /* PrintInt.m in Sources */ = {isa = PBXBuildFile; fileRef = AE60432C194EB0CF0050CAC5 /* PrintInt.m */; };
 		AE604330194EBD400050CAC5 /* PrintBool.m in Sources */ = {isa = PBXBuildFile; fileRef = AE60432F194EBD400050CAC5 /* PrintBool.m */; };
+		AE6CCFA2198C38120011E93B /* ProgramDB.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6CCFA1198C38120011E93B /* ProgramDB.m */; };
+		AE6CCFA5198C38120011E93B /* ProgramListDB.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6CCFA4198C38120011E93B /* ProgramListDB.m */; };
+		AE6CCFA8198C38120011E93B /* ElementDB.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6CCFA7198C38120011E93B /* ElementDB.m */; };
+		AE6CCFAB198C56D40011E93B /* DemoPrograms.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6CCFAA198C56D40011E93B /* DemoPrograms.m */; };
+		AE6CCFAE198C67410011E93B /* StatementDebugStringVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6CCFAD198C67410011E93B /* StatementDebugStringVisitor.m */; };
+		AE6CCFB1198C67500011E93B /* ExpressionDebugStringVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6CCFB0198C67500011E93B /* ExpressionDebugStringVisitor.m */; };
 		AE73E25B197C4072001F1507 /* HardcodeIntViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE73E25A197C4072001F1507 /* HardcodeIntViewController.m */; };
 		AE73E25E197C4092001F1507 /* VariableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE73E25D197C4092001F1507 /* VariableViewController.m */; };
 		AE7B98C6193A0FAC004C8C82 /* IntSum.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B98C5193A0FAC004C8C82 /* IntSum.m */; };
@@ -102,10 +108,8 @@
 		AEB41FD51976FB9E00227B68 /* StatementBreakdownVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41FD41976FB9E00227B68 /* StatementBreakdownVisitor.m */; };
 		AEB41FD81977395C00227B68 /* StatementDeleteVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41FD71977395C00227B68 /* StatementDeleteVisitor.m */; };
 		AEB41FDB1977397200227B68 /* StatementInsertAfterVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEB41FDA1977397200227B68 /* StatementInsertAfterVisitor.m */; };
-		AEBBDBA61988797D00452544 /* ElementDB.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBBDBA51988797D00452544 /* ElementDB.m */; };
-		AEBBDBA91988797E00452544 /* ProgramDB.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBBDBA81988797E00452544 /* ProgramDB.m */; };
 		AEBBDBAC19887A5900452544 /* StatementToDBVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBBDBAB19887A5900452544 /* StatementToDBVisitor.m */; };
-		AEBBDBAF19887A6B00452544 /* DBToStatementVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBBDBAE19887A6B00452544 /* DBToStatementVisitor.m */; };
+		AEBBDBAF19887A6B00452544 /* DBInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBBDBAE19887A6B00452544 /* DBInterface.m */; };
 		AEBBDBB219887AD000452544 /* ExpressionToDBVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBBDBB119887AD000452544 /* ExpressionToDBVisitor.m */; };
 		AEBD7D3C1956C2CF00F0DCD1 /* StatementMoveVisitor.m in Sources */ = {isa = PBXBuildFile; fileRef = AEBD7D3B1956C2CF00F0DCD1 /* StatementMoveVisitor.m */; };
 		AEC1AA4C198080CD00001E0C /* StatementFindOrReplaceVariables.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC1AA4B198080CD00001E0C /* StatementFindOrReplaceVariables.m */; };
@@ -190,6 +194,18 @@
 		AE60432C194EB0CF0050CAC5 /* PrintInt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintInt.m; sourceTree = "<group>"; };
 		AE60432E194EBD400050CAC5 /* PrintBool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrintBool.h; sourceTree = "<group>"; };
 		AE60432F194EBD400050CAC5 /* PrintBool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrintBool.m; sourceTree = "<group>"; };
+		AE6CCFA0198C38120011E93B /* ProgramDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDB.h; sourceTree = "<group>"; };
+		AE6CCFA1198C38120011E93B /* ProgramDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramDB.m; sourceTree = "<group>"; };
+		AE6CCFA3198C38120011E93B /* ProgramListDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramListDB.h; sourceTree = "<group>"; };
+		AE6CCFA4198C38120011E93B /* ProgramListDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramListDB.m; sourceTree = "<group>"; };
+		AE6CCFA6198C38120011E93B /* ElementDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementDB.h; sourceTree = "<group>"; };
+		AE6CCFA7198C38120011E93B /* ElementDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementDB.m; sourceTree = "<group>"; };
+		AE6CCFA9198C56D40011E93B /* DemoPrograms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoPrograms.h; sourceTree = "<group>"; };
+		AE6CCFAA198C56D40011E93B /* DemoPrograms.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoPrograms.m; sourceTree = "<group>"; };
+		AE6CCFAC198C67410011E93B /* StatementDebugStringVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementDebugStringVisitor.h; sourceTree = "<group>"; };
+		AE6CCFAD198C67410011E93B /* StatementDebugStringVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementDebugStringVisitor.m; sourceTree = "<group>"; };
+		AE6CCFAF198C67500011E93B /* ExpressionDebugStringVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpressionDebugStringVisitor.h; sourceTree = "<group>"; };
+		AE6CCFB0198C67500011E93B /* ExpressionDebugStringVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionDebugStringVisitor.m; sourceTree = "<group>"; };
 		AE73E259197C4072001F1507 /* HardcodeIntViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HardcodeIntViewController.h; sourceTree = "<group>"; };
 		AE73E25A197C4072001F1507 /* HardcodeIntViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HardcodeIntViewController.m; sourceTree = "<group>"; };
 		AE73E25C197C4092001F1507 /* VariableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VariableViewController.h; sourceTree = "<group>"; };
@@ -294,14 +310,10 @@
 		AEB41FD71977395C00227B68 /* StatementDeleteVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementDeleteVisitor.m; sourceTree = "<group>"; };
 		AEB41FD91977397200227B68 /* StatementInsertAfterVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementInsertAfterVisitor.h; sourceTree = "<group>"; };
 		AEB41FDA1977397200227B68 /* StatementInsertAfterVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementInsertAfterVisitor.m; sourceTree = "<group>"; };
-		AEBBDBA41988797D00452544 /* ElementDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ElementDB.h; sourceTree = "<group>"; };
-		AEBBDBA51988797D00452544 /* ElementDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ElementDB.m; sourceTree = "<group>"; };
-		AEBBDBA71988797E00452544 /* ProgramDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgramDB.h; sourceTree = "<group>"; };
-		AEBBDBA81988797E00452544 /* ProgramDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgramDB.m; sourceTree = "<group>"; };
 		AEBBDBAA19887A5900452544 /* StatementToDBVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementToDBVisitor.h; sourceTree = "<group>"; };
 		AEBBDBAB19887A5900452544 /* StatementToDBVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementToDBVisitor.m; sourceTree = "<group>"; };
-		AEBBDBAD19887A6B00452544 /* DBToStatementVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBToStatementVisitor.h; sourceTree = "<group>"; };
-		AEBBDBAE19887A6B00452544 /* DBToStatementVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBToStatementVisitor.m; sourceTree = "<group>"; };
+		AEBBDBAD19887A6B00452544 /* DBInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBInterface.h; sourceTree = "<group>"; };
+		AEBBDBAE19887A6B00452544 /* DBInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBInterface.m; sourceTree = "<group>"; };
 		AEBBDBB119887AD000452544 /* ExpressionToDBVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionToDBVisitor.m; sourceTree = "<group>"; };
 		AEBD7D3A1956C2CF00F0DCD1 /* StatementMoveVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementMoveVisitor.h; sourceTree = "<group>"; };
 		AEBD7D3B1956C2CF00F0DCD1 /* StatementMoveVisitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementMoveVisitor.m; sourceTree = "<group>"; };
@@ -519,10 +531,12 @@
 				AE7B98F7193D5E48004C8C82 /* BoolGreaterThanOrEquals.h */,
 				AE7B98F8193D5E48004C8C82 /* BoolGreaterThanOrEquals.m */,
 				AEA6DC061985D8D6004C2850 /* SavedPrograms.xcdatamodeld */,
-				AEBBDBA71988797E00452544 /* ProgramDB.h */,
-				AEBBDBA81988797E00452544 /* ProgramDB.m */,
-				AEBBDBA41988797D00452544 /* ElementDB.h */,
-				AEBBDBA51988797D00452544 /* ElementDB.m */,
+				AE6CCFA0198C38120011E93B /* ProgramDB.h */,
+				AE6CCFA1198C38120011E93B /* ProgramDB.m */,
+				AE6CCFA3198C38120011E93B /* ProgramListDB.h */,
+				AE6CCFA4198C38120011E93B /* ProgramListDB.m */,
+				AE6CCFA6198C38120011E93B /* ElementDB.h */,
+				AE6CCFA7198C38120011E93B /* ElementDB.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -560,8 +574,12 @@
 				AEBBDBAB19887A5900452544 /* StatementToDBVisitor.m */,
 				AE965CFB1988820A00DF3083 /* ExpressionToDBVisitor.h */,
 				AEBBDBB119887AD000452544 /* ExpressionToDBVisitor.m */,
-				AEBBDBAD19887A6B00452544 /* DBToStatementVisitor.h */,
-				AEBBDBAE19887A6B00452544 /* DBToStatementVisitor.m */,
+				AEBBDBAD19887A6B00452544 /* DBInterface.h */,
+				AEBBDBAE19887A6B00452544 /* DBInterface.m */,
+				AE6CCFAC198C67410011E93B /* StatementDebugStringVisitor.h */,
+				AE6CCFAD198C67410011E93B /* StatementDebugStringVisitor.m */,
+				AE6CCFAF198C67500011E93B /* ExpressionDebugStringVisitor.h */,
+				AE6CCFB0198C67500011E93B /* ExpressionDebugStringVisitor.m */,
 			);
 			name = Visitors;
 			sourceTree = "<group>";
@@ -585,6 +603,8 @@
 				AE604322194E96C10050CAC5 /* OutputViewController.m */,
 				AEFFE0B619899091002B1503 /* ViewSettings.h */,
 				AEFFE0B719899091002B1503 /* ViewSettings.m */,
+				AE6CCFA9198C56D40011E93B /* DemoPrograms.h */,
+				AE6CCFAA198C56D40011E93B /* DemoPrograms.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -742,11 +762,12 @@
 				AEA5E57D1978879E0090A9F2 /* ExpressionBreakdownVisitor.m in Sources */,
 				AE7B98D6193A8C7D004C8C82 /* WhileEndWhile.m in Sources */,
 				AE604323194E96C10050CAC5 /* OutputViewController.m in Sources */,
-				AEBBDBAF19887A6B00452544 /* DBToStatementVisitor.m in Sources */,
+				AE6CCFA8198C38120011E93B /* ElementDB.m in Sources */,
+				AEBBDBAF19887A6B00452544 /* DBInterface.m in Sources */,
 				AE7B990B193D5F03004C8C82 /* BoolBoolDoesNotEqual.m in Sources */,
 				AE7B98CF193A57F0004C8C82 /* IfThenElseEndIf.m in Sources */,
 				AE7B98C6193A0FAC004C8C82 /* IntSum.m in Sources */,
-				AEBBDBA61988797D00452544 /* ElementDB.m in Sources */,
+				AE6CCFAE198C67410011E93B /* StatementDebugStringVisitor.m in Sources */,
 				AE73E25E197C4092001F1507 /* VariableViewController.m in Sources */,
 				AEC1AA4C198080CD00001E0C /* StatementFindOrReplaceVariables.m in Sources */,
 				AE7B98D3193A6F8D004C8C82 /* StatementList.m in Sources */,
@@ -761,7 +782,9 @@
 				AE20837C193EF0FF0035C965 /* IntArrayElementAssignment.m in Sources */,
 				AE3701501936E4CF00426393 /* Value.m in Sources */,
 				AE7B9929193D788A004C8C82 /* BoolNand.m in Sources */,
+				AE6CCFAB198C56D40011E93B /* DemoPrograms.m in Sources */,
 				AEFA0F311945744D006AEA4B /* ProgramException.m in Sources */,
+				AE6CCFA5198C38120011E93B /* ProgramListDB.m in Sources */,
 				AE1B88281935B16B002962FA /* main.m in Sources */,
 				AE7B9926193D7861004C8C82 /* BoolAnd.m in Sources */,
 				AE604330194EBD400050CAC5 /* PrintBool.m in Sources */,
@@ -774,6 +797,8 @@
 				AE37015D1936EFCD00426393 /* BoolValue.m in Sources */,
 				AE36FBA9197F3C7600AA7457 /* ExpressionIsLeafVisitor.m in Sources */,
 				AE7B9902193D5ED1004C8C82 /* BoolIntEquals.m in Sources */,
+				AE6CCFB1198C67500011E93B /* ExpressionDebugStringVisitor.m in Sources */,
+				AE6CCFA2198C38120011E93B /* ProgramDB.m in Sources */,
 				AE60432D194EB0CF0050CAC5 /* PrintInt.m in Sources */,
 				AE7B98C9193A51F6004C8C82 /* IntVariable.m in Sources */,
 				AE73E25B197C4072001F1507 /* HardcodeIntViewController.m in Sources */,
@@ -794,7 +819,6 @@
 				AE7B98F0193D5BCD004C8C82 /* IfThenEndIf.m in Sources */,
 				AE604320194E615E0050CAC5 /* StatementAndDisplayString.m in Sources */,
 				AEA6DC081985D8D6004C2850 /* SavedPrograms.xcdatamodeld in Sources */,
-				AEBBDBA91988797E00452544 /* ProgramDB.m in Sources */,
 				AE20837F193EF1120035C965 /* BoolArrayElementAssignment.m in Sources */,
 				AE7B98DB193A91C1004C8C82 /* ExpressionDisplayStringVisitor.m in Sources */,
 				AE7B98F3193D5E27004C8C82 /* BoolLessThanOrEquals.m in Sources */,

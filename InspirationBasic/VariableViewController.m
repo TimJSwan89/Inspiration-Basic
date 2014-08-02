@@ -68,6 +68,7 @@
         [self.settings setSettingsForTextField:self.textField];
         self.button = (UIButton *) view.subviews[1];
         [self.button setEnabled:false];
+        [self.settings setSettingsForButton:self.button];
     } else {
         [[cell textLabel] setText:self.variables[indexPath.row]];
     }

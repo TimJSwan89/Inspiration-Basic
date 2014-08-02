@@ -142,10 +142,8 @@
 
 - (void) visitStatementList:(StatementList *)statementList {
     self.indentation++;
-    for (int i = 0; i < statementList.statementList.count; i++) {
+    for (int i = 0; i < statementList.statementList.count; i++)
         [statementList.statementList[i] accept:self];
-        NSLog(@"%@%d", @"Flattener statement: ", i);
-    }
     self.indentation--;
 }
 

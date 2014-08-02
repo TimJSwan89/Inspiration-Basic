@@ -13,9 +13,14 @@
     <entity name="ProgramDB" representedClassName="ProgramDB" syncable="YES">
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="programChild" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ElementDB" inverseName="programParent" inverseEntity="ElementDB" syncable="YES"/>
+        <relationship name="programList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ProgramListDB" inverseName="program" inverseEntity="ProgramListDB" syncable="YES"/>
+    </entity>
+    <entity name="ProgramListDB" representedClassName="ProgramListDB" syncable="YES">
+        <relationship name="program" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ProgramDB" inverseName="programList" inverseEntity="ProgramDB" syncable="YES"/>
     </entity>
     <elements>
         <element name="ElementDB" positionX="810" positionY="1736" width="119" height="163"/>
-        <element name="ProgramDB" positionX="466" positionY="1754" width="128" height="73"/>
+        <element name="ProgramDB" positionX="585" positionY="1802" width="128" height="88"/>
+        <element name="ProgramListDB" positionX="387" positionY="1823" width="128" height="58"/>
     </elements>
 </model>

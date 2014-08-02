@@ -205,13 +205,13 @@ NSMutableArray * listOfElements[3];
             } else if (indexPath.row == 2) {
                 element = [[IntSum alloc] initWith:[self defaultInt] plus:[self defaultInt]];
             } else if (indexPath.row == 3) {
-                element = [[IntDifference alloc] initWith:[self defaultInt] plus:[self defaultInt]];
+                element = [[IntDifference alloc] initWith:[self defaultInt] minus:[self defaultInt]];
             } else if (indexPath.row == 4) {
-                element = [[IntProduct alloc] initWith:[self defaultInt] plus:[self defaultInt]];
+                element = [[IntProduct alloc] initWith:[self defaultInt] times:[self defaultInt]];
             } else if (indexPath.row == 5) {
-                element = [[IntQuotient alloc] initWith:[self defaultInt] plus:[self defaultInt]];
+                element = [[IntQuotient alloc] initWith:[self defaultInt] dividedBy:[self defaultInt]];
             } else {
-                element = [[IntRemainder alloc] initWith:[self defaultInt] plus:[self defaultInt]];
+                element = [[IntRemainder alloc] initWith:[self defaultInt] dividedBy:[self defaultInt]];
             }
         }
     } else if (self.type == 9 || self.type == 11) { // Bool Expression

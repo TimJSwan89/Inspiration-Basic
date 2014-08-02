@@ -12,12 +12,17 @@
 
 @implementation ViewSettings
 
-- (id)    initWithFont:(UIFont  *)font
-       backgroundColor:(UIColor *)backgroundColor
-             textColor:(UIColor *)textColor
-   textBackgroundColor:(UIColor *)textBackgroundColor
- positiveFeedbackColor:(UIColor *)positiveFeedbackColor
- negativeFeedbackColor:(UIColor *)negativeFeedbackColor {
+- (id)          initWithFont:(UIFont  *)font
+             backgroundColor:(UIColor *)backgroundColor
+                   textColor:(UIColor *)textColor
+         textBackgroundColor:(UIColor *)textBackgroundColor
+       positiveFeedbackColor:(UIColor *)positiveFeedbackColor
+       negativeFeedbackColor:(UIColor *)negativeFeedbackColor
+navigationBarBackgroundColor:(UIColor *)navigationBarBackgroundColor
+navigationBarForegroundColor:(UIColor *)navigationBarForegroundColor
+    navigationBarButtonColor:(UIColor *)navigationBarButtonColor
+                 buttonColor:(UIColor *)buttonColor
+          statusBarTextWhite:(bool)statusBarTextWhite;{
     if (self = [super init]) {
         self.font = font;
         self.backgroundColor = backgroundColor;
@@ -25,6 +30,11 @@
         self.textBackgroundColor = textBackgroundColor;
         self.positiveFeedbackColor = positiveFeedbackColor;
         self.negativeFeedbackColor = negativeFeedbackColor;
+        self.navigationBarBackgroundColor = navigationBarBackgroundColor;
+        self.navigationBarForegroundColor = navigationBarForegroundColor;
+        self.navigationBarButtonColor = navigationBarButtonColor;
+        self.buttonColor = buttonColor;
+        self.statusBarTextWhite = statusBarTextWhite;
     }
     return self;
 }
@@ -102,5 +112,33 @@
 - (void) setSettingsForView:(UIView *)view {
     [view setBackgroundColor:self.backgroundColor];
 }
+
+- (void) setSettingsForNavigationBarAndStatusBar:(UINavigationController *) navigationController {
+    //self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    //self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    navigationController.navigationBar.barStyle = self.statusBarTextWhite ? UIBarStyleBlackTranslucent : UIBarStyleDefault;
+    if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
+        // iOS 6.1 or earlier
+        navigationController.navigationBar.tintColor = self.navigationBarBackgroundColor;
+    } else {
+        // iOS 7.0 or later
+        navigationController.navigationBar.barTintColor = self.navigationBarBackgroundColor;
+        navigationController.navigationBar.tintColor = self.navigationBarButtonColor;
+        //self.navigationController.navigationBar.translucent = NO;
+    }
+    [navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : self.navigationBarForegroundColor}];
+    
+    //self.navigationController.navigationBar.translucent = NO;
+    //[[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    //[self setNeedsStatusBarAppearanceUpdate];
+}
+
+- (void) setSettingsForButton:(UIButton *)button {
+    [button setTintColor:self.buttonColor];
+}
+
+//- (void) setSettingsForUIBarButtonItem:(UIBarButtonItem *)buttonItem {
+//    [buttonItem setTintColor:[UIColor yellowColor]];
+//}
 
 @end

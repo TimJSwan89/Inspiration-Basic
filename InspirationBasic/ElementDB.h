@@ -2,7 +2,7 @@
 //  ElementDB.h
 //  InspirationBasic
 //
-//  Created by Timothy Swan on 7/29/14.
+//  Created by Timothy Swan on 8/1/14.
 //  Copyright (c) 2014 ___InspirationTeam___. All rights reserved.
 //
 
@@ -16,11 +16,11 @@
 @property (nonatomic, retain) NSNumber * integer;
 @property (nonatomic, retain) NSString * string;
 @property (nonatomic, retain) NSString * type;
-@property (nonatomic, retain) NSOrderedSet * child;
-@property (nonatomic, retain) ElementDB * parent;
-@property (nonatomic, retain) ProgramDB * programParent;
-@property (nonatomic, retain) NSOrderedSet * expression;
-@property (nonatomic, retain) ElementDB * expressionContainer;
+@property (nonatomic, retain) NSOrderedSet *child;
+@property (nonatomic, retain) NSOrderedSet *expression;
+@property (nonatomic, retain) ElementDB *expressionContainer;
+@property (nonatomic, retain) ElementDB *parent;
+@property (nonatomic, retain) ProgramDB *programParent;
 @end
 
 @interface ElementDB (CoreDataGeneratedAccessors)

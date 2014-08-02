@@ -9,13 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "VariableViewController.h"
 #import "ViewSettings.h"
+#import "ProgramViewController.h"
+#import "DBInterface.h"
 
-@interface ProgramListViewController : UITableViewController<ScopeFinder, VarAccepter, UITableViewDelegate, UITableViewDataSource>
+@interface ProgramListViewController : UITableViewController<ScopeFinder, VarAccepter, Saveable, UITableViewDelegate, UITableViewDataSource>
 
 @property NSMutableArray * programs;
 @property bool editingState;
+@property bool renamingState;
 @property ViewSettings * settings;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem * editButton;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem * renameButton;
+@property DBInterface * interface;
 - (IBAction)ToggleEdit:(UIBarButtonItem *)sender;
-- (IBAction)savePrograms:(UIBarButtonItem *)sender;
+- (IBAction)renamePrograms:(UIBarButtonItem *)sender;
+- (void) save;
 
 @end

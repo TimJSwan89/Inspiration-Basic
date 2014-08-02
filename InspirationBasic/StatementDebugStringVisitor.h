@@ -1,28 +1,34 @@
+//
+//  statementFlatteningVisitor.h
+//  InspirationBasic
+//
+//  Created by Timothy Swan on 6/3/14.
+//  Copyright (c) 2014 ___InspirationTeam___. All rights reserved.
+//
+
 #import <Foundation/Foundation.h>
 #import "StatementVisitor.h"
-#import "Program.h"
-#import "ElementDB.h"
-@class StatementList;
-@class PrintInt;
-@class PrintBool;
+#import "Statement.h"
+#import "StatementAndDisplayString.h"
+
 @class IntAssignment;
 @class BoolAssignment;
 @class IntArrayElementAssignment;
 @class BoolArrayElementAssignment;
 @class IfThenElseEndIf;
 @class IfThenEndIf;
+@class StatementList;
 @class WhileEndWhile;
 
-@interface StatementToDBVisitor : NSObject <StatementVisitor>
+@interface StatementDebugStringVisitor : NSObject <StatementVisitor>
 
-@property ElementDB * element;
-@property NSManagedObjectContext * context;
+@property NSString * displayString;
+@property id <Statement> assertingParent;
 
 - (id) init;
-- (id) initWithContext:(NSManagedObjectContext *)context;
-- (ProgramDB *) generateProgramDB:(Program *)program;
+
 - (void) visitPrintInt:(PrintInt *)printInt;
-- (void) visitPrintBool:(PrintBool *)printBool;
+- (void) visitPrintBool:(PrintInt *)printBool;
 - (void) visitIntAssigment:(IntAssignment *)intAssignment;
 - (void) visitBoolAssigment:(BoolAssignment *)boolAssignment;
 - (void) visitIntArrayElementAssignment:(IntArrayElementAssignment *)intArrayElementAssignment;
