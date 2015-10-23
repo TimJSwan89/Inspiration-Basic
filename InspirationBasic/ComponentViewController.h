@@ -19,13 +19,13 @@
 - (void) acceptElement:(id) element;
 @end
 
-@interface ComponentViewController : UITableViewController<IntAccepter, VarAccepter, ScopeFinder>
+@interface ComponentViewController : UITableViewController<IntAccepter, VarAccepter, ScopeFinder, HasBackButton>
 
 //@property (nonatomic) id element;
 @property (nonatomic) long type;
 @property (nonatomic) id <ElementAccepter, SpecificScopeFinder> delegate;
 @property ViewSettings * settings;
-
+@property NSString * currentValueIfApplicable;
 - (void) acceptInt:(int)integer;
 - (void) acceptVar:(NSString *)variable;
 - (NSMutableArray *) getScope;

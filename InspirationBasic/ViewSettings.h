@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol HasBackButton
+- (void) popQuick;
+@end
+
 @interface ViewSettings : NSObject
 
 @property UIFont * font;
@@ -20,7 +24,7 @@
 @property UIColor * navigationBarForegroundColor;
 @property UIColor * navigationBarButtonColor;
 @property UIColor * buttonColor;
-@property bool statusBarTextWhite;
+@property int statusBarTextWhite; // 0: auto 1: black 2: white
 
 
 - (id)          initWithFont:(UIFont  *)font
@@ -33,7 +37,7 @@ navigationBarBackgroundColor:(UIColor *)navigationBarBackgroundColor
 navigationBarForegroundColor:(UIColor *)navigationBarForegroundColor
     navigationBarButtonColor:(UIColor *)navigationBarButtonColor
                  buttonColor:(UIColor *)buttonColor
-          statusBarTextWhite:(bool)statusBarTextWhite;
+          statusBarTextWhite:(int)statusBarTextWhite;
 
 - (void) setSettingsForCellWithNoSelectionColorAndIndentLines:(UITableViewCell *)cell indentString:(NSString *)indentString;
 - (void) setSettingsForCell:(UITableViewCell *)cell;
@@ -44,5 +48,6 @@ navigationBarForegroundColor:(UIColor *)navigationBarForegroundColor
 - (void) setSettingsForView:(UIView *)view;
 - (void) setSettingsForNavigationBarAndStatusBar:(UINavigationController *) navigationController;
 - (void) setSettingsForButton:(UIButton *)button;
+- (UIBarButtonItem *) getBackArrowWithReceiver:(id <HasBackButton>)receiver;
 
 @end

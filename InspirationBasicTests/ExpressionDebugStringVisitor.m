@@ -13,12 +13,14 @@
 #import "../InspirationBasic/IntArrayElement.h"
 #import "../InspirationBasic/IntValue.h"
 #import "../InspirationBasic/BoolValue.h"
+#import "../InspirationBasic/IntRandom.h"
 #import "../InspirationBasic/IntNegation.h"
 #import "../InspirationBasic/IntSum.h"
 #import "../InspirationBasic/IntDifference.h"
 #import "../InspirationBasic/IntProduct.h"
 #import "../InspirationBasic/IntQuotient.h"
 #import "../InspirationBasic/IntRemainder.h"
+#import "../InspirationBasic/BoolRandom.h"
 #import "../InspirationBasic/BoolNegation.h"
 #import "../InspirationBasic/BoolOr.h"
 #import "../InspirationBasic/BoolNor.h"
@@ -83,6 +85,12 @@
     [self append:@"]"];
 }
 
+- (void) visitIntRandom:(IntRandom *)intRandom {
+    [self append:@"RandomInt("];
+    [intRandom.expression accept:self];
+    [self append:@")"];
+}
+
 - (void) visitIntNegation:(IntNegation *)intNegation {
     [self append:@"-"];
     [intNegation.expression accept:self];
@@ -126,6 +134,10 @@
     [self append:@" % "];
     [intRemainder.expression2 accept:self];
     [self append:@")"];
+}
+
+- (void) visitBoolRandom:(BoolRandom *)boolRandom {
+    [self append:@"RandomBoolean"];
 }
 
 - (void) visitBoolNegation:(BoolNegation *)boolNegation {

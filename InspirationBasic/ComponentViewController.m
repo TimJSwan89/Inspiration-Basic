@@ -14,12 +14,14 @@
 #import "./IntArrayElement.h"
 #import "./IntValue.h"
 #import "./BoolValue.h"
+#import "./IntRandom.h"
 #import "./IntNegation.h"
 #import "./IntSum.h"
 #import "./IntDifference.h"
 #import "./IntProduct.h"
 #import "./IntQuotient.h"
 #import "./IntRemainder.h"
+#import "./BoolRandom.h"
 #import "./BoolNegation.h"
 #import "./BoolOr.h"
 #import "./BoolNor.h"
@@ -102,6 +104,7 @@ NSMutableArray * listOfElements[3];
         [listOfElements[2] addObject:@"Print Boolean ?"];
     } else if (self.type == 8 || self.type == 10) { // Int Expression
         [listOfElements[1] addObject:@"Integer[?]"];
+        [listOfElements[1] addObject:@"RandomInt(?)"];
         [listOfElements[1] addObject:@"-?"];
         [listOfElements[1] addObject:@"? + ?"];
         [listOfElements[1] addObject:@"? - ?"];
@@ -109,25 +112,26 @@ NSMutableArray * listOfElements[3];
         [listOfElements[1] addObject:@"? / ?"];
         [listOfElements[1] addObject:@"? % ?"];
     } else if (self.type == 9 || self.type == 11) { // Bool Expression
-        [listOfElements[1] addObject:@"Boolean[?]"];
-        [listOfElements[1] addObject:@"¬?"];
         [listOfElements[1] addObject:@"? = ?"];
         [listOfElements[1] addObject:@"? ≠ ?"];
-        [listOfElements[1] addObject:@"? ∨ ?"];
-        [listOfElements[1] addObject:@"? ↓ ?"];
-        [listOfElements[1] addObject:@"? ∧ ?"];
-        [listOfElements[1] addObject:@"? ↑ ?"];
-        [listOfElements[1] addObject:@"? ⇒ ?"];
-        [listOfElements[1] addObject:@"? ⇏ ?"];
-        [listOfElements[1] addObject:@"? ⇐ ?"];
-        [listOfElements[1] addObject:@"? ⇍ ?"];
+        [listOfElements[1] addObject:@"? < ?"];
+        [listOfElements[1] addObject:@"? ≤ ?"];
+        [listOfElements[1] addObject:@"? > ?"];
+        [listOfElements[1] addObject:@"? ≥ ?"];
         
+        [listOfElements[2] addObject:@"Boolean[?]"];
+        [listOfElements[2] addObject:@"RandomBoolean"];
+        [listOfElements[2] addObject:@"¬?"];
         [listOfElements[2] addObject:@"? = ?"];
         [listOfElements[2] addObject:@"? ≠ ?"];
-        [listOfElements[2] addObject:@"? < ?"];
-        [listOfElements[2] addObject:@"? ≤ ?"];
-        [listOfElements[2] addObject:@"? > ?"];
-        [listOfElements[2] addObject:@"? ≥ ?"];
+        [listOfElements[2] addObject:@"? ∨ ?"];
+        [listOfElements[2] addObject:@"? ↓ ?"];
+        [listOfElements[2] addObject:@"? ∧ ?"];
+        [listOfElements[2] addObject:@"? ↑ ?"];
+        [listOfElements[2] addObject:@"? ⇒ ?"];
+        [listOfElements[2] addObject:@"? ⇏ ?"];
+        [listOfElements[2] addObject:@"? ⇐ ?"];
+        [listOfElements[2] addObject:@"? ⇍ ?"];
     } else {
         [NSException raise:@"Invalid type value" format:@"value of %ld is invalid", self.type];
     }
@@ -201,14 +205,16 @@ NSMutableArray * listOfElements[3];
             if (indexPath.row == 0) {
                 element = [[IntArrayElement alloc] initWithVariable:[self defaultVar] andIndexExpression:[self defaultInt]];
             } else if (indexPath.row == 1) {
-                element = [[IntNegation alloc] initWith:[self defaultInt]];
+                element = [[IntRandom alloc] initWith:[self defaultInt]];
             } else if (indexPath.row == 2) {
-                element = [[IntSum alloc] initWith:[self defaultInt] plus:[self defaultInt]];
+                element = [[IntNegation alloc] initWith:[self defaultInt]];
             } else if (indexPath.row == 3) {
-                element = [[IntDifference alloc] initWith:[self defaultInt] minus:[self defaultInt]];
+                element = [[IntSum alloc] initWith:[self defaultInt] plus:[self defaultInt]];
             } else if (indexPath.row == 4) {
-                element = [[IntProduct alloc] initWith:[self defaultInt] times:[self defaultInt]];
+                element = [[IntDifference alloc] initWith:[self defaultInt] minus:[self defaultInt]];
             } else if (indexPath.row == 5) {
+                element = [[IntProduct alloc] initWith:[self defaultInt] times:[self defaultInt]];
+            } else if (indexPath.row == 6) {
                 element = [[IntQuotient alloc] initWith:[self defaultInt] dividedBy:[self defaultInt]];
             } else {
                 element = [[IntRemainder alloc] initWith:[self defaultInt] dividedBy:[self defaultInt]];
@@ -225,32 +231,6 @@ NSMutableArray * listOfElements[3];
             }
         } else if (indexPath.section == 1) {
             if (indexPath.row == 0) {
-                element = [[BoolArrayElement alloc] initWithVariable:[self defaultVar] andIndexExpression:[self defaultInt]];
-            } else if (indexPath.row == 1) {
-                element = [[BoolNegation alloc] initWith:[self defaultBool]];
-            } else if (indexPath.row == 2) {
-                element = [[BoolBoolEquals alloc] initWith:[self defaultBool] BoolBoolEquals:[self defaultBool]];
-            } else if (indexPath.row == 3) {
-                element = [[BoolBoolDoesNotEqual alloc] initWith:[self defaultBool] BoolBoolDoesNotEqual:[self defaultBool]];
-            } else if (indexPath.row == 4) {
-                element = [[BoolAnd alloc] initWith:[self defaultBool] BoolAnd:[self defaultBool]];
-            } else if (indexPath.row == 5) {
-                element = [[BoolNand alloc] initWith:[self defaultBool] BoolNand:[self defaultBool]];
-            } else if (indexPath.row == 6) {
-                element = [[BoolOr alloc] initWith:[self defaultBool] BoolOr:[self defaultBool]];
-            } else if (indexPath.row == 7) {
-                element = [[BoolNor alloc] initWith:[self defaultBool] BoolNor:[self defaultBool]];
-            } else if (indexPath.row == 8) {
-                element = [[BoolImplies alloc] initWith:[self defaultBool] BoolImplies:[self defaultBool]];
-            } else if (indexPath.row == 9) {
-                element = [[BoolNonImplies alloc] initWith:[self defaultBool] BoolNonImplies:[self defaultBool]];
-            } else if (indexPath.row == 10) {
-                element = [[BoolReverseImplies alloc] initWith:[self defaultBool] BoolReverseImplies:[self defaultBool]];
-            } else {
-                element = [[BoolReverseNonImplies alloc] initWith:[self defaultBool] BoolReverseNonImplies:[self defaultBool]];
-            }
-        } else {
-            if (indexPath.row == 0) {
                 element = [[BoolIntEquals alloc] initWith:[self defaultInt] IntEquals:[self defaultInt]];
             } else if (indexPath.row == 1) {
                 element = [[BoolIntDoesNotEqual alloc] initWith:[self defaultInt] IntDoesNotEqual:[self defaultInt]];
@@ -262,6 +242,34 @@ NSMutableArray * listOfElements[3];
                 element = [[BoolGreaterThan alloc] initWith:[self defaultInt] GreaterThan:[self defaultInt]];
             } else {
                 element = [[BoolGreaterThanOrEquals alloc] initWith:[self defaultInt] GreaterThanOrEquals:[self defaultInt]];
+            }
+        } else {
+            if (indexPath.row == 0) {
+                element = [[BoolArrayElement alloc] initWithVariable:[self defaultVar] andIndexExpression:[self defaultInt]];
+            } else if (indexPath.row == 1) {
+                element = [[BoolRandom alloc] init];
+            } else if (indexPath.row == 2) {
+                element = [[BoolNegation alloc] initWith:[self defaultBool]];
+            } else if (indexPath.row == 3) {
+                element = [[BoolBoolEquals alloc] initWith:[self defaultBool] BoolBoolEquals:[self defaultBool]];
+            } else if (indexPath.row == 4) {
+                element = [[BoolBoolDoesNotEqual alloc] initWith:[self defaultBool] BoolBoolDoesNotEqual:[self defaultBool]];
+            } else if (indexPath.row == 5) {
+                element = [[BoolOr alloc] initWith:[self defaultBool] BoolOr:[self defaultBool]];
+            } else if (indexPath.row == 6) {
+                element = [[BoolNor alloc] initWith:[self defaultBool] BoolNor:[self defaultBool]];
+            } else if (indexPath.row == 7) {
+                element = [[BoolAnd alloc] initWith:[self defaultBool] BoolAnd:[self defaultBool]];
+            } else if (indexPath.row == 8) {
+                element = [[BoolNand alloc] initWith:[self defaultBool] BoolNand:[self defaultBool]];
+            } else if (indexPath.row == 9) {
+                element = [[BoolImplies alloc] initWith:[self defaultBool] BoolImplies:[self defaultBool]];
+            } else if (indexPath.row == 10) {
+                element = [[BoolNonImplies alloc] initWith:[self defaultBool] BoolNonImplies:[self defaultBool]];
+            } else if (indexPath.row == 11) {
+                element = [[BoolReverseImplies alloc] initWith:[self defaultBool] BoolReverseImplies:[self defaultBool]];
+            } else {
+                element = [[BoolReverseNonImplies alloc] initWith:[self defaultBool] BoolReverseNonImplies:[self defaultBool]];
             }
         }
     } else {
@@ -294,11 +302,17 @@ NSMutableArray * listOfElements[3];
     [super viewDidLoad];
     [self.settings setSettingsForTableView:self.tableView];
     [self initMenus];
+    
+    self.navigationItem.leftBarButtonItem = [self.settings getBackArrowWithReceiver:self];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)popQuick {
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -389,15 +403,13 @@ NSMutableArray * listOfElements[3];
     } else if (section == 1) {
         if (self.type == 1)
             returnValue = @"Control";
-        else if (self.type == 8 || self.type == 10)
-            returnValue = @"Integer Operators";
         else
-            returnValue = @"Boolean Operators";
+            returnValue = @"Integer Operators";
     } else if (section == 2) {
         if (self.type == 1)
             returnValue = @"Output";
         else
-            returnValue = @"Integer Tests";
+            returnValue = @"Boolean Operators";
     }
     if ([returnValue isEqualToString:@""])
         [NSException raise:@"Invalid type value" format:@"value of '%@' is invalid", returnValue];
@@ -453,10 +465,12 @@ NSMutableArray * listOfElements[3];
         VariableViewController * variableViewController = [segue destinationViewController];
         variableViewController.delegate = self;
         variableViewController.settings = self.settings;
+        variableViewController.initialValue = self.currentValueIfApplicable;
     } else if ([[segue identifier] isEqualToString:@"ComponentToHardcodeInt"]) {
         HardcodeIntViewController * hardcodeIntViewController = [segue destinationViewController];
         hardcodeIntViewController.delegate = self;
         hardcodeIntViewController.settings = self.settings;
+        hardcodeIntViewController.initialValue = self.currentValueIfApplicable;
     }
 }
 

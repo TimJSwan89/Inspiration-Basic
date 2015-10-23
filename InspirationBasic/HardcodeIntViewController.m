@@ -29,6 +29,17 @@
     [self.settings setSettingsForView:self.view];
     [self.settings setSettingsForTextField:self.inputField];
     [self initialize];
+    self.inputField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+    [self.inputField becomeFirstResponder];
+    [self.inputField setText:self.initialValue];
+    [self update];
+    if (!self.doneButton.enabled)
+        [self.inputField setText:@""];
+    self.navigationItem.leftBarButtonItem = [self.settings getBackArrowWithReceiver:self];
+}
+
+-(void)popQuick {
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning

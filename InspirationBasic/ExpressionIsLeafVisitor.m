@@ -72,6 +72,10 @@
     self.isLeaf = true;
 }
 
+- (void) visitBoolRandom:(BoolRandom *)boolRandom {
+    self.isLeaf = true;
+}
+
 // Non-leaf expressions:
 
 - (void) visitIntArrayElement:(IntArrayElement *)intArrayElement {
@@ -79,6 +83,10 @@
 }
 
 - (void) visitBoolArrayElement:(BoolArrayElement *)boolArrayElement {
+    self.isLeaf = false;
+}
+
+- (void) visitIntRandom:(IntRandom *)intRandom {
     self.isLeaf = false;
 }
 

@@ -22,20 +22,21 @@
 
 -(int) evaluateAgainst:(EnvironmentModel *)environment {
     
-    IntValue * numeratorValue = [self.expression1 evaluateAgainst:environment];
-    if ([ProgramException checkException:numeratorValue withEnvironment:environment andIdentifier:@"IntQuotient Expression 1"])
+    int numeratorValue = [self.expression1 evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"IntQuotient Expression 1"])
         return 0;
-    int numerator = numeratorValue.value;
+    int numerator = numeratorValue;
     
-    IntValue * denominatorValue = [self.expression2 evaluateAgainst:environment];
-    if ([ProgramException checkException:denominatorValue withEnvironment:environment andIdentifier:@"IntQuotient Expression 2"])
+    int denominatorValue = [self.expression2 evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"IntQuotient Expression 2"])
         return 0;
-    int denominator = denominatorValue.value;
+    int denominator = denominatorValue;
     
     if (denominator == 0) {
-        NSString * message = @"The quotient of the division of an expression numerator with the value ";
-        message = [message stringByAppendingString:[[NSNumber numberWithInt:numerator] stringValue]];
-        message = [message stringByAppendingString:@" by an expression denominator with the value 0 does not exist."];
+        //NSString * message = @"The quotient of the division of an expression numerator with the value ";
+        //message = [message stringByAppendingString:[[NSNumber numberWithInt:numerator] stringValue]];
+        //message = [message stringByAppendingString:@" by an expression denominator with the value 0 does not exist."];
+        NSString * message = @"Division not defined for denominator 0";
         environment.exception = [[ProgramException alloc] initWithMessage:message];
         return 0;
     }

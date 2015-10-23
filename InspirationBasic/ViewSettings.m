@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import "ViewSettings.h"
+#import "StatementCell.h"
 
 @implementation ViewSettings
 
@@ -22,7 +23,7 @@ navigationBarBackgroundColor:(UIColor *)navigationBarBackgroundColor
 navigationBarForegroundColor:(UIColor *)navigationBarForegroundColor
     navigationBarButtonColor:(UIColor *)navigationBarButtonColor
                  buttonColor:(UIColor *)buttonColor
-          statusBarTextWhite:(bool)statusBarTextWhite;{
+          statusBarTextWhite:(int)statusBarTextWhite; /* 0: auto 1: black 2: white */ {
     if (self = [super init]) {
         self.font = font;
         self.backgroundColor = backgroundColor;
@@ -39,7 +40,7 @@ navigationBarForegroundColor:(UIColor *)navigationBarForegroundColor
     return self;
 }
 
-- (void) setSettingsForCellWithNoSelectionColorAndIndentLines:(UITableViewCell *)cell indentString:(NSString *)indentString {
+- (void) setSettingsForCellWithNoSelectionColorAndIndentLines:(StatementCell *)cell indentString:(NSString *)indentString {
     //UIView *bgColorView = [[UIView alloc] init];
     //bgColorView.backgroundColor = [UIColor clearColor];
     //[cell setSelectedBackgroundView:bgColorView];
@@ -67,6 +68,9 @@ navigationBarForegroundColor:(UIColor *)navigationBarForegroundColor
         i += 15;
         tag += 1;
     }
+    [cell layoutSubviews];
+    [cell reduceSize:i];
+    cell.textLabel.text = string;
     while ([cell.contentView viewWithTag:tag]) {
         [[cell.contentView viewWithTag:tag] removeFromSuperview];
         tag++;
@@ -114,9 +118,25 @@ navigationBarForegroundColor:(UIColor *)navigationBarForegroundColor
 }
 
 - (void) setSettingsForNavigationBarAndStatusBar:(UINavigationController *) navigationController {
-    //self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    //self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-    navigationController.navigationBar.barStyle = self.statusBarTextWhite ? UIBarStyleBlackTranslucent : UIBarStyleDefault;
+    UIBarStyle style;
+    if (self.statusBarTextWhite == 0) /* 0: auto 1: black 2: white */ {
+        const CGFloat * colors = CGColorGetComponents(self.navigationBarBackgroundColor.CGColor);
+        CGFloat red = colors[0];
+        CGFloat green = colors[1];
+        CGFloat blue = colors[2];
+        //CGFloat alpha = colors[3];
+        float brightness = (red / 255.0) * 0.3 + (green / 255.0) * 0.59 + (blue / 255.0) * 0.11;
+        if (brightness > 0.0038998255 / 2 + 0.000013039953) {
+            style = UIBarStyleDefault;
+        } else {
+            style = UIBarStyleBlackTranslucent;
+        }
+    } else if (self.statusBarTextWhite == 1) {
+        style = UIBarStyleDefault;
+    } else {
+        style = UIBarStyleBlackTranslucent;
+    }
+    navigationController.navigationBar.barStyle = style;
     if (floor(NSFoundationVersionNumber) <= NSFoundationVersionNumber_iOS_6_1) {
         // iOS 6.1 or earlier
         navigationController.navigationBar.tintColor = self.navigationBarBackgroundColor;
@@ -140,5 +160,18 @@ navigationBarForegroundColor:(UIColor *)navigationBarForegroundColor
 //- (void) setSettingsForUIBarButtonItem:(UIBarButtonItem *)buttonItem {
 //    [buttonItem setTintColor:[UIColor yellowColor]];
 //}
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wundeclared-selector"
+- (UIBarButtonItem *) getBackArrowWithReceiver:(id <HasBackButton>)receiver {
+
+    UIBarButtonItem * left = [[UIBarButtonItem alloc] initWithTitle:@"˿" style:UIBarButtonItemStyleBordered target:receiver action:@selector(popQuick)];
+
+    [left setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                  [UIFont fontWithName:@"Chalkduster" size:85.0], NSFontAttributeName,
+                                  nil]
+                        forState:UIControlStateNormal];
+    return left;
+}
+#pragma clang diagnostic pop
 
 @end

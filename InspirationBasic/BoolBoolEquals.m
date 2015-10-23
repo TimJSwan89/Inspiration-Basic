@@ -21,15 +21,15 @@
 
 -(bool) evaluateAgainst:(EnvironmentModel *)environment {
     
-    BoolValue * firstValue = [self.expression1 evaluateAgainst:environment];
-    if ([ProgramException checkException:firstValue withEnvironment:environment andIdentifier:@"BoolBoolEquals Expression 1"])
+    bool firstValue = [self.expression1 evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"BoolBoolEquals Expression 1"])
         return false;
     
-    BoolValue * secondValue = [self.expression2 evaluateAgainst:environment];
-    if ([ProgramException checkException:secondValue withEnvironment:environment andIdentifier:@"BoolBoolEquals Expression 2"])
+    bool secondValue = [self.expression2 evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"BoolBoolEquals Expression 2"])
         return false;
     
-    BOOL newValue = firstValue.value == secondValue.value;
+    BOOL newValue = firstValue == secondValue;
     return newValue;
     
 }

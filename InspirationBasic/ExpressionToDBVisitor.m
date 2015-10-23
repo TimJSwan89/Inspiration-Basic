@@ -9,12 +9,14 @@
 #import "BoolVariable.h"
 #import "IntArrayElement.h"
 #import "BoolArrayElement.h"
+#import "IntRandom.h"
 #import "IntNegation.h"
 #import "IntSum.h"
 #import "IntDifference.h"
 #import "IntProduct.h"
 #import "IntQuotient.h"
 #import "IntRemainder.h"
+#import "BoolRandom.h"
 #import "BoolNegation.h"
 #import "BoolBoolEquals.h"
 #import "BoolBoolDoesNotEqual.h"
@@ -109,6 +111,17 @@
     
     self.element = element;
 }
+- (void) visitIntRandom:(IntRandom *)intRandom {
+    ElementDB * element = [self createElementWithType:@"IntRandom"];
+    
+    //The following is a necessary hack for the next commented line.
+    NSMutableOrderedSet * tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:element.expression];
+    [tempSet addObject:[self addIntExpression:intRandom.expression]];
+    element.expression = tempSet;
+    //[element addExpressionObject:[self addIntExpression:intNegation.expression]];
+    
+    self.element = element;
+}
 - (void) visitIntNegation:(IntNegation *)intNegation {
     ElementDB * element = [self createElementWithType:@"IntNegation"];
     
@@ -184,6 +197,9 @@
     //[element addExpressionObject:[self addIntExpression:intRemainder.expression2]];
     
     self.element = element;
+}
+- (void) visitBoolRandom:(BoolRandom *)boolRandom {
+    self.element = [self createElementWithType:@"BoolRandom"];
 }
 - (void) visitBoolNegation:(BoolNegation *)boolNegation {
     ElementDB * element = [self createElementWithType:@"BoolNegation"];

@@ -20,11 +20,11 @@
 
 -(int) evaluateAgainst:(EnvironmentModel *)environment {
     
-    IntValue * theValue = [self.expression evaluateAgainst:environment];
-    if ([ProgramException checkException:theValue withEnvironment:environment andIdentifier:@"IntNegation Expression"])
+    int theValue = [self.expression evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"IntNegation Expression"])
         return 0;
     
-    return -theValue.value;
+    return -theValue;
     
 }
 

@@ -20,11 +20,11 @@
 
 -(bool) evaluateAgainst:(EnvironmentModel *)environment {
     
-    BoolValue * theValue = [self.expression evaluateAgainst:environment];
-    if ([ProgramException checkException:theValue withEnvironment:environment andIdentifier:@"BoolNegation Expression"])
+    bool theValue = [self.expression evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"BoolNegation Expression"])
         return false;
 
-    return !theValue.value;
+    return !theValue;
     
 }
 

@@ -21,14 +21,16 @@
 }
 
 -(void) executeAgainst:(EnvironmentModel *)environment {
-    if (environment.exception)
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"PreWhileLoop"])
         return;
     while ([self.expression evaluateAgainst:environment]) {
-        if (environment.exception)
-            return;
-        [self.loopStatements executeAgainst:environment];
-        if (environment.exception)
-            return;
+        @autoreleasepool {
+            if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"WhileCheck"])
+                return;
+            [self.loopStatements executeAgainst:environment];
+            if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"WhileLoop"])
+                return;
+        }
     }
 }
 

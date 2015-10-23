@@ -20,10 +20,10 @@
 
 - (void) executeAgainst:(EnvironmentModel *)environment {
     
-    IntValue * theValue = [self.expression evaluateAgainst:environment];
-    if ([ProgramException checkException:theValue withEnvironment:environment andIdentifier:@"PrintInt Statement"])
+    int theValue = [self.expression evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"PrintInt Statement"])
         return;
-    [environment printLine:[@(theValue.value) stringValue]];
+    [environment printLine:[@(theValue) stringValue]];
     
 }
 

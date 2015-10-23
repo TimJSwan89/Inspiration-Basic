@@ -14,12 +14,14 @@
 #import "./IntArrayElement.h"
 #import "./IntValue.h"
 #import "./BoolValue.h"
+#import "./IntRandom.h"
 #import "./IntNegation.h"
 #import "./IntSum.h"
 #import "./IntDifference.h"
 #import "./IntProduct.h"
 #import "./IntQuotient.h"
 #import "./IntRemainder.h"
+#import "./BoolRandom.h"
 #import "./BoolNegation.h"
 #import "./BoolOr.h"
 #import "./BoolNor.h"
@@ -85,6 +87,10 @@
     [NSException raise:[self leafNodeException] format:@"LeafNode"];
 }
 
+- (void) visitBoolRandom:(BoolRandom *)boolRandom {
+    [NSException raise:[self leafNodeException] format:@"LeafNode"];
+}
+
 // Non-leaf expressions:
 
 - (void) visitIntArrayElement:(IntArrayElement *)intArrayElement {
@@ -98,6 +104,14 @@
 - (void) visitBoolArrayElement:(BoolArrayElement *)boolArrayElement {
     if (boolArrayElement.indexExpression == self.theOldChild) {
         boolArrayElement.indexExpression = self.theNewChild;
+    } else {
+        [NSException raise:[self oldChildDoesNotExistException] format:@"OldChild"];
+    }
+}
+
+- (void) visitIntRandom:(IntRandom *)intRandom {
+    if (intRandom.expression == self.theOldChild) {
+        intRandom.expression = self.theNewChild;
     } else {
         [NSException raise:[self oldChildDoesNotExistException] format:@"OldChild"];
     }

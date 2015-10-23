@@ -18,10 +18,10 @@
     return self;
 }
 
-- (BoolValue *)evaluateAgainst:(EnvironmentModel *)environment {
-    if ([ProgramException checkException:self withEnvironment:environment andIdentifier:@"BoolVariable"])
+- (bool)evaluateAgainst:(EnvironmentModel *)environment {
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"BoolVariable"])
         return nil;
-    return (BoolValue *) [environment getValueFor:self.variable];
+    return [environment getBoolFor:self.variable];
 }
 
 - (void) accept:(id <ExpressionVisitor>)visitor {

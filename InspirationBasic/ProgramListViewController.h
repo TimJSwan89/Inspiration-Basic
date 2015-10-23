@@ -11,10 +11,11 @@
 #import "ViewSettings.h"
 #import "ProgramViewController.h"
 #import "DBInterface.h"
+#import "SettingsViewController.h"
 
-@interface ProgramListViewController : UITableViewController<ScopeFinder, VarAccepter, Saveable, UITableViewDelegate, UITableViewDataSource>
+@interface ProgramListViewController : UITableViewController<ScopeFinder, VarAccepter, Saveable, UITableViewDelegate, UITableViewDataSource, ViewResettable, ProgramExecutionDelegate>
 
-@property NSMutableArray * programs;
+@property NSMutableArray * wrappedPrograms;
 @property bool editingState;
 @property bool renamingState;
 @property ViewSettings * settings;
@@ -24,5 +25,6 @@
 - (IBAction)ToggleEdit:(UIBarButtonItem *)sender;
 - (IBAction)renamePrograms:(UIBarButtonItem *)sender;
 - (void) save;
-
+- (void) resetView;
+- (void) program:(Program *)program isExecuting:(bool)flag underVC:(ProgramViewController *)pvc;
 @end

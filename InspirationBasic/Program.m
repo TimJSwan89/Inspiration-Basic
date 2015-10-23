@@ -24,6 +24,7 @@
 
 - (void) executeProgramAgainst:(EnvironmentModel *)environment { // For debugging/testing
     [self executeAgainst:environment];
+    [ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"Program"];
 }
 
 @end

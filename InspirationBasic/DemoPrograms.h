@@ -13,6 +13,6 @@
 
 + (NSMutableArray *) getDefaultListOfDempPrograms;
 
-+ (Program *) createDefaultProgram;
++ (Program *) createInsertionSortProgram;
 
 @end

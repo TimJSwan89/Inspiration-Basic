@@ -17,7 +17,7 @@
 
 - (id) initWithVariable:(NSString *) variable andIndexExpression:(id <IntExpression>) indexExpression;
 
-- (BoolValue *)evaluateAgainst:(EnvironmentModel *)environment;
+- (bool)evaluateAgainst:(EnvironmentModel *)environment;
 
 - (void) accept:(id <ExpressionVisitor>) visitor;
 

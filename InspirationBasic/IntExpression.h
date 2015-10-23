@@ -13,7 +13,7 @@
 
 @protocol IntExpression
 
-- (IntValue *)evaluateAgainst:(EnvironmentModel *)environment;
+- (int)evaluateAgainst:(EnvironmentModel *)environment;
 
 - (void) accept: (id <ExpressionVisitor>) visitor;
 

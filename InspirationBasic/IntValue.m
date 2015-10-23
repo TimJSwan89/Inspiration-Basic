@@ -15,15 +15,14 @@
 - (id) initWithValue:(int) value {
     if (self = [super init]) {
         self.value = value;
-        NSLog(@"%@",@"Int Value");
     }
     return self;
 }
 
-- (IntValue *)evaluateAgainst:(EnvironmentModel *)environment {
-    if ([ProgramException checkException:self withEnvironment:environment andIdentifier:@"IntValue"])
-        return nil;
-    return self;
+- (int)evaluateAgainst:(EnvironmentModel *)environment {
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"IntValue"])
+        return 0;
+    return self.value;
 }
 
 - (void) accept:(id <ExpressionVisitor>)visitor {

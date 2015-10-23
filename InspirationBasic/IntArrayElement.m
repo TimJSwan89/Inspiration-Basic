@@ -19,9 +19,9 @@
     return self;
 }
 
-- (IntValue *)evaluateAgainst:(EnvironmentModel *)environment {
-    int index = [self.indexExpression evaluateAgainst:environment].value;
-    return (IntValue *) [environment getValueFor:self.variable atIndex:index];
+- (int)evaluateAgainst:(EnvironmentModel *)environment {
+    int index = [self.indexExpression evaluateAgainst:environment];
+    return [environment getIntFor:self.variable atIndex:index];
 }
 
 - (void) accept:(id <ExpressionVisitor>)visitor {

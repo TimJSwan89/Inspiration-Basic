@@ -10,6 +10,7 @@
 
 #import "StatementList.h"
 #import "PrintInt.h"
+#import "PrintBool.h"
 #import "IntAssignment.h"
 #import "BoolAssignment.h"
 #import "IntArrayElementAssignment.h"
@@ -24,12 +25,14 @@
 #import "./IntArrayElement.h"
 #import "./IntValue.h"
 #import "./BoolValue.h"
+#import "./IntRandom.h"
 #import "./IntNegation.h"
 #import "./IntSum.h"
 #import "./IntDifference.h"
 #import "./IntProduct.h"
 #import "./IntQuotient.h"
 #import "./IntRemainder.h"
+#import "./BoolRandom.h"
 #import "./BoolNegation.h"
 #import "./BoolOr.h"
 #import "./BoolNor.h"
@@ -52,7 +55,7 @@
 
 + (NSMutableArray *) getDefaultListOfDempPrograms {
     NSMutableArray * list = [[NSMutableArray alloc] init];
-    [list addObject:[self createDefaultProgram]];
+    [list addObject:[self createInsertionSortProgram]];
     [list addObject:[self createPrimeGeneratorProgram]];
     return list;
 }
@@ -111,45 +114,70 @@
     return program;
 }
 
-+ (Program *) createDefaultProgram {
++ (BoolLessThan *) getILessThanLength {
+    return [[BoolLessThan alloc] initWith:[self getIntVariableFor:@"i"] LessThan:[self getIntVariableFor:@"length"]];
+}
+
++ (IntAssignment *) getIncrementI {
+    IntSum * iPlusOne = [[IntSum alloc] initWith:[self getIntVariableFor:@"i"] plus:[self getIntValueFor:1]];
+    return [self getIntAssignmentForAssigning:iPlusOne to:@"i"];
+}
+
++ (IntArrayElement *) getASubI {
+    return [[IntArrayElement alloc] initWithVariable:@"a" andIndexExpression:[self getIntVariableFor:@"i"]];
+}
+
++ (IntArrayElement *) getASubJ {
+    return [[IntArrayElement alloc] initWithVariable:@"a" andIndexExpression:[self getIntVariableFor:@"j"]];
+}
+
++ (IntArrayElement *) getASubJPlusOne {
+    return [[IntArrayElement alloc] initWithVariable:@"a" andIndexExpression:[[IntSum alloc] initWith:[self getIntVariableFor:@"j"] plus:[self getIntValueFor:1]]];
+}
+
++ (PrintInt *) getPrintASubI {
+    return [[PrintInt alloc] initWithExpression:[self getASubI]];
+}
+
++ (WhileEndWhile *) getForIInLength:(StatementList *)list {
+    return [[WhileEndWhile alloc] initWithWhile:[self getILessThanLength] Do:list];
+}
+
++ (Program *) createInsertionSortProgram {
     
-    Program * program = [[Program alloc] initWithTitle:@"Default Program"];
+    Program * program = [[Program alloc] initWithTitle:@"Insertion Sort"];
     
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:5]]];
-    StatementList * loopStatements = [[StatementList alloc] init];
-    BoolLessThan * lessThan = [[BoolLessThan alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] LessThan:[[IntValue alloc] initWithValue:10]];
-    IntSum * sum = [[IntSum alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] plus:[[IntValue alloc] initWithValue:1]];
-    [loopStatements addStatement:[[IntAssignment alloc] initWith:@"x" equals:sum]];
-    [loopStatements addStatement:[[PrintInt alloc] initWithExpression:[[IntVariable alloc] initWithVariable:@"x"]]];
-    WhileEndWhile * whileEndWhile = [[WhileEndWhile alloc] initWithWhile:lessThan Do:loopStatements];
-    [program addStatement:whileEndWhile];
-    
-    StatementList * loopStatements1 = [[StatementList alloc] init];
-    BoolLessThan * lessThan1 = [[BoolLessThan alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] LessThan:[[IntValue alloc] initWithValue:10]];
-    IntSum * sum1 = [[IntSum alloc] initWith:[[IntVariable alloc] initWithVariable:@"x"] plus:[[IntValue alloc] initWithValue:1]];
-    [loopStatements1 addStatement:[[IntAssignment alloc] initWith:@"x" equals:sum1]];
-    [loopStatements1 addStatement:[[PrintInt alloc] initWithExpression:[[IntVariable alloc] initWithVariable:@"x"]]];
-    WhileEndWhile * whileEndWhile1 = [[WhileEndWhile alloc] initWithWhile:lessThan1 Do:loopStatements1];
-    [whileEndWhile.loopStatements addStatement:whileEndWhile1];
-    
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:6]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:7]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:8]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:9]]];
-    [program addStatement:[[IntAssignment alloc] initWith:@"x" equals:[[IntValue alloc] initWithValue:10]]];
+    [program addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:12] to:@"length"]];
+    [program addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:100] to:@"max"]];
+    [program addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:0] to:@"i"]];
+    IntArrayElementAssignment * assignment = [[IntArrayElementAssignment alloc] initWith:[self getASubI] equals:[[IntRandom alloc] initWith:[self getIntVariableFor:@"max"]]];
+    StatementList * list = [[StatementList alloc] init];
+    [list addStatement:assignment];
+    [list addStatement:[self getPrintASubI]];
+    [list addStatement:[self getIncrementI]];
+    [program addStatement:[self getForIInLength:list]];
+    [program addStatement:[[PrintBool alloc] initWithExpression:[self getBoolValueFor:false]]];
+    [program addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:1] to:@"i"]];
+    IntAssignment * initT = [[IntAssignment alloc] initWith:@"t" equals:[self getASubI]];
+    IntAssignment * initJ = [[IntAssignment alloc] initWith:@"j" equals:[[IntDifference alloc] initWith:[self getIntVariableFor:@"i"] minus:[self getIntValueFor:1]]];
+    BoolAnd * andCheck = [[BoolAnd alloc] initWith:[[BoolGreaterThanOrEquals alloc] initWith:[self getIntVariableFor:@"j"] GreaterThanOrEquals:[self getIntValueFor:0]] BoolAnd:[[BoolGreaterThan alloc] initWith:[self getASubJ] GreaterThan:[self getIntVariableFor:@"t"]]];
+    StatementList * innerList = [[StatementList alloc] init];
+    [innerList addStatement:[[IntArrayElementAssignment alloc] initWith:[self getASubJPlusOne] equals:[self getASubJ]]];
+    [innerList addStatement:[self getIntAssignmentForAssigning:[[IntDifference alloc] initWith:[self getIntVariableFor:@"j"] minus:[self getIntValueFor:1]] to:@"j"]];
+    WhileEndWhile * innerWhile = [[WhileEndWhile alloc] initWithWhile:andCheck Do:innerList];
+    assignment = [[IntArrayElementAssignment alloc] initWith:[self getASubJPlusOne] equals:[self getIntVariableFor:@"t"]];
+    list = [[StatementList alloc] init];
+    [list addStatement:initT];
+    [list addStatement:initJ];
+    [list addStatement:innerWhile];
+    [list addStatement:assignment];
+    [list addStatement:[self getIncrementI]];
+    [program addStatement:[self getForIInLength:list]];
+    [program addStatement:[self getIntAssignmentForAssigning:[self getIntValueFor:0] to:@"i"]];
+    list = [[StatementList alloc] init];
+    [list addStatement:[self getPrintASubI]];
+    [list addStatement:[self getIncrementI]];
+    [program addStatement:[self getForIInLength:list]];
     return program;
 }
 

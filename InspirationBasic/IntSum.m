@@ -21,15 +21,15 @@
 
 -(int) evaluateAgainst:(EnvironmentModel *)environment {
     
-    IntValue * firstValue = [self.expression1 evaluateAgainst:environment];
-    if ([ProgramException checkException:firstValue withEnvironment:environment andIdentifier:@"IntSum Expression 1"])
+    int firstValue = [self.expression1 evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"IntSum Expression 1"])
         return 0;
     
-    IntValue * secondValue = [self.expression2 evaluateAgainst:environment];
-    if ([ProgramException checkException:secondValue withEnvironment:environment andIdentifier:@"IntSum Expression 2"])
+    int secondValue = [self.expression2 evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"IntSum Expression 2"])
         return 0;
     
-    int newValue = firstValue.value + secondValue.value;
+    int newValue = firstValue + secondValue;
     return newValue;
     
 }

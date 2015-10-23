@@ -79,11 +79,11 @@
 }
 
 - (int)evaluateVariableToIntAgainstGlobalEnvironment:(NSString *)variable {
-    return [[self getIntVariableFor:variable] evaluateAgainst:self.environment].value;
+    return [[self getIntVariableFor:variable] evaluateAgainst:self.environment];
 }
 
 - (BOOL)evaluateVariableToBoolAgainstGlobalEnvironment:(NSString *)variable {
-    return [[self getBoolVariableFor:variable] evaluateAgainst:self.environment].value;
+    return [[self getBoolVariableFor:variable] evaluateAgainst:self.environment];
 }
 
 - (void)testDisplayStringWithIntArrayElement
@@ -125,7 +125,7 @@
 {
     BoolAssignment * assignment = [[BoolAssignment alloc] initWith:@"b" equals:[self getBoolValueFor:true]];
     [assignment executeAgainst:self.environment];
-    XCTAssertTrue([self evaluateVariableToIntAgainstGlobalEnvironment:@"b"]);
+    XCTAssertTrue([self evaluateVariableToBoolAgainstGlobalEnvironment:@"b"]);
 }
 
 - (void)testEvaluationAfterIntArrayElementAssignment
@@ -133,7 +133,7 @@
     IntArrayElement * element = [[IntArrayElement alloc] initWithVariable:@"x" andIndexExpression:[self getIntValueFor:0]];
     IntArrayElementAssignment * assigment = [[IntArrayElementAssignment alloc] initWith:element equals:[self getIntValueFor:10]];
     [assigment executeAgainst:self.environment];
-    XCTAssertTrue([element evaluateAgainst:self.environment].value == 10);
+    XCTAssertTrue([element evaluateAgainst:self.environment] == 10);
 }
 
 - (void)testEvaluationAfterBoolArrayElementAssignment
@@ -141,7 +141,7 @@
     BoolArrayElement * element = [[BoolArrayElement alloc] initWithVariable:@"x" andIndexExpression:[self getIntValueFor:0]];
     BoolArrayElementAssignment * assigment = [[BoolArrayElementAssignment alloc] initWith:element equals:[self getBoolValueFor:true]];
     [assigment executeAgainst:self.environment];
-    XCTAssertTrue([element evaluateAgainst:self.environment].value == true);
+    XCTAssertTrue([element evaluateAgainst:self.environment] == true);
 }
 
 - (void)testEvaluateLessThanOfIntVariablesAfterExecutingStatementListOfTheirAssignments

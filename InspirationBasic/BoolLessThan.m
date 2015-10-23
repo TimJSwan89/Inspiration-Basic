@@ -22,15 +22,15 @@
 
 -(bool) evaluateAgainst:(EnvironmentModel *)environment {
     
-    IntValue * firstValue = [self.expression1 evaluateAgainst:environment];
-    if ([ProgramException checkException:firstValue withEnvironment:environment andIdentifier:@"BoolLessThan Expression 1"])
+    int firstValue = [self.expression1 evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"BoolLessThan Expression 1"])
         return false;
     
-    IntValue * secondValue = [self.expression2 evaluateAgainst:environment];
-    if ([ProgramException checkException:secondValue withEnvironment:environment andIdentifier:@"BoolLessThan Expression 2"])
+    int secondValue = [self.expression2 evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"BoolLessThan Expression 2"])
         return false;
     
-    BOOL value = firstValue.value < secondValue.value;
+    BOOL value = firstValue < secondValue;
     return value;
     
 }

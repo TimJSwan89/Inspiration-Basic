@@ -21,16 +21,19 @@
 
 -(bool) evaluateAgainst:(EnvironmentModel *)environment {
     
-    BoolValue * firstValue = [self.expression1 evaluateAgainst:environment];
-    if ([ProgramException checkException:firstValue withEnvironment:environment andIdentifier:@"BoolImplies Expression 1"])
+    bool firstValue = [self.expression1 evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"BoolImplies Expression 1"])
         return false;
     
-    BoolValue * secondValue = [self.expression2 evaluateAgainst:environment];
-    if ([ProgramException checkException:secondValue withEnvironment:environment andIdentifier:@"BoolImplies Expression 2"])
+    if (!firstValue)
+        return true;
+    
+    bool secondValue = [self.expression2 evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"BoolImplies Expression 2"])
         return false;
     
-    BOOL newValue = (!firstValue.value) || secondValue.value;
-    return newValue;
+    return secondValue;
+    //return (!firstValue) || secondValue;
     
 }
 

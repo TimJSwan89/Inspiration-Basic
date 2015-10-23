@@ -18,10 +18,10 @@
     return self;
 }
 
-- (IntValue *)evaluateAgainst:(EnvironmentModel *)environment {
-    if ([ProgramException checkException:self withEnvironment:environment andIdentifier:@"IntVariable"])
-        return nil;
-    return (IntValue *) [environment getValueFor:self.variable];
+- (int)evaluateAgainst:(EnvironmentModel *)environment {
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"IntVariable"])
+        return 0;
+    return [environment getIntFor:self.variable];
 }
 
 - (void) accept:(id <ExpressionVisitor>)visitor {

@@ -13,8 +13,7 @@
 #import "StatementAndDisplayString.h"
 #import "StatementDebugStringVisitor.h"
 #import "StatementFindOrReplaceVariables.h"
-
-#import <AudioToolbox/AudioToolbox.h>
+#import "StatementCell.h"
 
 @interface ProgramViewController ()
 
@@ -25,15 +24,16 @@
 - (void) reload {
     [self.delegate save];
     [self reflattenProgram];
+    [self checkEmptyState];
     [self.tableView reloadData];
-    [self logProgram];
+    //[self logProgram];
 }
 
-- (void) logProgram {
-    StatementDebugStringVisitor * visitor = [[StatementDebugStringVisitor alloc] init];
-    [self.program accept:visitor];
-    NSLog(@"\n%@",visitor.displayString);
-}
+//- (void) logProgram {
+//    StatementDebugStringVisitor * visitor = [[StatementDebugStringVisitor alloc] init];
+//    [self.program accept:visitor];
+//    NSLog(@"\n%@",visitor.displayString);
+//}
 
 - (NSMutableArray *) getScope:(int)type {
     StatementFindOrReplaceVariables * visitor = [[StatementFindOrReplaceVariables alloc] init];
@@ -42,9 +42,8 @@
 
 - (void) acceptElement:(id)element {
     long row = [self.tableView indexPathForSelectedRow].row;
-    if (row == self.flattenedList.count) {
-        [self.program.statementList addObject:element];
-        ((id <Statement>) element).parent = self.program;
+    if (self.emptyState) {
+        [self.program addStatement:element];
     } else {
         id <Statement> statement = ((StatementAndDisplayString *)(self.flattenedList[row])).statement;
         StatementList * list = ((StatementList *) statement.parent);
@@ -53,6 +52,8 @@
             [list.statementList removeObjectAtIndex:index];
         [list.statementList insertObject:element atIndex:index];
         ((id <Statement>) element).parent = list;
+        if (self.inserting)
+            [self moveStatement:element Up:false];
     }
     [self reload];
     NSUInteger newIndex = (NSInteger) [self getFlattenedIndexForStatement:element];
@@ -61,11 +62,29 @@
     NSIndexPath * path = [[NSIndexPath alloc] initWithIndexes:pathIndecies length:2];
     [self.tableView selectRowAtIndexPath:path animated:false scrollPosition:UITableViewScrollPositionMiddle];
     [self.navigationController popToViewController:self animated:false];
-    [self performSegueWithIdentifier:@"ProgramToElement" sender:self];
+    [self performSegueWithIdentifier:ProgramToElementSegueIdentifier sender:self];
 }
 
 - (void) finishedExecuting {
-    
+    [self.runButton setTitle:runButtonRunString];
+    self.running = false;
+    [self.tableView reloadData];
+    [self.delegate program:self.program isExecuting:false underVC:self];
+}
+
+- (IBAction)Run:(UIBarButtonItem *)sender {
+    if (self.running) {
+        //[self presentViewController:self.executingViewController animated:true completion:^{}];
+        [self.navigationController pushViewController:self.executingViewController animated:false];
+    } else if (self.emptyState) {
+        [self performSegueWithIdentifier:programToComponentSegueIdentifier sender:self];
+    } else { // Run program
+        [sender setTitle:@"Output"];
+        self.running = true;
+        [self.tableView reloadData];
+        [self.delegate program:self.program isExecuting:true underVC:self];
+        [self performSegueWithIdentifier:programToOutputIdentifier sender:self];
+    }
 }
 
 - (int) getFlattenedIndexForStatement:(id <Statement>)statement {
@@ -84,7 +103,7 @@
 }
 
 - (void)deleteStatement:(UIButton *)sender and:(bool)protectChildren {
-    UITableViewCell * cell = (UITableViewCell *) [[[sender superview] superview] superview];
+    StatementCell * cell = (StatementCell *) [[[sender superview] superview] superview];
     
     [self setButtonsOnCell:cell to:false];
     
@@ -106,12 +125,12 @@
     verticalContentOffset = verticalContentOffset + (table.rowHeight) * (newIndex - index);
     [table setContentOffset:CGPointMake(0, verticalContentOffset)];
     [table selectRowAtIndexPath:newIndexPath animated:false scrollPosition:UITableViewScrollPositionNone];
-    [self setButtonsOnCell:newCell to:true];
+    [self setButtonsOnCell:(StatementCell *)newCell to:true];
     
 }
 
 - (IBAction)insertAfter:(UIButton *)sender {
-    [self performSegueWithIdentifier:@"ProgramToComponent" sender:self];
+    [self performSegueWithIdentifier:programToComponentSegueIdentifier sender:self];
 }
 
 - (void) reflattenProgram {
@@ -119,25 +138,16 @@
     self.flattenedList = [visitor getFlattenedList:self.program];
 }
 
-- (void) moveUp:(bool)up withSender:(UIButton *)sender {
-    
-    SystemSoundID soundFileObject;
-    NSURL *tapSound   = [[NSBundle mainBundle] URLForResource: @"tap"
-                                                withExtension: @"aif"];
-    CFURLRef soundFileURLRef = (__bridge CFURLRef) tapSound;
-    AudioServicesCreateSystemSoundID(soundFileURLRef, &soundFileObject);
-    AudioServicesPlaySystemSound(soundFileObject);
-    AudioServicesDisposeSystemSoundID(soundFileObject);
-    
-    UITableViewCell * cell = (UITableViewCell *) [[[sender superview] superview] superview];
-    
-    [self setButtonsOnCell:cell to:false];
-    
-    UITableView * table = (UITableView *)[[cell superview] superview];
-    NSInteger index = [[table indexPathForCell:cell] row];
-    id <Statement> statement = ((StatementAndDisplayString *) self.flattenedList[index]).statement;
+- (void) moveStatement:(id <Statement>)statement Up:(bool)up {
     StatementMoveVisitor * visitor = [[StatementMoveVisitor alloc] initWithDirection:up andStatement:statement];
     [visitor move];
+}
+
+- (void) moveCell:(StatementCell *)cell Up:(bool)up {
+    [self setButtonsOnCell:cell to:false];
+    NSInteger index = [[self.tableView indexPathForCell:cell] row];
+    id <Statement> statement = ((StatementAndDisplayString *) self.flattenedList[index]).statement;
+    [self moveStatement:statement Up:up];
     [self reload];
     //need index from flattened statements where the statement is equal to this statement
     NSInteger newIndex = [StatementAndDisplayString indexOfStatement:statement inList:self.flattenedList];
@@ -148,21 +158,26 @@
     
     
     
-    float oldOffset = table.contentOffset.y;
+    float oldOffset = self.tableView.contentOffset.y;
     //[table selectRowAtIndexPath:newIndexPath animated:false scrollPosition:UITableViewScrollPositionMiddle];
     //if (oldOffset != table.contentOffset.y) {
-        float verticalContentOffset = oldOffset + (table.rowHeight) * (newIndex - index);
+    float verticalContentOffset = oldOffset + (self.tableView.rowHeight) * (newIndex - index);
     float top = self.navigationController.navigationBar.frame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
-        if (verticalContentOffset < 0 - top)
-            verticalContentOffset = 0 - top;
-        [table setContentOffset:CGPointMake(0, verticalContentOffset)];
+    if (verticalContentOffset < 0 - top)
+        verticalContentOffset = 0 - top;
+    [self.tableView setContentOffset:CGPointMake(0, verticalContentOffset)];
     //}
     
-    [table selectRowAtIndexPath:newIndexPath animated:false scrollPosition:UITableViewScrollPositionNone];
+    [self.tableView selectRowAtIndexPath:newIndexPath animated:false scrollPosition:UITableViewScrollPositionNone];
     
-    [self setButtonsOnCell:[table cellForRowAtIndexPath:newIndexPath] to:true];
+    [self setButtonsOnCell:(StatementCell *)[self.tableView cellForRowAtIndexPath:newIndexPath] to:true];
     // Commented out since we can move statement groups
     //[table reloadRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void) moveUp:(bool)up withSender:(UIButton *)sender {
+    StatementCell * cell = (StatementCell *) [[[sender superview] superview] superview];
+    [self moveCell:cell Up:up];
 }
 
 - (IBAction)moveUp:(UIButton *)sender {
@@ -182,13 +197,25 @@
     return self;
 }
 
+- (void) checkEmptyState {
+    self.emptyState = (self.program.statementList.count == 0);
+    if (self.emptyState) {
+        [self.runButton setTitle:@"Add"];
+    } else {
+        [self.runButton setTitle:runButtonRunString];
+    }
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.running = false;
     self.indentString = @"   ";
     [self.settings setSettingsForTableView:self.tableView];
-    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
     [self reflattenProgram];
+    [self checkEmptyState];
+    self.navigationItem.leftBarButtonItem = [self.settings getBackArrowWithReceiver:self];
     // Uncomment the following line to preserve selection between presentations.
     //self.clearsSelectionOnViewWillAppear = NO;
     
@@ -196,8 +223,12 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+- (void)popQuick {
+    [self.navigationController popViewControllerAnimated:NO];
+}
+
 - (void) viewWillAppear:(BOOL)animated {
-    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -215,7 +246,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.flattenedList.count + 1;
+    return self.flattenedList.count;
 }
 
 
@@ -223,56 +254,43 @@
 {
     NSString * identifier;
     NSString * string;
-    bool show = false;
-    if (indexPath.row == self.flattenedList.count) {
-        identifier = @"InsertCell";
-        string = @"Add Statement";
-    } else {
-        identifier = @"StatementCell";
-        StatementAndDisplayString * statementAndString = (StatementAndDisplayString *) self.flattenedList[indexPath.row];
-        StatementHasStatementListVisitor * visitor = [[StatementHasStatementListVisitor alloc] init];
-        show = ![visitor hasStatementList:statementAndString.statement];
-        string = statementAndString.displayString;
-    }
-    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    identifier = @"StatementCell";
+    StatementAndDisplayString * statementAndString = (StatementAndDisplayString *) self.flattenedList[indexPath.row];
+    StatementHasStatementListVisitor * visitor = [[StatementHasStatementListVisitor alloc] init];
+    bool hasXButton = [visitor hasStatementList:statementAndString.statement];
+    string = statementAndString.displayString;
+    StatementCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     [[cell textLabel] setText:string];
-    [self.settings setSettingsForCellWithNoSelectionColorAndIndentLines:cell indentString:self.indentString];
-//    NSArray * families = [UIFont familyNames];
-//    NSString * family;
-//    for (family in families) {
-//        NSString * font;
-//        //NSLog(@"%@",family);
-//        for (font in families) {
-//            //NSLog(@"%@",font);
-//        }
-//    }
+    [self.settings setSettingsForCellWithNoSelectionColorAndIndentLines:((StatementCell *) cell) indentString:self.indentString];
+    cell.hasXButton = hasXButton;
     [self setButtonsOnCell:cell to:([tableView indexPathForSelectedRow] && ([tableView indexPathForSelectedRow].row == indexPath.row))];
-    if (show)
-        [((UIButton *) [cell.contentView viewWithTag:1]) removeFromSuperview];
     return cell;
 }
 
-- (void) setButtonsOnCell:(UITableViewCell *)cell to:(bool)enabled {
+- (void) setButtonsOnCell:(StatementCell *)cell to:(bool)enabled {
+    if (self.running)
+        enabled = false;
     for (int i = 1; i < 7; i++) {
+        bool allowed = enabled && (i != 1 || cell.hasXButton);
         UIButton * button = ((UIButton *) [cell.contentView viewWithTag:i]);
-        [button setEnabled:enabled];
+        [button setEnabled:allowed];
         [button setAlpha:1.0];
 //        if (button.superview == cell)
 //            NSLog(@"%@",@"is");
 //        else
 //            NSLog(@"%@",@"is not");
         [button.superview bringSubviewToFront:button];
-        [button setHidden:!enabled];
+        [button setHidden:!allowed];
         //[cell insertSubview:button aboveSubview:cell.contentView];
     }
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self setButtonsOnCell:[tableView cellForRowAtIndexPath:indexPath] to:true];
+    [self setButtonsOnCell:(StatementCell *)[tableView cellForRowAtIndexPath:indexPath] to:true];
 }
 
 - (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self setButtonsOnCell:[tableView cellForRowAtIndexPath:indexPath] to:false];
+    [self setButtonsOnCell:(StatementCell *)[tableView cellForRowAtIndexPath:indexPath] to:false];
 }
 
 /*
@@ -312,12 +330,15 @@
     return YES;
 }
 */
-
+NSString * runButtonRunString = @"Run";
+NSString * programToComponentSegueIdentifier = @"ProgramToComponent";
+NSString * programToOutputIdentifier = @"ProgramToOutput";
+NSString * ProgramToElementSegueIdentifier = @"ProgramToElement";
 
 #pragma mark - Navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"ProgramToElement"]) {
+    if ([[segue identifier] isEqualToString:ProgramToElementSegueIdentifier]) {
         id <Statement> statement = ((StatementAndDisplayString *)(self.flattenedList[[self.tableView indexPathForSelectedRow].row])).statement;
         ElementViewController * statementViewController = [segue destinationViewController];
         statementViewController.element = statement;
@@ -325,17 +346,18 @@
         statementViewController.delegate = self;
         statementViewController.settings = self.settings;
         self.inserting = false;
-    } else if ([[segue identifier] isEqualToString:@"ProgramToComponent"]) {
+    } else if ([[segue identifier] isEqualToString:programToComponentSegueIdentifier]) {
         ComponentViewController * componentViewController = [segue destinationViewController];
         componentViewController.type = 1;
         componentViewController.delegate = self;
         componentViewController.settings = self.settings;
         self.inserting = true;
-    } else if ([[segue identifier] isEqualToString:@"ProgramToOutput"]) {
+    } else if ([[segue identifier] isEqualToString:programToOutputIdentifier]) {
         OutputViewController * outputViewController = [segue destinationViewController];
         outputViewController.program = self.program;
         outputViewController.delegate = self;
         outputViewController.settings = self.settings;
+        self.executingViewController = outputViewController;
     }
 }
 

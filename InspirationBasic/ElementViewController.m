@@ -14,6 +14,7 @@
 #import "StatementReplaceChildVisitor.h"
 #import "ExpressionIsLeafVisitor.h"
 #import "StatementFindOrReplaceVariables.h"
+#import "ExpressionFindOrReplaceVariables.h"
 
 @interface ElementViewController ()
 
@@ -89,7 +90,7 @@
     long index = path.row;
     int wasType = [self.types[index] intValue];
     if (wasType < 4 || wasType > 7)
-        [NSException raise:@"Invalid type value" format:@"value of %d is invalid", wasType];
+        [NSException raise:@"Invalid type value (see getScope ElementViewController)" format:@"value of %d is invalid", wasType];
     return [self.delegate getScope:wasType];
 }
 
@@ -98,14 +99,23 @@
 }
 
 - (void) acceptVar:(NSString *)variable {
-    if (self.type != 1)
-        [NSException raise:@"Invalid type value" format:@"value of %ld is invalid", self.type];
     NSIndexPath * path = [self.tableView indexPathForSelectedRow];
-    StatementFindOrReplaceVariables * visitor = [[StatementFindOrReplaceVariables alloc] init];
-    [visitor replaceVariable:(id <Statement>) self.element withVariable:variable];
+    if (self.type == 1) {
+        StatementFindOrReplaceVariables * visitor = [[StatementFindOrReplaceVariables alloc] init];
+        [visitor replaceVariable:(id <Statement>)self.element withVariable:variable];
+    } else if (self.type == 2 || self.type == 3) {
+        ExpressionFindOrReplaceVariables * visitor = [[ExpressionFindOrReplaceVariables alloc] init];
+        if (self.type == 2) {
+            [visitor replaceVariableInIntExpression:(id <IntExpression>)self.element withVariable:variable];
+        } else {
+            [visitor replaceVariableInBoolExpression:(id <BoolExpression>)self.element withVariable:variable];
+        }
+    } else {
+        [NSException raise:@"Invalid type value (see acceptVar ElementViewController)" format:@"value of %ld is invalid", self.type];
+    }
     [self reload];
     [self.tableView selectRowAtIndexPath:path animated:false scrollPosition:UITableViewScrollPositionNone];
-    [self.navigationController popToViewController:self animated:true];
+    [self.navigationController popToViewController:self animated:false];
 }
 
 - (void) acceptElement:(id) element {
@@ -135,7 +145,7 @@
         }
         [self reload];
         [self.tableView selectRowAtIndexPath:path animated:false scrollPosition:UITableViewScrollPositionNone];
-        [self.navigationController popToViewController:self animated:shouldPop];
+        [self.navigationController popToViewController:self animated:false/*shouldPop*/];
         if (!shouldPop) {
             [self performSegueWithIdentifier:[self getElementToElementSegueIdentifier] sender:self];
         }
@@ -150,11 +160,17 @@
     [self.settings setSettingsForTableView:self.tableView];
     [self initCellModels];
     [self initTypesIndex];
+    
+    self.navigationItem.leftBarButtonItem = [self.settings getBackArrowWithReceiver:self];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)popQuick {
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void) reload {
@@ -244,6 +260,10 @@
         componentViewController.type = nextType;
         componentViewController.delegate = self;
         componentViewController.settings = self.settings;
+        if ((nextType >= 4 && nextType <= 7) || nextType == 10 || nextType == 11)
+            componentViewController.currentValueIfApplicable = self.strings[index];
+        else
+            componentViewController.currentValueIfApplicable = @"";
     } else if ([[segue identifier] isEqualToString:[self getElementToElementSegueIdentifier]]) {
         ElementViewController * statementViewController = [segue destinationViewController];
         statementViewController.element = nextElement;
@@ -254,6 +274,7 @@
         VariableViewController * variableViewController = [segue destinationViewController];
         variableViewController.delegate = self;
         variableViewController.settings = self.settings;
+        variableViewController.initialValue = self.strings[index];
     }
 }
 

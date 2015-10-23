@@ -66,7 +66,7 @@
 
 - (void) visitStatementList:(StatementList *)statementList {
     if (self.type == 0)
-        [NSException raise:@"Invalid type value" format:@"value of %d is invalid", self.type];
+        [NSException raise:@"Invalid type value (see visitStatementList in StatementFindOrReplaceVariables)" format:@"value of %d is invalid", self.type];
     for (int i = 0; i < statementList.statementList.count; i++)
          [((id <Statement>)statementList.statementList[i]) accept:self];
 }

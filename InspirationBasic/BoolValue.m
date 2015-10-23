@@ -13,15 +13,14 @@
 - (id) initWithValue:(BOOL) value {
     if (self = [super init]) {
         self.value = value;
-        NSLog(@"%@",@"Bool Value");
     }
     return self;
 }
 
-- (BoolValue *)evaluateAgainst:(EnvironmentModel *)environment{
-    if ([ProgramException checkException:self withEnvironment:environment andIdentifier:@"BoolValue"])
-        return nil;
-    return self;
+- (bool)evaluateAgainst:(EnvironmentModel *)environment{
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"BoolValue"])
+        return false;
+    return self.value;
 }
 
 - (void) accept:(id <ExpressionVisitor>)visitor {

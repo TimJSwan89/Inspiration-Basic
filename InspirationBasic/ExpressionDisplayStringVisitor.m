@@ -13,12 +13,14 @@
 #import "./IntArrayElement.h"
 #import "./IntValue.h"
 #import "./BoolValue.h"
+#import "./IntRandom.h"
 #import "./IntNegation.h"
 #import "./IntSum.h"
 #import "./IntDifference.h"
 #import "./IntProduct.h"
 #import "./IntQuotient.h"
 #import "./IntRemainder.h"
+#import "./BoolRandom.h"
 #import "./BoolNegation.h"
 #import "./BoolOr.h"
 #import "./BoolNor.h"
@@ -112,6 +114,12 @@
     [self append:@"]"];
 }
 
+- (void) visitIntRandom:(IntRandom *)intRandom {
+    [self append:@"RandomInt("];
+    [intRandom.expression accept:self];
+    [self append:@")"];
+}
+
 - (void) visitIntNegation:(IntNegation *)intNegation {
     [self append:@"-"];
     [intNegation.expression accept:self];
@@ -155,6 +163,10 @@
     [self append:@" % "];
     [intRemainder.expression2 accept:self];
     [self append:@")"];
+}
+
+- (void) visitBoolRandom:(BoolRandom *)boolRandom {
+    [self append:@"RandomBoolean"];
 }
 
 - (void) visitBoolNegation:(BoolNegation *)boolNegation {

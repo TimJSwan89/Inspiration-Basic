@@ -21,8 +21,9 @@
 - (void) executeAgainst:(EnvironmentModel *)environment {
     if (environment.exception)
         return;
-    [environment setValue:(Value *)[self.expression evaluateAgainst:environment] For:self.variable];
-    
+    [environment setInt:[self.expression evaluateAgainst:environment] For:self.variable];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"IntAssignment"])
+        return;
 }
 
 - (void) accept:(id <StatementVisitor>)visitor {

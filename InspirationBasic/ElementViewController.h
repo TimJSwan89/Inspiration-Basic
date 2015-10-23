@@ -15,7 +15,7 @@
 - (void) reload;
 @end
 
-@interface ElementViewController : UITableViewController<ElementAccepter, Reloadable, ScopeFinder, SpecificScopeFinder, VarAccepter>
+@interface ElementViewController : UITableViewController<ElementAccepter, Reloadable, ScopeFinder, SpecificScopeFinder, VarAccepter, HasBackButton>
 
 @property (nonatomic) id element;
 @property (nonatomic) long type;

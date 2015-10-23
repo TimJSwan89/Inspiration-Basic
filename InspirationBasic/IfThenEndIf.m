@@ -21,10 +21,15 @@
 }
 
 -(void) executeAgainst:(EnvironmentModel *)environment {
-    if (environment.exception)
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"PreIf"])
         return;
-    if ([self.expression evaluateAgainst:environment])
+    if ([self.expression evaluateAgainst:environment]) {
+        if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"IfCheck"])
+            return;
         [self.thenStatements executeAgainst:environment];
+        if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"IfThen"])
+            return;
+    }
 }
 
 - (void) accept:(id <StatementVisitor>)visitor {

@@ -16,6 +16,6 @@
 
 - (id) initWithMessage:(NSString *) message;
 
-+ (BOOL) checkException:(id) check withEnvironment:(EnvironmentModel *) environment andIdentifier:(NSString *) identifier;
++ (BOOL) checkExceptionWithEnvironment:(EnvironmentModel *) environment andIdentifier:(NSString *) identifier;
 
 @end

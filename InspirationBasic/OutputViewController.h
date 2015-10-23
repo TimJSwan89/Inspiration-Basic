@@ -9,13 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "Program.h"
 #import "ViewSettings.h"
+#import "EnvironmentModel.h"
 @protocol ExecutionDelegate
 - (void) finishedExecuting;
 @end
-@interface OutputViewController : UIViewController<OutputListener>
+@interface OutputViewController : UIViewController<OutputListener, HasBackButton>
 @property ViewSettings * settings;
 @property (strong, nonatomic) IBOutlet UITextView * outputTextView;
 @property (nonatomic, strong) NSString * outputText;
 @property (nonatomic) Program * program;
 @property (weak, nonatomic) id<ExecutionDelegate> delegate;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *pauseButton;
+- (IBAction)stopButtonPressed:(UIBarButtonItem *)sender;
+@property bool stopped;
+@property EnvironmentModel * environment;
+@property (atomic) int numberOfPosts;
 @end

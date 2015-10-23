@@ -17,12 +17,13 @@
 - (void) acceptVar:(NSString *)variable;
 @end
 
-@interface VariableViewController : UITableViewController
+@interface VariableViewController : UITableViewController<HasBackButton>
 
 @property (nonatomic) id<ScopeFinder, VarAccepter> delegate;
 @property ViewSettings * settings;
 @property (nonatomic) UITextField * textField;
 @property (nonatomic) UIButton * button;
+@property NSString * initialValue;
 
 @property (nonatomic) NSMutableArray * variables;
 

@@ -24,7 +24,7 @@
 - (void) executeAgainst:(EnvironmentModel *)environment {
     if (environment.exception)
         return;
-    [environment setValue:(Value*)[self.expression evaluateAgainst:environment] For:self.variable atIndex:[self.indexExpression evaluateAgainst:environment].value];
+    [environment setInt:[self.expression evaluateAgainst:environment] For:self.variable atIndex:[self.indexExpression evaluateAgainst:environment]];
 }
 
 - (void) accept:(id <StatementVisitor>)visitor {

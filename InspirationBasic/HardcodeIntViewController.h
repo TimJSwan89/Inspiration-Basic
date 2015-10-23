@@ -13,12 +13,13 @@
 - (void) acceptInt:(int)integer;
 @end
 
-@interface HardcodeIntViewController : UIViewController
+@interface HardcodeIntViewController : UIViewController<HasBackButton>
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 @property (strong, nonatomic) IBOutlet UITextField *inputField;
 @property (nonatomic) id<IntAccepter> delegate;
 @property ViewSettings * settings;
 @property (nonatomic) int currentValue;
+@property NSString * initialValue;
 - (IBAction)fieldWasEdited:(UITextField *)sender;
 - (IBAction)donePressed:(UIBarButtonItem *)sender;
 @end

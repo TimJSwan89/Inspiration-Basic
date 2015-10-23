@@ -22,12 +22,14 @@
 #import "./IntArrayElement.h"
 #import "./IntValue.h"
 #import "./BoolValue.h"
+#import "./IntRandom.h"
 #import "./IntNegation.h"
 #import "./IntSum.h"
 #import "./IntDifference.h"
 #import "./IntProduct.h"
 #import "./IntQuotient.h"
 #import "./IntRemainder.h"
+#import "./BoolRandom.h"
 #import "./BoolNegation.h"
 #import "./BoolOr.h"
 #import "./BoolNor.h"
@@ -65,18 +67,18 @@
     NSError * error;
     NSArray * objects = [self.context executeFetchRequest:request error:&error];
     if ([objects count] == 0) {
-        NSLog(@"Creating initial program list...");
+        //NSLog(@"Creating initial program list...");
         self.list = [NSEntityDescription insertNewObjectForEntityForName:@"ProgramListDB" inManagedObjectContext:self.context];
         NSError * error;
         [self.context save:&error];
-        NSLog(@"%@",[error localizedDescription]);
-        NSLog(@"Saved newly created program list. Adding default programs:");
+        //NSLog(@"%@",[error localizedDescription]);
+        //NSLog(@"Saved newly created program list. Adding default programs:");
         [self addDefaultPrograms];
     } else if ([objects count] == 1) {
-        NSLog(@"Program list found.");
+        //NSLog(@"Program list found.");
         self.list = objects[0];
     } else {
-        NSLog(@"Error, more than one save exists.");
+        //NSLog(@"Error, more than one save exists.");
         [NSException raise:@"Error, more than one save exists." format:@"Error, more than one save exists."];
     }
 }
@@ -109,9 +111,10 @@
     //[self.list removeObjectFromProgramAtIndex:index];
     NSError * error;
     [self.context save:&error];
-    if (error)
-        NSLog(@"%@",[error localizedDescription]);
-    NSLog(@"Replaced program at index %ld.", index);
+    if (error) {
+        //NSLog(@"%@",[error localizedDescription]);
+    }
+    //NSLog(@"Replaced program at index %ld.", index);
 }
 
 - (void) moveProgramInDBFromIndex:(long)fromIndex toIndex:(long)toIndex {
@@ -126,9 +129,10 @@
     //[self.list insertObject:programDB inProgramAtIndex:toIndex];
     NSError * error;
     [self.context save:&error];
-    if (error)
-        NSLog(@"%@",[error localizedDescription]);
-    NSLog(@"Moved program from index %ld to %ld.", fromIndex, toIndex);
+    if (error) {
+        //NSLog(@"%@",[error localizedDescription]);
+    }
+    //NSLog(@"Moved program from index %ld to %ld.", fromIndex, toIndex);
 }
 
 - (void) replaceProgramInDB:(Program *)program atIndex:(long)index {
@@ -140,9 +144,10 @@
     //[self.list replaceObjectInProgramAtIndex:index withObject:programDB];
     NSError * error;
     [self.context save:&error];
-    if (error)
-        NSLog(@"%@",[error localizedDescription]);
-    NSLog(@"Replaced program at index %ld.", index);
+    if (error) {
+        //NSLog(@"%@",[error localizedDescription]);
+    }
+    //NSLog(@"Replaced program at index %ld.", index);
 }
 
 - (void) addProgramToDB:(Program *)program {
@@ -154,9 +159,10 @@
     //[self.list addProgramObject:programDB];
     NSError * error;
     [self.context save:&error];
-    if (error)
-        NSLog(@"%@",[error localizedDescription]);
-    NSLog(@"Saved new program.");
+    if (error) {
+        //NSLog(@"%@",[error localizedDescription]);
+    }
+    //NSLog(@"Saved new program.");
 }
 
 - (BoolArrayElement *) getBoolArrayElementVariable:(NSString *)variable indexExpression:(id <IntExpression>)indexExpression {
@@ -209,6 +215,8 @@
         intExpression = [[IntVariable alloc] initWithVariable:element.string];
     } else if ([element.type isEqualToString:@"IntArrayElement"]) {
         intExpression = [self getIntArrayElementVariable:element.string indexExpression:[self convertToIntExpression:element.expression[0]]];
+    } else if ([element.type isEqualToString:@"IntRandom"]) {
+        intExpression = [[IntRandom alloc] initWith:[self convertToIntExpression:element.expression[0]]];
     } else if ([element.type isEqualToString:@"IntNegation"]) {
         intExpression = [[IntNegation alloc] initWith:[self convertToIntExpression:element.expression[0]]];
     } else if ([element.type isEqualToString:@"IntSum"]) {
@@ -236,6 +244,8 @@
         boolExpression = [[BoolVariable alloc] initWithVariable:element.string];
     } else if ([element.type isEqualToString:@"BoolArrayElement"]) {
         boolExpression = [self getBoolArrayElementVariable:element.string indexExpression:[self convertToIntExpression:element.expression[0]]];
+    } else if ([element.type isEqualToString:@"BoolRandom"]) {
+        boolExpression = [[BoolRandom alloc] init];
     } else if ([element.type isEqualToString:@"BoolNegation"]) {
         boolExpression = [[BoolNegation alloc] initWith:[self convertToBoolExpression:element.expression[0]]];
     } else if ([element.type isEqualToString:@"BoolBoolEquals"]) {

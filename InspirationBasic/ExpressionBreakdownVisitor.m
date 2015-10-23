@@ -14,12 +14,14 @@
 #import "./IntArrayElement.h"
 #import "./IntValue.h"
 #import "./BoolValue.h"
+#import "./IntRandom.h"
 #import "./IntNegation.h"
 #import "./IntSum.h"
 #import "./IntDifference.h"
 #import "./IntProduct.h"
 #import "./IntQuotient.h"
 #import "./IntRemainder.h"
+#import "./BoolRandom.h"
 #import "./BoolNegation.h"
 #import "./BoolOr.h"
 #import "./BoolNor.h"
@@ -137,6 +139,12 @@
     [self.strings addObject:boolVariable.variable];
 }
 
+- (void) visitBoolRandom:(BoolRandom *)boolRandom {
+    [self.types addObject:[NSNumber numberWithInt:9]];
+    [self.elements addObject:boolRandom];
+    [self.strings addObject:@"RandomBoolean"];
+}
+
 // Non-leaf expressions:
 
 - (void) visitIntArrayElement:(IntArrayElement *)intArrayElement {
@@ -173,6 +181,20 @@
     [self.types addObject:[NSNumber numberWithInt:9]];
     [self.elements addObject:boolArrayElement];
     [self.strings addObject:@"]"];
+}
+
+- (void) visitIntRandom:(IntRandom *)intRandom {
+    [self.types addObject:[NSNumber numberWithInt:8]];
+    [self.elements addObject:intRandom];
+    [self.strings addObject:@"RandomInt("];
+    
+    [self.types addObject:[self checkIntSingleComponent:intRandom.expression]];
+    [self.elements addObject:intRandom.expression];
+    [self.strings addObject:[self getStringForInt:intRandom.expression]];
+    
+    [self.types addObject:[NSNumber numberWithInt:8]];
+    [self.elements addObject:intRandom];
+    [self.strings addObject:@")"];
 }
 
 - (void) visitIntNegation:(IntNegation *)intNegation {

@@ -27,7 +27,9 @@
     for (int i = 0; i < self.statementList.count; i++) {
         id <Statement> statement = self.statementList[i];
         [statement executeAgainst: environment];
-        if ([ProgramException checkException:statement withEnvironment:environment andIdentifier:@"StatementList Expression"])
+        NSString * identifier = @"Statement ";
+        identifier = [identifier stringByAppendingString:[@(i) stringValue]];
+        if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:identifier])
             break;
     }
 }

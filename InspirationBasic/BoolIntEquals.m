@@ -22,16 +22,16 @@
 
 -(bool) evaluateAgainst:(EnvironmentModel *)environment {
     
-    IntValue * firstValue = [self.expression1 evaluateAgainst:environment];
-    if ([ProgramException checkException:firstValue withEnvironment:environment andIdentifier:@"BoolIntEquals Expression 1"])
+    int firstValue = [self.expression1 evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"BoolIntEquals Expression 1"])
         return nil;
     
-    IntValue * secondValue = [self.expression2 evaluateAgainst:environment];
-    if ([ProgramException checkException:secondValue withEnvironment:environment andIdentifier:@"BoolIntEquals Expression 2"])
+    int secondValue = [self.expression2 evaluateAgainst:environment];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"BoolIntEquals Expression 2"])
         return nil;
     
-    BOOL value = firstValue.value == secondValue.value;
-    return [[BoolValue alloc] initWithValue:value];
+    bool value = firstValue == secondValue;
+    return value;
     
 }
 

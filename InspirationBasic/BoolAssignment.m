@@ -22,7 +22,9 @@
 - (void) executeAgainst:(EnvironmentModel *)environment {
     if (environment.exception)
         return;
-    [environment setValue:(Value *)[self.expression evaluateAgainst:environment] For:self.variable];
+    [environment setBool:[self.expression evaluateAgainst:environment] For:self.variable];
+    if ([ProgramException checkExceptionWithEnvironment:environment andIdentifier:@"BoolAssignment"])
+        return;
     
 }
 

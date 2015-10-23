@@ -33,11 +33,17 @@
     [super viewDidLoad];
     [self.settings setSettingsForTableView:self.tableView];
     [self initViewModel];
+    
+    self.navigationItem.leftBarButtonItem = [self.settings getBackArrowWithReceiver:self];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+-(void)popQuick {
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,10 +71,15 @@
     if (indexPath.section == 0) {
         UIView * view = cell.contentView;
         self.textField = (UITextField *) view.subviews[0];
+        [self.textField setText:self.initialValue];
+        [self.textField becomeFirstResponder];
         [self.settings setSettingsForTextField:self.textField];
         self.button = (UIButton *) view.subviews[1];
         [self.button setEnabled:false];
         [self.settings setSettingsForButton:self.button];
+        [self edited:self.textField];
+        if (!self.button.enabled)
+            [self.textField setText:@""];
     } else {
         [[cell textLabel] setText:self.variables[indexPath.row]];
     }
@@ -80,6 +91,12 @@
 {
     if (indexPath.section > 0) {
         [self.delegate acceptVar:self.variables[indexPath.row]];
+    } else {
+        UITableViewCell *cellSelected = [tableView cellForRowAtIndexPath: indexPath];
+        UITextField *textField = [[cellSelected.contentView subviews] objectAtIndex: 0];
+        [textField becomeFirstResponder];
+        
+        [tableView deselectRowAtIndexPath: indexPath animated: NO];
     }
 }
 

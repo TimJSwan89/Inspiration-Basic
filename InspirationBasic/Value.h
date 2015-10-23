@@ -10,5 +10,6 @@
 //#import "Displayable.h"
 
 @interface Value : NSObject
-
+@property int integer;
+@property bool boolean;
 @end
